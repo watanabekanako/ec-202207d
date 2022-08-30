@@ -5,14 +5,21 @@
       "description": "おいしい",
       "img": "/img/1.jpg",
       "name": "豚骨ラーメン",
-      "price": "800円"
+      "price": 1000
     },
     {
       "id": 2,
       "description": "おいしい",
       "img": "/img/2.jpg",
       "name": "家系ラーメン",
-      "price": "900円"
+      "price": 1200
+    },
+    {
+      "id": 2,
+      "description": "おいしい",
+      "img": "/img/2.jpg",
+      "name": "家系ラーメ",
+      "price": 900
     }
   ],
   "options1": [

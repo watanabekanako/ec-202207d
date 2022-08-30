@@ -34,6 +34,11 @@ function Page() {
 
   console.log('search', search);
 
+const narabikae = [data];
+  data.sort((a:any, b:any) => {
+    return a.price < b.price ? -1 : 1;
+});
+
   return (
     <>
       <Head>
@@ -48,10 +53,6 @@ function Page() {
           name="kensaku"
           value={kensaku}
           onChange={(e) => setKensaku(e.target.value)}
-
-          //   onChange=
-          //   {(e)=>handleClick(e)}
-          //   {(e)=>setSearch(e.target.value)}
         />
         <button type="button" onClick={(e) => handleClick(e)}>
           検索
@@ -67,7 +68,9 @@ function Page() {
           </tr>
         </thead>
         <tbody>
-          {!search?.length && (
+          {!search?.length && 
+        //   検索ボタンが押された時
+          (
             <p>該当の商品がありません</p>
           )}
           {!search?.length &&
