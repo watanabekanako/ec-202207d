@@ -15,21 +15,21 @@ export const Btn = (props:{item: string}) => {
 }
 
 export const clear = () => {
-  let nameS = document.getElementById('inputName')  as HTMLInputElement;
-  let zipS = document.getElementById('inputZipcode')  as HTMLInputElement;
-  let mailS = document.getElementById('inputEmail')  as HTMLInputElement;
-  let addressS = document.getElementById('inputAddress')  as HTMLInputElement;
-  let telS = document.getElementById('inputTel')  as HTMLInputElement;
-  let passS = document.getElementById('inputPassword')  as HTMLInputElement;
-  let confPassS = document.getElementById('inputConfirmationPassword')  as HTMLInputElement;
+  let getNameId = document.getElementById('inputName')  as HTMLInputElement;
+  let getZipId = document.getElementById('inputZipcode')  as HTMLInputElement;
+  let getMailId = document.getElementById('inputEmail')  as HTMLInputElement;
+  let getAddrId = document.getElementById('inputAddress')  as HTMLInputElement;
+  let getTelId = document.getElementById('inputTel')  as HTMLInputElement;
+  let getPassId = document.getElementById('inputPassword')  as HTMLInputElement;
+  let getPassConfId = document.getElementById('inputConfirmationPassword')  as HTMLInputElement;
 
-  nameS.value = ""
-  zipS.value = ""
-  mailS.value = ""
-  addressS.value = ""
-  telS.value = ""
-  passS.value = ""
-  confPassS.value = ""
+  getNameId.value = ""
+  getZipId.value = ""
+  getMailId.value = ""
+  getAddrId.value = ""
+  getTelId.value = ""
+  getPassId.value = ""
+  getPassConfId.value = ""
 }
 
 const list = [
@@ -79,26 +79,7 @@ const list = [
 ]
 
 export const Form = () => {
-
-
-  const [err, SetErr] = React.useState(["true","true","true","true","true","true","true"]);
-  
-  
-  // const mailCheck = (props,num) => {
-    
-  //   if(!props.includes('@')){
-  //     SetErr(err.map((err,index) =>(index === num ? "format-incorrect" : err  )));     
-  //   }else{
-  //     SetErr(err.map((err,index) =>(index === num ? "true" : err  )))
-  //   }  }
-
-  // const judge = (props) => {
-  //   if(!props){
-  //     SetErr(err.map((err,index) =>(index === num ? "format-incorrect" : err  )));     
-  //   }else{
-    //     SetErr(err.map((err,index) =>(index === num ? "true" : err  )))
-  //   }  
-  // }
+  // const [err, SetErr] = React.useState(["true","true","true","true","true","true","true"]);
 
   return (
   <>
@@ -121,9 +102,6 @@ export const Form = () => {
           id={list.id}
           className="form-control"
           placeholder={list.place}
-          onChange={(e)=>{
-
-          }}
           />
           </div>
       );

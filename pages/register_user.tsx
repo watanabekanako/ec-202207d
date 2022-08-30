@@ -3,15 +3,7 @@ import { stringify } from "querystring";
 import React from 'react';
 import {Title,clear, Form} from "../compornents/register_user"
 // import styles from "../styles/register.module.css"
-
-
-let nameA = "";
-let zipA = "";
-let mailA = "";
-let addressA = "";
-let telA = "";
-let passA = "";
-
+import { useRouter } from "next/router";
 
 const list = [
   {
@@ -62,6 +54,7 @@ const list = [
 
 
 const Show = () => {
+  const router = useRouter();
 
   return (
 <div className="container" >
@@ -119,13 +112,13 @@ const Show = () => {
           <div className="form-group">
             <button type="button" className="btn btn-primary" onClick={() => {
             
-            let nameS = document.getElementById('inputName')  as HTMLInputElement;
-            let zipS = document.getElementById('inputZipcode')  as HTMLInputElement;
-            let mailS = document.getElementById('inputEmail')  as HTMLInputElement;
-            let addressS = document.getElementById('inputAddress')  as HTMLInputElement;
-            let telS = document.getElementById('inputTel')  as HTMLInputElement;
-            let passS = document.getElementById('inputPassword')  as HTMLInputElement;
-            let confPassS = document.getElementById('inputConfirmationPassword')  as HTMLInputElement;
+            let getNameId = document.getElementById('inputName')  as HTMLInputElement;
+            let getZipId = document.getElementById('inputZipcode')  as HTMLInputElement;
+            let getMailId = document.getElementById('inputEmail')  as HTMLInputElement;
+            let getAddrId = document.getElementById('inputAddress')  as HTMLInputElement;
+            let getTelId = document.getElementById('inputTel')  as HTMLInputElement;
+            let getPassId = document.getElementById('inputPassword')  as HTMLInputElement;
+            let getPassConfId = document.getElementById('inputConfirmationPassword')  as HTMLInputElement;
 
             list.map((list) => {
               let tag = document.getElementsByClassName("control-label")[list.num] as HTMLElement;
@@ -133,13 +126,13 @@ const Show = () => {
               })
               
         if(
-              !nameS.value && 
-              !mailS.value && 
-              !zipS.value && 
-              !addressS.value && 
-              !telS.value && 
-              !passS.value &&
-              !confPassS.value 
+              !getNameId.value && 
+              !getMailId.value && 
+              !getZipId.value && 
+              !getAddrId.value && 
+              !getTelId.value && 
+              !getPassId.value &&
+              !getPassConfId.value 
         ){
               list.map((list) => {
               let tag = document.getElementsByClassName("control-label")[list.num] as HTMLElement;
@@ -148,90 +141,91 @@ const Show = () => {
               })
    
         }else if(
-              nameS.value && 
-              mailS.value && 
-              zipS.value && 
-              addressS.value && 
-              telS.value && 
-              passS.value &&
-              confPassS.value 
+              getNameId.value && 
+              getMailId.value && 
+              getZipId.value && 
+              getAddrId.value && 
+              getTelId.value && 
+              getPassId.value &&
+              getPassConfId.value 
         ){
 
-          let flagM1 = "true"
-          let  flagM2 = "true"
-          let  flagZ = "true"
-          let  flagT = "true"
-          let flagP = "true"
-          let  flagC = "true"
+          let flagMailFormat = "true"
+          let flagMailDup = "true"
+          let flagZip = "true"
+          let flagTel = "true"
+          let flagPassLength = "true"
+          let flagPassConf = "true"
 
-          if(!mailS.value.includes('@')){
+          if(!getMailId.value.includes('@')){
             let tag = document.getElementsByClassName("control-label")[1] as HTMLElement;
             let echo = tag.style.display="inline-block"
             let alart = tag.innerHTML= "メールアドレスの形式が不正です"
-            flagM1 = ""
+            flagMailFormat = ""
           }
 
-          if(!(zipS.value.match(/^\d{3}-\d{4}$/))){
+          if(!(getZipId.value.match(/^\d{3}-\d{4}$/))){
             let tag = document.getElementsByClassName("control-label")[2] as HTMLElement;
             let echo = tag.style.display="inline-block"
             let alart = tag.innerHTML= "郵便番号はXXX-XXXXの形式で入力してください"
-            flagZ = ""
+            flagZip = ""
           }
 
-          if(!(telS.value.match(/^[0-9]*-[0-9]*-[0-9]*$/))){
+          if(!(getTelId.value.match(/^[0-9]*-[0-9]*-[0-9]*$/))){
             let tag = document.getElementsByClassName("control-label")[4] as HTMLElement;
             let echo = tag.style.display="inline-block"
             let alart = tag.innerHTML= "電話番号はXXXX-XXXX-XXXXの形式で入力してください"
-            flagT = ""
+            flagTel = ""
           }
 
-          if(!(passS.value.length <= 16 && passS.value.length >= 8)){
+          if(!(getPassId.value.length <= 16 && getPassId.value.length >= 8)){
             let tag = document.getElementsByClassName("control-label")[5] as HTMLElement;
             let echo =tag.style.display="inline-block"
             let alart = tag.innerHTML= "パスワードは８文字以上１６文字以内で設定してください"
-            flagP  = ""
+            flagPassLength  = ""
           }
 
-          if(!(passS.value === confPassS.value)){
+          if(!(getPassId.value === getPassConfId.value)){
             let tag = document.getElementsByClassName("control-label")[6] as HTMLElement;
             let echo = tag.style.display="inline-block"
             let alart = tag.innerHTML= "パスワードと確認用パスワードが不一致です"
-            flagC  = ""
+            flagPassConf  = ""
           }
       
               if(
-                flagM1 &&
-                flagZ &&
-                flagT  &&
-                flagP  &&
-                flagC  
+                flagMailFormat &&
+                flagZip &&
+                flagTel  &&
+                flagPassLength  &&
+                flagPassConf  
                 ){     
                   
-            const last = async() => {     
-            await fetch('http://localhost:8000/info')
+            const post = async() => {     
+            await fetch('http://localhost:8000/users')
               .then(response => response.json())
               .then((data) =>{ 
                 data.map((data: any) => {                  
-                   if(data.mail === mailS.value){
+                   if(data.mail === getMailId.value){
                      let tag = document.getElementsByClassName("control-label")[1] as HTMLElement;
                      let echo = tag.style.display="inline-block"
                      let alart = tag.innerHTML= "そのメールアドレスはすでに使われています"
-                     flagM2 = ""
+                     flagMailDup = ""
                    }
                 })
   
               });
            
               const data = {
-                  name: nameS.value,
-                  mail: mailS.value,
-                  zip: zipS.value,
-                  address: addressS.value,
-                  tel: telS.value,
-                  pass: passS.value,
+                  name: getNameId.value,
+                  mail: getMailId.value,
+                  zip: getZipId.value,
+                  address: getAddrId.value,
+                  tel: getTelId.value,
+                  pass: getPassId.value,
                 };
-              if(flagM2){
-                await fetch(`http://localhost:8000/info`,{
+
+              if(flagMailDup){
+                await fetch(`http://localhost:8000/users`,{
                   method: "POST" , 
                   headers: {
                     'Content-Type': 'application/json'
@@ -240,7 +234,7 @@ const Show = () => {
                 }).then((response) => {
                   return response.json();
                 }).then((data) => {
-    
+                  router.push("/");
                 })
                 
                 list.map((list) => {
@@ -248,7 +242,7 @@ const Show = () => {
                   let none = tag.style.display="none"
                 })}
               }
-              last();
+              post();
             }
             
 
@@ -259,28 +253,28 @@ const Show = () => {
             let echo = tag.style.display="none"
             })
 
-              if(!nameS.value){
+              if(!getNameId.value){
                 let tag = document.getElementsByClassName("control-label")[0] as HTMLElement;
                 let echo = tag.style.display="inline-block"
                 let alart = tag.innerHTML= "メールアドレスを入力してください"
               }
 
-              if(!mailS.value){
+              if(!getMailId.value){
                 let tag = document.getElementsByClassName("control-label")[1] as HTMLElement;
                 let echo = tag.style.display="inline-block"
                 let alart = tag.innerHTML= "メールアドレスを入力してください"
 
               }else{
-                if(!mailS.value.includes('@')){
+                if(!getMailId.value.includes('@')){
                   let tag = document.getElementsByClassName("control-label")[1] as HTMLElement;
                   let echo = tag.style.display="inline-block"
                   let alart = tag.innerHTML= "メールアドレスの形式が不正です"
                 }else{         
-                  fetch('http://localhost:8000/info')
+                  fetch('http://localhost:8000/users')
                   .then(response => response.json())
                   .then((data) =>{ 
                     data.map((data: any) => {
-                      if(data.mail === mailS.value){
+                      if(data.mail === getMailId.value){
                         let tag = document.getElementsByClassName("control-label")[1] as HTMLElement;
                         let echo = tag.style.display="inline-block"
                         let alart = tag.innerHTML= "そのメールアドレスはすでに使われています"
@@ -292,12 +286,12 @@ const Show = () => {
             }
 
             
-              if(!zipS.value){
+              if(!getZipId.value){
                 let tag = document.getElementsByClassName("control-label")[2] as HTMLElement;
                 let echo = tag.style.display="inline-block"
                 let alart = document.getElementsByClassName("control-label")[2].innerHTML= "郵便番号を入力してください"
               }else{
-                if(!(zipS.value.match(/^\d{3}-\d{4}$/))){
+                if(!(getZipId.value.match(/^\d{3}-\d{4}$/))){
                   let tag = document.getElementsByClassName("control-label")[2] as HTMLElement;
                   let echo = tag.style.display="inline-block"
                   let alart = tag.innerHTML= "郵便番号はXXX-XXXXの形式で入力してください"
@@ -305,30 +299,30 @@ const Show = () => {
               }
 
 
-              if(!addressS.value){
+              if(!getAddrId.value){
                 let tag = document.getElementsByClassName("control-label")[3] as HTMLElement;
                 let echo = tag.style.display="inline-block"
                 let alart = tag.innerHTML= "住所を入力してください"
               }
               
-              if(!telS.value){
+              if(!getTelId.value){
                 let tag = document.getElementsByClassName("control-label")[4] as HTMLElement;
                 let echo = tag.style.display="inline-block"
                 let alart = tag.innerHTML= "電話番号を入力してください"
               }else{
-                if(!(telS.value.match(/^[0-9]*-[0-9]*-[0-9]*$/))){
+                if(!(getTelId.value.match(/^[0-9]*-[0-9]*-[0-9]*$/))){
                   let tag = document.getElementsByClassName("control-label")[4] as HTMLElement;
                   let echo = tag.style.display="inline-block"
                   let alart = tag.innerHTML= "電話番号はXXXX-XXXX-XXXXの形式で入力してください"
                 }
               }
 
-              if(!passS.value){
+              if(!getPassId.value){
                 let tag = document.getElementsByClassName("control-label")[5] as HTMLElement;
                 let echo = tag.style.display="inline-block"
                 let alart = tag.innerHTML= "パスワードを入力してください"
               }else{
-                if(!(passS.value.length <= 16 && passS.value.length >= 8)){
+                if(!(getPassId.value.length <= 16 && getPassId.value.length >= 8)){
                   let tag = document.getElementsByClassName("control-label")[5] as HTMLElement;
                   let echo = tag.style.display="inline-block"
                   let alart = tag.innerHTML= "パスワードは８文字以上１６文字以内で設定してください"
@@ -336,12 +330,12 @@ const Show = () => {
               }
 
 
-              if(!confPassS.value){
+              if(!getPassConfId.value){
                 let tag = document.getElementsByClassName("control-label")[6] as HTMLElement;
                 let echo = tag.style.display="inline-block"
                 let alart = tag.innerHTML= "確認用パスワードを入力してください"
               }else{
-                if(!(passS.value === confPassS.value)){
+                if(!(getPassId.value === getPassConfId.value)){
                   let tag = document.getElementsByClassName("control-label")[6] as HTMLElement;
                   let echo = tag.style.display="inline-block"
                   let alart = tag.innerHTML= "パスワードと確認用パスワードが不一致です" 
