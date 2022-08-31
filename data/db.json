@@ -13,6 +13,13 @@
       "img": "/img/2.jpg",
       "name": "家系ラーメン",
       "price": "900円"
+    },
+    {
+      "id": 2,
+      "description": "おいしい",
+      "img": "/img/2.jpg",
+      "name": "家系ラーメ",
+      "price": 900
     }
   ],
   "options1": [
@@ -38,6 +45,34 @@
   "options5": [
     {
       "options5": "ネギ"
+    },
+    {
+      "name": "ssss",
+      "description": "sssssss",
+      "price": "sssss",
+      "id": 3
+    }
+  ],
+  "options": [
+    {
+      "id": 1,
+      "name": "卵"
+    },
+    {
+      "id": 2,
+      "name": "チャーシュー"
+    },
+    {
+      "id": 3,
+      "name": "めんま"
+    },
+    {
+      "id": 4,
+      "name": "海苔"
+    },
+    {
+      "id": 5,
+      "name": "ネギ"
     }
   ],
   "users": [
@@ -59,5 +94,6 @@
       "pass": "passpass",
       "id": 2
     }
+
   ]
 }
