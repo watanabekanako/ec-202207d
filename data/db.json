@@ -13,31 +13,34 @@
       "img": "/img/2.jpg",
       "name": "家系ラーメン",
       "price": "900円"
+    },
+    {
+      "name": "ssss",
+      "description": "sssssss",
+      "price": "sssss",
+      "id": 3
     }
   ],
-  "options1": [
+  "options": [
     {
-      "options5": "卵"
-    }
-  ],
-  "options2": [
+      "id": 1,
+      "name": "卵"
+    },
     {
-      "options5": "チャーシュー"
-    }
-  ],
-  "options3": [
+      "id": 2,
+      "name": "チャーシュー"
+    },
     {
-      "options5": "めんま"
-    }
-  ],
-  "options4": [
+      "id": 3,
+      "name": "めんま"
+    },
     {
-      "options5": "海苔"
-    }
-  ],
-  "options5": [
+      "id": 4,
+      "name": "海苔"
+    },
     {
-      "options5": "ネギ"
+      "id": 5,
+      "name": "ネギ"
     }
   ],
   "users": [
@@ -61,3 +64,4 @@
     }
   ]
 }
+
