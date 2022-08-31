@@ -5,14 +5,13 @@
       "description": "おいしい",
       "img": "/img/1.jpg",
       "name": "豚骨ラーメン",
-      "price": 1000
+      "price": "800円"
     },
     {
       "id": 2,
       "description": "おいしい",
       "img": "/img/2.jpg",
-      "name": "家系ラーメン",
-      "price": 1200
+      "name": "家系ラーメン"
     },
     {
       "id": 2,
@@ -45,6 +44,34 @@
   "options5": [
     {
       "options5": "ネギ"
+    },
+    {
+      "name": "ssss",
+      "description": "sssssss",
+      "price": "sssss",
+      "id": 3
+    }
+  ],
+  "options": [
+    {
+      "id": 1,
+      "name": "卵"
+    },
+    {
+      "id": 2,
+      "name": "チャーシュー"
+    },
+    {
+      "id": 3,
+      "name": "めんま"
+    },
+    {
+      "id": 4,
+      "name": "海苔"
+    },
+    {
+      "id": 5,
+      "name": "ネギ"
     }
   ],
   "users": [
