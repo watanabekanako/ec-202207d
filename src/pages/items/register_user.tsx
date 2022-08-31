@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Title } from "../compornents/register_user"
-import { clear } from "../utils/register_user_clear"
-import { Form } from "../compornents/register_user_form"
+import { Title } from "../../compornents/register_user"
+import { clear } from "../../utils/register_user_clear"
+import { Form } from "../../compornents/register_user_form"
 import { useRouter } from "next/router";
 // import styles from "../styles/register.module.css"
 
@@ -53,6 +53,14 @@ const list = [
 
 const Show = () => {
   const router = useRouter();
+  // フラグ
+  const [flagMailFormat, SetFlagMailFormat] = useState("true");
+  const [flagMailDup, SetFlagMailDup] = useState("true");
+  const [flagZip, SetFlagZip] = useState("true");
+  const [flagTel, SetFlagTel] = useState("true");
+  const [flagPassLength, SetFlagPassLength] = useState("true");
+  const [flagPassConf, SetFlagPassConf] = useState("true");
+  
   
   return (
     <div className="container" >
@@ -121,7 +129,7 @@ const Show = () => {
                     // エラー非表示
                     list.map((list) => {
                       let tag = document.getElementsByClassName("control-label")[list.num] as HTMLElement;
-                      let echo = tag.style.display = "none"
+                      tag.style.display = "none"
                     })
 
                      if (
@@ -134,51 +142,45 @@ const Show = () => {
                       getPassConfId.value
                     ) {
 
-                      // フラグ
-                      const [flagMailFormat, SetFlagMailFormat] = useState("true");
-                      const [flagMailDup, SetFlagMailDup] = useState("true");
-                      const [flagZip, SetFlagZip] = useState("true");
-                      const [flagTel, SetFlagTel] = useState("true");
-                      const [flagPassLength, SetFlagPassLength] = useState("true");
-                      const [flagPassConf, SetFlagPassConf] = useState("true");
+
 
                       
                       if (!getMailId.value.includes('@')) {
                         let tag = document.getElementsByClassName("control-label")[1] as HTMLElement;
-                        let echo = tag.style.display = "inline-block"
-                        let alart = tag.innerHTML = "メールアドレスの形式が不正です"
+                        tag.style.display = "inline-block"
+                          tag.innerHTML = "メールアドレスの形式が不正です"
 
                         SetFlagMailFormat("")
                       }
 
                       if (!(getZipId.value.match(/^\d{3}-\d{4}$/))) {
                         let tag = document.getElementsByClassName("control-label")[2] as HTMLElement;
-                        let echo = tag.style.display = "inline-block"
-                        let alart = tag.innerHTML = "郵便番号はXXX-XXXXの形式で入力してください"
+                        tag.style.display = "inline-block"
+                          tag.innerHTML = "郵便番号はXXX-XXXXの形式で入力してください"
 
                         SetFlagZip("")
                       }
 
                       if (!(getTelId.value.match(/^[0-9]*-[0-9]*-[0-9]*$/))) {
                         let tag = document.getElementsByClassName("control-label")[4] as HTMLElement;
-                        let echo = tag.style.display = "inline-block"
-                        let alart = tag.innerHTML = "電話番号はXXXX-XXXX-XXXXの形式で入力してください"
+                        tag.style.display = "inline-block"
+                          tag.innerHTML = "電話番号はXXXX-XXXX-XXXXの形式で入力してください"
 
                         SetFlagTel("")
                       }
 
                       if (!(getPassId.value.length <= 16 && getPassId.value.length >= 8)) {
                         let tag = document.getElementsByClassName("control-label")[5] as HTMLElement;
-                        let echo = tag.style.display = "inline-block"
-                        let alart = tag.innerHTML = "パスワードは８文字以上１６文字以内で設定してください"
+                        tag.style.display = "inline-block"
+                          tag.innerHTML = "パスワードは８文字以上１６文字以内で設定してください"
 
                         SetFlagPassLength("")
                       }
 
                       if (!(getPassId.value === getPassConfId.value)) {
                         let tag = document.getElementsByClassName("control-label")[6] as HTMLElement;
-                        let echo = tag.style.display = "inline-block"
-                        let alart = tag.innerHTML = "パスワードと確認用パスワードが不一致です"
+                        tag.style.display = "inline-block"
+                          tag.innerHTML = "パスワードと確認用パスワードが不一致です"
 
                         SetFlagPassConf("")
                       }
@@ -197,9 +199,8 @@ const Show = () => {
                             .then((data) => {
                               if (data.length !== 0) {
                                 let tag = document.getElementsByClassName("control-label")[1] as HTMLElement;
-                                let echo = tag.style.display = "inline-block"
-                                let alart = tag.innerHTML = "そのメールアドレスはすでに使われています"
-                                // flagMailDup = ""
+                                tag.style.display = "inline-block"
+                                  tag.innerHTML = "そのメールアドレスはすでに使われています"
                                 SetFlagMailDup("")
                               }
                             })
@@ -226,7 +227,7 @@ const Show = () => {
                             }).then((response) => {
                               return response.json();
                             }).then((data) => {
-                              router.push("/");
+                              router.push("/items/loginpage");
                             })
 
                             list.map((list) => {
@@ -242,28 +243,28 @@ const Show = () => {
                     } else {
                       if (!getNameId.value) {
                         let tag = document.getElementsByClassName("control-label")[0] as HTMLElement;
-                        let echo = tag.style.display = "inline-block"
-                        let alart = tag.innerHTML = "名前を入力してください"
+                        tag.style.display = "inline-block"
+                          tag.innerHTML = "名前を入力してください"
                       }
 
                       if (!getMailId.value) {
                         let tag = document.getElementsByClassName("control-label")[1] as HTMLElement;
-                        let echo = tag.style.display = "inline-block"
-                        let alart = tag.innerHTML = "メールアドレスを入力してください"
+                        tag.style.display = "inline-block"
+                          tag.innerHTML = "メールアドレスを入力してください"
 
                       } else {
                         if (!getMailId.value.includes('@')) {
                           let tag = document.getElementsByClassName("control-label")[1] as HTMLElement;
-                          let echo = tag.style.display = "inline-block"
-                          let alart = tag.innerHTML = "メールアドレスの形式が不正です"
+                          tag.style.display = "inline-block"
+                            tag.innerHTML = "メールアドレスの形式が不正です"
                         } else {
                           fetch(`http://localhost:8000/users?mail=${getMailId.value}`)
                             .then(response => response.json())
                             .then((data) => {
                               if (data.length !== 0) {
                                 let tag = document.getElementsByClassName("control-label")[1] as HTMLElement;
-                                let echo = tag.style.display = "inline-block"
-                                let alart = tag.innerHTML = "そのメールアドレスはすでに使われています"
+                                tag.style.display = "inline-block"
+                                  tag.innerHTML = "そのメールアドレスはすでに使われています"
                               }
                             })
                             .catch(error => {
@@ -274,55 +275,55 @@ const Show = () => {
 
                       if (!getZipId.value) {
                         let tag = document.getElementsByClassName("control-label")[2] as HTMLElement;
-                        let echo = tag.style.display = "inline-block"
-                        let alart = document.getElementsByClassName("control-label")[2].innerHTML = "郵便番号を入力してください"
+                        tag.style.display = "inline-block"
+                          document.getElementsByClassName("control-label")[2].innerHTML = "郵便番号を入力してください"
                       } else {
                         if (!(getZipId.value.match(/^\d{3}-\d{4}$/))) {
                           let tag = document.getElementsByClassName("control-label")[2] as HTMLElement;
-                          let echo = tag.style.display = "inline-block"
-                          let alart = tag.innerHTML = "郵便番号はXXX-XXXXの形式で入力してください"
+                          tag.style.display = "inline-block"
+                            tag.innerHTML = "郵便番号はXXX-XXXXの形式で入力してください"
                         }
                       }
 
                       if (!getAddrId.value) {
                         let tag = document.getElementsByClassName("control-label")[3] as HTMLElement;
-                        let echo = tag.style.display = "inline-block"
-                        let alart = tag.innerHTML = "住所を入力してください"
+                        tag.style.display = "inline-block"
+                          tag.innerHTML = "住所を入力してください"
                       }
 
                       if (!getTelId.value) {
                         let tag = document.getElementsByClassName("control-label")[4] as HTMLElement;
-                        let echo = tag.style.display = "inline-block"
-                        let alart = tag.innerHTML = "電話番号を入力してください"
+                        tag.style.display = "inline-block"
+                          tag.innerHTML = "電話番号を入力してください"
                       } else {
                         if (!(getTelId.value.match(/^[0-9]*-[0-9]*-[0-9]*$/))) {
                           let tag = document.getElementsByClassName("control-label")[4] as HTMLElement;
-                          let echo = tag.style.display = "inline-block"
-                          let alart = tag.innerHTML = "電話番号はXXXX-XXXX-XXXXの形式で入力してください"
+                          tag.style.display = "inline-block"
+                            tag.innerHTML = "電話番号はXXXX-XXXX-XXXXの形式で入力してください"
                         }
                       }
 
                       if (!getPassId.value) {
                         let tag = document.getElementsByClassName("control-label")[5] as HTMLElement;
-                        let echo = tag.style.display = "inline-block"
-                        let alart = tag.innerHTML = "パスワードを入力してください"
+                        tag.style.display = "inline-block"
+                          tag.innerHTML = "パスワードを入力してください"
                       } else {
                         if (!(getPassId.value.length <= 16 && getPassId.value.length >= 8)) {
                           let tag = document.getElementsByClassName("control-label")[5] as HTMLElement;
-                          let echo = tag.style.display = "inline-block"
-                          let alart = tag.innerHTML = "パスワードは８文字以上１６文字以内で設定してください"
+                          tag.style.display = "inline-block"
+                            tag.innerHTML = "パスワードは８文字以上１６文字以内で設定してください"
                         }
                       }
 
                       if (!getPassConfId.value) {
                         let tag = document.getElementsByClassName("control-label")[6] as HTMLElement;
-                        let echo = tag.style.display = "inline-block"
-                        let alart = tag.innerHTML = "確認用パスワードを入力してください"
+                        tag.style.display = " inline-block"
+                          tag.innerHTML = "確認用パスワードを入力してください"
                       } else {
                         if (!(getPassId.value === getPassConfId.value)) {
                           let tag = document.getElementsByClassName("control-label")[6] as HTMLElement;
-                          let echo = tag.style.display = "inline-block"
-                          let alart = tag.innerHTML = "パスワードと確認用パスワードが不一致です"
+                          tag.style.display = "inline-block"
+                            tag.innerHTML = "パスワードと確認用パスワードが不一致です"
                         }
                       }
                     }
