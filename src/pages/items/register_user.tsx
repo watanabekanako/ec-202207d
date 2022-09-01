@@ -3,7 +3,7 @@ import { Title } from "../../compornents/register_user"
 import { clear } from "../../utils/register_user_clear"
 import { Form } from "../../compornents/register_user_form"
 import { useRouter } from "next/router";
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
 // import styles from '../../styles/register_user.module.css'
 

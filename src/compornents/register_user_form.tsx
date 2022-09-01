@@ -1,6 +1,6 @@
 import { Btn } from "./register_user"
 import 'bootstrap/dist/css/bootstrap.min.css';
-import styles from '../styles/register_user.module.css'
+// import styles from '../styles/register_user.module.css'
 
 export const Form = (props:any) => {
   return (
