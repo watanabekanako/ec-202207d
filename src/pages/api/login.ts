@@ -21,13 +21,13 @@ export default function LoginApi(
       } else if (data.length < 2) {
         console.log('複数取得されました');
       } else {
-        // res.status(200).json('メールとパスワードが間違っています');
         console.log('1人も取得できませんでした');
-        res.status(404)
       }
     })
     .catch((error) => {
       console.log('失敗');
+      res.status(404)
+      // res.status(404).send("メールとパスワードが間違っています");
     });
 }
 
