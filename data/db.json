@@ -5,21 +5,21 @@
       "description": "おいしい",
       "img": "/img/1.jpg",
       "name": "豚骨ラーメン",
-      "price": "800円"
+      "price": "800"
     },
     {
       "id": 2,
       "description": "おいしい",
       "img": "/img/2.jpg",
       "name": "家系ラーメン",
-      "price": "900円"
+      "price": "900"
     },
     {
       "id": 2,
       "description": "おいしい",
       "img": "/img/2.jpg",
       "name": "家系ラーメ",
-      "price": 900
+      "price": "900"
     }
   ],
   "options1": [
@@ -103,10 +103,9 @@
       "size": "L",
       "price": 800,
       "quantity": 2,
-      "options": [
-        "ネギ",
-        "チャーシュー"
-      ],
+
+      "options": ["ネギ", "チャーシュー"],
+
       "subtotal": 1600
     },
     {
@@ -116,9 +115,7 @@
       "size": "L",
       "price": 800,
       "quantity": 3,
-      "options": [
-        "海苔"
-      ],
+      "options": ["海苔"],
       "subtotal": 2400
     },
     {

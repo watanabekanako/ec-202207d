@@ -1,19 +1,21 @@
 import Head from 'next/head';
-// import Link from 'next/link';
+import Link from 'next/link';
 import useSWR, { useSWRConfig } from 'swr';
 import Image from 'next/image';
 import { useState } from 'react';
-import Link from 'next/link';
 
 const fetcher = (url: any) => fetch(url).then((res) => res.json());
 
 function CartPage() {
-    const { mutate } = useSWRConfig()
-    const { data, error } = useSWR('http://localhost:8000/cartItems', fetcher)
-  
-    if (error) return <div>failed to load</div>
-    if (!data) return <div>loading...</div>
-  
+  const { mutate } = useSWRConfig();
+  const { data, error } = useSWR(
+    'http://localhost:8000/cartItems',
+    fetcher
+  );
+
+  if (error) return <div>failed to load</div>;
+  if (!data) return <div>loading...</div>;
+
   return (
     <>
       <Head>
@@ -34,40 +36,52 @@ function CartPage() {
           </thead>
 
           <tbody>
-
-          {data.map((cartitem:any) => {
-            return (
+            {data.map((cartitem: any) => {
+              return (
                 <tr>
+                  <td className="cart-item-name">
+                    <div className="cart-item-icon">
+                      <Image
+                        src={cartitem.img}
+                        width={200}
+                        height={143}
+                      />
+                    </div>
+                    <span>{cartitem.name}</span>
+                  </td>
 
-                <td className="cart-item-name">
-                <div className="cart-item-icon">
-                    <Image src={cartitem.img} width={200} height={143} />
-                </div>
-                <span>{cartitem.name}</span>
-                </td>
+                  <td>
+                    <span className="price">
+                      &nbsp;{cartitem.size}
+                    </span>
+                    {cartitem.price}円 {cartitem.quantity}個
+                  </td>
 
-                <td>
-                <span className="price">&nbsp;{cartitem.size}</span>
-                  {cartitem.price}円 {cartitem.quantity}個
-                </td>
+                  <td>{cartitem.options}</td>
 
+                  <div className="text-center">
+                    {cartitem.subtotal}
+                  </div>
 
-                {/* <td>{cartitem.options}</td> */}
-                    
-                <div className="text-center">{cartitem.subtotal}</div>
-
-                <td>
-                <button onClick={
-                    () => {fetch(`http://localhost:8000/cartItems/${cartitem.id}`,{method: 'DELETE'})  
-                    mutate('http://localhost:8000/cartItems')
-                    }}>[削除]</button></td>
+                  <td>
+                    <button
+                      onClick={() => {
+                        fetch(
+                          `http://localhost:8000/cartItems/${cartitem.id}`,
+                          { method: 'DELETE' }
+                        );
+                        mutate('http://localhost:8000/cartItems');
+                      }}
+                    >
+                      [削除]
+                    </button>
+                  </td>
                 </tr>
-            )})}
-
-           </tbody>
-          </table>
-          
-          </div>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
 
       <div className="row cart-total-price">
         <div>消費税:8,000円</div>
@@ -75,15 +89,12 @@ function CartPage() {
       </div>
 
       <div className="row order-confirm-btn">
-      <Link href={`http://localhost:3000/items/order_confirm`}>
-        <button
-          className="btn"
-          type="button"
-        >
-          <span>注文に進む</span>
-        </button>
+        <Link href={`http://localhost:3000/items/order_confirm`}>
+          <button className="btn" type="button">
+            <span>注文に進む</span>
+          </button>
         </Link>
-      </div> 
+      </div>
     </>
   );
 }

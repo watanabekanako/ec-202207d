@@ -212,9 +212,12 @@ export default function ItemDetail({ items, options }: any) {
             <div className="col-xs-offset-2 col-xs-3">
               <div className="form-group">
                 <p>
-                  <Link href="http://localhost:3000/cart">
-                    <button onClick={() => onClickCart()}>
-                      保存
+                  <Link href="http://localhost:3000/items/cartPage">
+                    <button
+                      className="form-control btn btn-warning btn-block"
+                      onClick={() => onClickCart()}
+                    >
+                      カートに入れる
                     </button>
                   </Link>
                   {/* <input
