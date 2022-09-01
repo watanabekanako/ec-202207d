@@ -1,6 +1,8 @@
 import { useState } from "react"
 import {Nav} from "../../compornents/order_confirm_nav"
 import {ShoppingCart} from "../../compornents/order_confirm_shoppingCart"
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 const Total = () => {
   return (
@@ -17,13 +19,20 @@ const Total = () => {
 
 export const Show = () => {
   const [times, Settimes] = useState(10)
+
+  // フラグ
+  const [flagMailFormat, SetFlagMailFormat] = useState("true");
+  const [flagZip, SetFlagZip] = useState("true");
+  const [flagTel, SetFlagTel] = useState("true");
+  const [flagDate, SetFlagDate] = useState("true");
+    
   return (
     <>
       <div className="container">
         <Nav />
         {/*table */}
-        {/* <ShoppingCart /> */}
-        {/* <Total /> */}
+        <ShoppingCart />
+        <Total />
 
         {/*table */}
         <form action="#">
@@ -132,6 +141,7 @@ export const Show = () => {
                               name="name"
                               id="date"
                               className="form-control input-sm" 
+                              pattern="\d{4},\d{1},\d{1}"
                             />
                           </div>
                         </div>
@@ -250,12 +260,7 @@ export const Show = () => {
                     let getTimeClass = document.getElementsByClassName("time") as HTMLCollectionOf<HTMLFormElement>
                     let getPayClass = document.getElementsByClassName("pay") as HTMLCollectionOf<HTMLFormElement>
 
-                    // フラグ
-                    const [flagMailFormat, SetFlagMailFormat] = useState("true");
-                    const [flagZip, SetFlagZip] = useState("true");
-                    const [flagTel, SetFlagTel] = useState("true");
-                    const [flagDate, SetFlagDate] = useState("true");
-                      
+                    console.log(getDateId.value)
 
 
                     // 配達時間取得

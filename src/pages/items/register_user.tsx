@@ -3,7 +3,11 @@ import { Title } from "../../compornents/register_user"
 import { clear } from "../../utils/register_user_clear"
 import { Form } from "../../compornents/register_user_form"
 import { useRouter } from "next/router";
-// import styles from "../styles/register.module.css"
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+// import styles from '../../styles/register_user.module.css'
+
+
 
 // 入力項目リスト
 const list = [
@@ -64,6 +68,8 @@ const Show = () => {
   
   return (
     <div className="container" >
+      {/* navbar navbar-default */}
+      {/* <nav className={styles.navbarNavbarDefault}> */}
       <nav className="navbar navbar-default">
         <div className="container-fluid">
           {/*  <!-- Brand and toggle get grouped for better mobile display -->  */}
@@ -80,12 +86,12 @@ const Show = () => {
               <span className="icon-bar"></span>
             </button>
             <a className="navbar-brand" href="#">
-              {/* <!-- 企業ロゴ -->  */}
-              <img
+              {/* 企業ロゴ  */}
+              {/* <img
                 alt="main log"
-                // src="../static/img_pizza/header_logo.png"
+                src="../static/img_pizza/header_logo.png"
                 height="35"
-              />
+              /> */}
             </a>
           </div>
 
@@ -141,10 +147,7 @@ const Show = () => {
                       getPassId.value &&
                       getPassConfId.value
                     ) {
-
-
-
-                      
+                   
                       if (!getMailId.value.includes('@')) {
                         let tag = document.getElementsByClassName("control-label")[1] as HTMLElement;
                         tag.style.display = "inline-block"
