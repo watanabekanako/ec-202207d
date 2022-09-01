@@ -103,7 +103,7 @@
       "size": "L",
       "price": 800,
       "quantity": 2,
-      "options": "[]",
+      "options": ["ネギ","チャーシュー"],
       "subtotal": 1600
     },
     {
@@ -113,7 +113,7 @@
       "size": "L",
       "price": 800,
       "quantity": 3,
-      "options": "",
+      "options": ["海苔"],
       "subtotal": 2400
     }
   ]

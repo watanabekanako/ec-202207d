@@ -1,5 +1,8 @@
-import {Nav} from "../compornents/order_confirm_nav"
-import {ShoppingCart} from "../compornents/order_confirm_shoppingCart"
+import { useState } from "react"
+import {Nav} from "../../compornents/order_confirm_nav"
+import {ShoppingCart} from "../../compornents/order_confirm_shoppingCart"
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 const Total = () => {
   return (
@@ -15,13 +18,21 @@ const Total = () => {
 }
 
 export const Show = () => {
+  const [times, Settimes] = useState(10)
+
+  // フラグ
+  const [flagMailFormat, SetFlagMailFormat] = useState("true");
+  const [flagZip, SetFlagZip] = useState("true");
+  const [flagTel, SetFlagTel] = useState("true");
+  const [flagDate, SetFlagDate] = useState("true");
+    
   return (
     <>
       <div className="container">
         <Nav />
         {/*table */}
-        {/* <ShoppingCart /> */}
-        {/* <Total /> */}
+        <ShoppingCart />
+        <Total />
 
         {/*table */}
         <form action="#">
@@ -110,7 +121,7 @@ export const Show = () => {
                   </tr>
                   <tr>
                     <td>
-                      <div className="text-center" id="date">配達日時</div>
+                      <div className="text-center" >配達日時</div>
                     </td>
                     <td>
                       <div className="form-group">
@@ -128,8 +139,9 @@ export const Show = () => {
                             <input
                               type="date"
                               name="name"
-                              id="name"
-                              className="form-control input-sm"
+                              id="date"
+                              className="form-control input-sm" 
+                              pattern="\d{4},\d{1},\d{1}"
                             />
                           </div>
                         </div>
@@ -140,6 +152,8 @@ export const Show = () => {
                                 type="radio"
                                 name="responsibleCompany"
                                 defaultChecked={true}
+                                className="time"
+                                value={10}
                               />
                               10時
                             </label>
@@ -149,7 +163,11 @@ export const Show = () => {
                                 for (let i = 11; i <= 18; i++) {
                                   radioList.push(
                                     <label className="radio-inline" key={i}>
-                                      <input type="radio" name="responsibleCompany" />
+                                      <input 
+                                      type="radio" name="responsibleCompany"
+                                      value={i} 
+                                      className="time"
+                                      />
                                       {i}時
                                     </label>
                                   )
@@ -187,9 +205,11 @@ export const Show = () => {
                         <div className="col-sm-12">
                           <label className="radio-inline">
                             <input
+                              className="pay"
                               type="radio"
                               name="responsibleCompany"
                               defaultChecked={true}
+                              value="代金引換"
                             />
                             代金引換
                           </label>
@@ -206,11 +226,14 @@ export const Show = () => {
                         <div className="col-sm-12">
                           <label className="radio-inline">
                             <input
+                              className="pay"
                               type="radio"
                               name="responsibleCompany"
                               defaultChecked={true}
+                              value="クレジットカード"
                             />
-                            クレジットカード </label
+                            クレジットカード 
+                            </label
                           ><br /><br />
                         </div>
                       </div>
@@ -233,102 +256,158 @@ export const Show = () => {
                     let getZipId = document.getElementById("zip") as HTMLInputElement
                     let getAddrId = document.getElementById("address") as HTMLInputElement
                     let getTelId = document.getElementById("tel") as HTMLInputElement
+                    let getDateId = document.getElementById("date") as HTMLInputElement
+                    let getTimeClass = document.getElementsByClassName("time") as HTMLCollectionOf<HTMLFormElement>
+                    let getPayClass = document.getElementsByClassName("pay") as HTMLCollectionOf<HTMLFormElement>
 
-                    let flagMail = "true"
-                    let flagZip = "true"
-                    let flagTel = "true"
-                    let flag = "true"
+                    console.log(getDateId.value)
 
+
+                    // 配達時間取得
+                    let timeValue = ""
+                    for(let i = 0; i < getTimeClass.length; i++){
+                      if(getTimeClass[i].checked === true){
+                        timeValue = getTimeClass[i].value;
+                      }
+                    }
+
+                    // 支払方法取得
+                    let payOpt = ""
+                    for(let i = 0; i < getPayClass.length; i++){
+                      if(getPayClass[i].checked === true){
+                        payOpt = getPayClass[i].value;
+                      }
+                    }
+                    
                     // エラーを非表示
                     const errList = [
-                      "",
-                      "",
-                      ""
+                      "nameErr",
+                      "addrErr",
+                      "mailErr",
+                      "zipErr",
+                      "telErr",
+                      "dateErr"
                     ]
-                    a.map((list) => {
-                      let tag = document.getElementsByClassName("control-label")[list.num] as HTMLElement;
-                      let echo = tag.style.display = "none"
+
+                    errList.map((list) => {
+                      let tag = document.getElementById(list) as HTMLInputElement;
+                       tag.style.display = "none"
                     })
-
-
 
                     if (
                       getNameId.value &&
                       getMailId.value &&
                       getZipId.value &&
                       getAddrId.value &&
-                      getTelId.value
+                      getTelId.value &&
+                      getDateId.value
                     ) {
+
+
                       if (!getMailId.value.includes('@')) {
                         let tag = document.getElementById("mailErr") as HTMLInputElement;
-                        let echo = tag.style.display = "inline-block"
+                         tag.style.display = "inline-block"
                         let alart = tag.innerHTML = "メールアドレスの形式が不正です"
-                        // flagMailFormat = ""
+                        SetFlagMailFormat("")
                       }
 
                       if (!(getZipId.value.match(/^\d{3}-\d{4}$/))) {
                         let tag = document.getElementById("zipErr") as HTMLInputElement;
-                        let echo = tag.style.display = "inline-block"
+                         tag.style.display = "inline-block"
                         let alart = tag.innerHTML = "郵便番号はXXX-XXXXの形式で入力してください"
-                        // flagZip = ""
+                        SetFlagZip("")
                       }
 
                       if (!(getTelId.value.match(/^[0-9]*-[0-9]*-[0-9]*$/))) {
                         let tag = document.getElementById("telErr") as HTMLInputElement;
-                        let echo = tag.style.display = "inline-block"
+                         tag.style.display = "inline-block"
                         let alart = tag.innerHTML = "電話番号はXXXX-XXXX-XXXXの形式で入力してください"
-                        // flagTel = ""
+                        SetFlagTel("")
                       }
+
+                      //現時点から3時間後以前が入力された場合 処理
+
+                      if (
+                        flagMailFormat &&
+                        flagZip &&
+                        flagTel &&
+                        flagDate 
+                        ){
+                          const data = {
+                            pay: payOpt
+                          }; 
+
+                          fetch(`http://localhost:8000/shoppingCart`, {
+                            method: "POST",
+                            headers: {
+                              'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(data)
+                          }).then((response) => {
+                            return response.json();
+                          }).then((data) => {
+                            // router.push("/items/order_finished");
+                          })                                            
+                      }
+
+
                     }else{
 
                       if(getMailId.value){
                         if (!getMailId.value.includes('@')) {
                           let tag = document.getElementById("mailErr") as HTMLInputElement;
-                          let echo = tag.style.display = "inline-block"
+                           tag.style.display = "inline-block"
                           let alart = tag.innerHTML = "メールアドレスの形式が不正です"
                         }
                         }else{
                           let tag = document.getElementById("mailErr") as HTMLInputElement;
-                          let echo = tag.style.display = "inline-block"
+                           tag.style.display = "inline-block"
                           let alart = tag.innerHTML = "メールアドレスを入力してください"
                         }
 
                         if(getZipId.value){
                           if (!(getZipId.value.match(/^\d{3}-\d{4}$/))) {
                             let tag = document.getElementById("zipErr") as HTMLInputElement;
-                            let echo = tag.style.display = "inline-block"
+                             tag.style.display = "inline-block"
                             let alart = tag.innerHTML = "郵便番号はXXX-XXXXの形式で入力してください"
                             // flagZip = ""
                           }
                         }else{
                           let tag = document.getElementById("zipErr") as HTMLInputElement;
-                          let echo = tag.style.display = "inline-block"
+                           tag.style.display = "inline-block"
                           let alart = tag.innerHTML = "郵便番号を入力してください"
                         }
 
                         if(getTelId.value){
                           if (!(getTelId.value.match(/^[0-9]*-[0-9]*-[0-9]*$/))) {
                             let tag = document.getElementById("telErr") as HTMLInputElement;
-                            let echo = tag.style.display = "inline-block"
+                             tag.style.display = "inline-block"
                             let alart = tag.innerHTML = "電話番号はXXXX-XXXX-XXXXの形式で入力してください"
                             // flagTel = ""
                           }
                         }else{
                           let tag = document.getElementById("telErr") as HTMLInputElement;
-                          let echo = tag.style.display = "inline-block"
+                           tag.style.display = "inline-block"
                           let alart = tag.innerHTML = "電話番号を入力してください"
                         }
 
                         if(!getNameId.value){
                           let tag = document.getElementById("nameErr") as HTMLInputElement;
-                          let echo = tag.style.display = "inline-block"
+                           tag.style.display = "inline-block"
                         }
 
                         if(!getAddrId.value){
                           let tag = document.getElementById("addrErr") as HTMLInputElement;
-                          let echo = tag.style.display = "inline-block"
+                           tag.style.display = "inline-block"
                         }
 
+                        // 配達日時　判定
+                        if(!getDateId.value){
+                          let tag = document.getElementById("dateErr") as HTMLInputElement;
+                           tag.style.display = "inline-block"
+                        }else{
+  
+                        }
                     }
                   }}
                 />

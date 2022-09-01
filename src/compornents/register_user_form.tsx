@@ -1,4 +1,6 @@
 import { Btn } from "./register_user"
+import 'bootstrap/dist/css/bootstrap.min.css';
+import styles from '../styles/register_user.module.css'
 
 export const Form = (props:any) => {
   return (
@@ -6,7 +8,7 @@ export const Form = (props:any) => {
       {
         props.list.map((list: any, index:number) => {
           return (
-            <div className="form-group" key={index} >
+            <div className={styles.formGroup} key={index} >
               <label htmlFor={list.id}>{list.item}:</label>
               <label
                 id={list.place}

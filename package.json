@@ -13,6 +13,7 @@
     "mock-api": "json-server --watch data/db.json --port 8000"
   },
   "dependencies": {
+    "bootstrap": "^5.2.0",
     "install": "^0.13.0",
     "isomorphic-unfetch": "^3.1.0",
     "js-cookie": "^3.0.1",
