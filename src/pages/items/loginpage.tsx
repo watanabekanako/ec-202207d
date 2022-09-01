@@ -1,91 +1,80 @@
 import Link from 'next/link';
 import React, { useState } from 'react';
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
 
-export default function Login() {      
+export default function Login() {
+  const router = useRouter();
 
-    
-const router = useRouter();
-    // let emailItem = document.getElementById('email') as HTMLInputElement;
-    // let passItem = document.getElementById('pass') as HTMLInputElement;
+  const [email, setEmail] = useState('');
+  const [pass, setPass] = useState('');
 
-
-    const [email, setEmail] = useState('');
-    const [pass, setPass] = useState('');
-  
-  const HandleSubmit = (e:any) => {
-
+  const HandleSubmit = (e: any) => {
     e.preventDefault();
 
-    fetch('http://localhost:8000/users?mail={email}&pass={pass}')
-      .then((response) => response.json())
-      .then((data) => {
-        // router.push('/items/profile')
-        console.log(data);
-
-        const dataItem = {
-          // id: data.id,
-          email: data.mail,
-          pass: data.pass,
-        };       
-        const request = {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json; charset=utf-8',
-          },
-          body: JSON.stringify(dataItem),
-        };
-        fetch('/api/login',request)
+    const dataItem = {
+      email: email,
+      pass: pass,
+    };
+    const request = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json charset=utf-8',
+      },
+      body: JSON.stringify(dataItem),
+    };
+    return (
+      fetch('/api/login', request)
         .then((response) => response.json())
-        .catch((error) => {
-          alert('エラーが発生しました');
+        //           console.log(response.status); // 404
+        // console.log(response.statusText); // Not Found
+        // console.log(dataItem);
+        .then((data) => {
+          console.log(data);
+          router.push('/itemList');
         })
-
-        
-    //     if(data.mail === emailItem && data.pass === passItem) {
-    //         // alert('ログイン成功しました');
-    //         router.push('/items/profile')
-    //     } else {
-    //         alert('メールアドレス、またはパスワードが間違っています');
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     alert('ログインエラー');
-        // return (
-        //     <Login />
-        // );
-      });
+        // .then((datas) => {
+        // console.log(datas);
+        // })
+        .catch((error) => {
+          alert('エラーが発生しました！');
+        })
+    );
   };
 
   return (
-    <form action="#" method="POST" onSubmit={HandleSubmit}>
-      <p>メールアドレス</p>
-      <input
-        id="email"
-        type="email"
-        name="email"
-        // onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-        //     const emailItem = (event.target.value);
-        //     console.log(emailItem);}}
-        value={email}
-        onChange={(event) => {
-          console.log(email);
-          setEmail(event.target.value);
-        }}
-      />
-      <p>パスワード</p>
-      <input
-        id="pass"
-        type="password"
-        name="pass"
-        // onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-        //     const passItem = (event.target.value);
-        //     console.log(passItem);}}
-        value={pass}
-        onChange={(event) => {setPass(event.target.value)}}
-      />
-      <br />
-      <button type="submit">送信</button>
-    </form>
+    <>
+      <h1>ログイン</h1>
+      <p>メールアドレス、またはパスワードが間違っています</p>
+      <form action="#" method="POST" onSubmit={HandleSubmit}>
+        <p id="error" style={{ display: 'none' }}>
+          メールアドレス
+        </p>
+        <input
+          id="email"
+          type="email"
+          name="email"
+          value={email}
+          onChange={(event) => {
+            // console.log(email);
+            setEmail(event.target.value);
+          }}
+        />
+        <p>パスワード</p>
+        <input
+          id="pass"
+          type="password"
+          name="pass"
+          value={pass}
+          onChange={(event) => {
+            setPass(event.target.value);
+          }}
+        />
+        <br />
+        <button type="submit">送信</button>
+      </form>
+      <Link href={''}>
+        <a>ユーザー登録はこちら</a>
+      </Link>
+    </>
   );
 }

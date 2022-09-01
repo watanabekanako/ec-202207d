@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 // import { useState, useEffect } from 'react';
 import Image from 'next/image';
-
 import Head from 'next/head';
 import React from 'react';
 
@@ -24,7 +23,6 @@ export async function getStaticProps({ params }: any) {
     },
   };
 }
-
 export async function getItemsIds() {
   const items = await fetch('http://localhost:8000/items').then(
     (res) => res.json()
@@ -49,15 +47,50 @@ export async function getStaticPaths() {
 
 export default function ItemDetail({ items, options }: any) {
   const [nameText, setNameText] = useState(items.name);
-
   const [descText, setDescText] = useState(items.description);
-
   const [priceText, setPriceText] = useState(items.price);
   const [imgText, setImgText] = useState(items.img);
-  const [total, setTotal] = useState(0);
-  const addHandler = (sub: any) => {
-    setTotal(total + sub);
+  const [count, setCount] = useState(1);
+  const [selectOptions, setSelectOptions] = useState({});
+  // const total = num;
+  const total = count * priceText;
+  /*
+チェックボックスがチェックされたらオプションの合計金額をだす
+初期表示がチェックがついているかいないかの確認
+*/
+  // function optionChanged(optionId: number, value: boolean) {
+  //   // selectOptions[optionId] = value;
+  //   setSelectOptions(selectOptions);
+  // }
+  // let optionTotalPrice = 0;
+  // for (const id in selectOptions) {
+  //   // selectOptions[??]の値がtrueの場合にのみ値段を加算する
+  //   if (selectOptions[id]) {
+  //     optionTotalPrice += selectOptions[id];
+  //   }
+  // }
+
+  // カートへのボタン
+  const onClickCart = () => {
+    return fetch('http://localhost:8000/cartItems', {
+      method: 'POST',
+      headers: { 'Content-type': 'application/json' },
+      body: JSON.stringify({
+        img: imgText,
+        name: nameText,
+        price: priceText,
+        quantity: count,
+        options: selectOptions,
+        subtotal: total,
+        id: items.id,
+      }),
+    })
+      .then((res) => res.json)
+      .catch((error) => {
+        console.error(error);
+      });
   };
+
   return (
     <form action="cart_list.html">
       <div className="row">
@@ -66,8 +99,6 @@ export default function ItemDetail({ items, options }: any) {
           <div className="row">
             <div className="col-xs-5">
               <p className="img-responsive img-rounded item-img-center">
-                {/* <img src={imgText}></img> */}
-
                 <Image src={imgText} width={200} height={143} />
               </p>
             </div>
@@ -89,18 +120,7 @@ export default function ItemDetail({ items, options }: any) {
                   <div className="col-sm-12"></div>
                   <div className="col-sm-12">
                     <label className="radio-inline">
-                      <input
-                        type="radio"
-                        name="responsibleCompany"
-                        // checked="checked"
-                      />
-                      {/* <span className="price"></span> */}
                       {priceText}
-                    </label>
-                    <label className="radio-inline">
-                      <input type="radio" name="responsibleCompany" />
-                      <span className="price">&nbsp;Ｌ</span>
-                      &nbsp;&nbsp;2,380円(税抜)
                     </label>
                   </div>
                 </div>
@@ -117,8 +137,26 @@ export default function ItemDetail({ items, options }: any) {
                       {options.map((option: any, index: any) => {
                         return (
                           <>
-                            <input type="checkbox" value="" />
+                            {/* オプションの値段を取得する方法を考える */}
+                            <input
+                              type="checkbox"
+                              value="{option.price}"
+                              className="checks"
+                              onChange={(e) => {
+                                // const optionId = option.price;
+                                // const checked =
+                                //   e.currentTarget.checked;
+                                // console.log(optionId, checked);
+                                // optionChanged(optionId, checked);
+                                // console.log(
+                                //   option.name,
+                                //   e.currentTarget.checked
+                                // );
+                              }}
+                            />
+
                             <p key={index}>{option.name}</p>
+                            <p key={index}>{option.price}</p>
                           </>
                         );
                       })}
@@ -138,11 +176,8 @@ export default function ItemDetail({ items, options }: any) {
                       数量を選択してください
                     </label>
                     <select
-                      onChange={(e) =>
-                        console.log('数量', e.currentTarget.value)
-                      }
-                      name="area"
-                      className="form-control"
+                      name=""
+                      onChange={(e: any) => setCount(e.target.value)}
                     >
                       <option value="1">1</option>
                       <option value="2">2</option>
@@ -166,7 +201,10 @@ export default function ItemDetail({ items, options }: any) {
           <div className="row">
             <div className="col-xs-offset-2 col-xs-10">
               <div className="form-group">
-                <span id="total-price">合計金額{total}</span>
+                {/* <div id="total-price"> */}
+                合計金額
+                {total}
+                {/* </div> */}
               </div>
             </div>
           </div>
@@ -174,11 +212,16 @@ export default function ItemDetail({ items, options }: any) {
             <div className="col-xs-offset-2 col-xs-3">
               <div className="form-group">
                 <p>
-                  <input
+                  <Link href="http://localhost:3000/cart">
+                    <button onClick={() => onClickCart()}>
+                      保存
+                    </button>
+                  </Link>
+                  {/* <input
                     className="form-control btn btn-warning btn-block"
                     type="submit"
                     value="カートに入れる"
-                  />
+                  /> */}
                 </p>
               </div>
             </div>
