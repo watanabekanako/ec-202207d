@@ -2,6 +2,7 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 
+
 export default function Login() {
   const router = useRouter();
 
@@ -30,7 +31,7 @@ export default function Login() {
         // console.log(dataItem);
         .then((data) => {
           console.log(data);
-          router.push('/itemList');
+          router.push('/items/itemList');
         })
         // .then((datas) => {
         // console.log(datas);
@@ -72,7 +73,7 @@ export default function Login() {
         <br />
         <button type="submit">送信</button>
       </form>
-      <Link href={''}>
+      <Link href={'/order_confirm'}>
         <a>ユーザー登録はこちら</a>
       </Link>
     </>
