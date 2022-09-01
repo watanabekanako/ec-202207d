@@ -3,6 +3,7 @@ import Head from 'next/head';
 import useSWR, { useSWRConfig } from 'swr';
 import Image from 'next/image';
 import { useState } from 'react';
+import Link from 'next/link';
 
 const fetcher = (url: any) => fetch(url).then((res) => res.json());
 
@@ -51,7 +52,7 @@ function CartPage() {
                 </td>
 
 
-                <td>{cartitem.options}</td>
+                {/* <td>{cartitem.options}</td> */}
                     
                 <div className="text-center">{cartitem.subtotal}</div>
 
@@ -74,13 +75,14 @@ function CartPage() {
       </div>
 
       <div className="row order-confirm-btn">
+      <Link href={`http://localhost:3000/items/order_confirm`}>
         <button
           className="btn"
           type="button"
-          onClick="location.href='order_confirm.html'"
         >
           <span>注文に進む</span>
         </button>
+        </Link>
       </div> 
     </>
   );
