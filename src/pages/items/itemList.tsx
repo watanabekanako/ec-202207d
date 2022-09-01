@@ -53,21 +53,40 @@ function Page() {
       <Head>
         <title>ラクスヌードル</title>
       </Head>
-      <h1>商品一覧</h1>
-      <p>商品を検索する</p>
-      <form>
-        <input
-          type="text"
-          id="form1"
-          name="kensaku"
-          value={kensaku}
-          onChange={(e) => setKensaku(e.target.value)}
-        />
-        <button type="button" onClick={(e) => handleClick(e)}>
+
+      <div className="row">
+        <div className="col-lg-offset-3 col-lg-6 col-md-offset-2 col-md-8 col-sm-10 col-xs-12">
+          <div className="panel panel-default">
+            <div className="panel-heading">
+            <div className="panel-title">商品を検索する</div>
+            </div>
+            <div className="panel-body">
+              <form method="post" action="#" className="form-horizontal">
+                <div className="form-group" />
+                  <label  className="control-label col-sm-2">商品名</label>
+                  
+      <div className="col-sm-9">
+      <div className="col-sm-9">
+                    <input
+                      type="text"
+                      name="kensaku"
+                      id="form1"
+                      className="form-control input-sm"
+                      value={kensaku}
+                      onChange={(e) => setKensaku(e.target.value)}
+                    />
+                  </div>
+                  </div>
+        
+                  <div className="text-center">
+        <button type="button" value="検索" className="btn btn-primary" onClick={(e) => handleClick(e)}>
           検索
         </button>
+
         <button
           type="button"
+          value="クリア"
+          className="btn btn-default"
           onClick={() => {
             setKensaku('');
             // setGaitouDisplay('none');
@@ -75,30 +94,39 @@ function Page() {
         >
           クリア
         </button>
+        </div>
       </form>
+      </div>
+          </div>
+        </div>
+      </div>
+
+
       <p id="gaitou" style={{ display: gaitouDisplay }}>
         該当の商品がありません
       </p>
-      <table>
-        <thead>
+      <div className="row">
+        <div
+          className="table-responsive col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10 col-sm-10 col-xs-12"
+        >
+          <table className="table table-striped item-list-table">
+        {/* <thead>
           <tr>
             <th>画像</th>
             <th>商品名</th>
             <th>価格</th>
           </tr>
-        </thead>
+        </thead> */}
+
         <tbody>
-          {/* {!search?.length && 
-          (
-            <p id="gaitou" style={{display:"none"}}>該当の商品がありません</p>
-          )} */}
+
           {!search?.length &&
             data.map((item: any,index:any) => {
               let number = index +1 ;
               return (
                 <tr>
                   <Link href={`http://localhost:3000/items/${number}`}>
-                  <Image src={item.img} width={200} height={143} />
+                  <Image src={item.img} width={200} height={143} className="img-responsive img-rounded item-img-center" />
                   </Link>
                   <Link href={`http://localhost:3000/items/${number}`}>
                   <td>{item.name}</td>
@@ -113,18 +141,21 @@ function Page() {
               return (
                 <tr>
                   <Link href={`http://localhost:3000/items/${number}`}>
-                  <Image src={item.img} width={200} height={143} />
+                  <Image src={item.img} width={200} height={143} className="img-responsive img-rounded item-img-center"/>
                   </Link>
 
                   <Link href={`http://localhost:3000/items/${number}`}>
                   <td>{item.name}</td>
                   </Link>
-                  <td>{item.price}</td>
+                  <td>{item.price}円
+                  </td>
                 </tr>
               );
             })}
         </tbody>
       </table>
+        </div>
+      </div>
     </>
   );
 }

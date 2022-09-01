@@ -97,35 +97,28 @@
   ],
   "cartItems": [
     {
-      "id": 2,
-      "img": "/img/1.jpg",
-      "name": "豚骨ラーメン",
-      "size": "L",
-      "price": 800,
-      "quantity": 2,
-
-      "options": ["ネギ", "チャーシュー"],
-
-      "subtotal": 1600
-    },
-    {
-      "id": 3,
       "img": "/img/2.jpg",
-      "name": "塩ラーメン",
-      "size": "L",
-      "price": 800,
-      "quantity": 3,
-      "options": ["海苔"],
-      "subtotal": 2400
+      "name": "豚骨ラーメン",
+      "price": "800",
+      "quantity": 1,
+      "options": [
+        "卵",
+        "ねぎ"
+      ],
+      "subtotal": 800,
+      "id": 1
     },
     {
-      "img": "/img/1.jpg",
+      "img": "/img/2.jpg",
       "name": "豚骨ラーメン",
-      "price": "800円",
+      "price": "800",
       "quantity": 1,
-      "options": {},
-      "subtotal": null,
-      "id": 1
+      "options": [
+        "卵",
+        "ねぎ"
+      ],
+      "subtotal": 800,
+      "id": 4
     }
   ]
 }

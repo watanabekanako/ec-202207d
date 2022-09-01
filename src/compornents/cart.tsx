@@ -6,7 +6,23 @@ import { useState } from 'react';
 
 const fetcher = (url: any) => fetch(url).then((res) => res.json());
 
+const Total = (props: any) => {
+  let tax = props.total * 0.1;
+  let totalPrice = tax + props.total;
+  return (
+    <div className="row">
+      <div className="col-xs-offset-2 col-xs-8">
+        <div className="form-group text-center">
+          <span id="total-price">消費税：{tax}円</span><br />
+          <span id="total-price">ご注文金額合計：{totalPrice}円 (税込)</span>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 function CartPage() {
+  let total = 0;
   const { mutate } = useSWRConfig();
   const { data, error } = useSWR(
     'http://localhost:8000/cartItems',
@@ -29,7 +45,7 @@ function CartPage() {
           <thead>
             <tr>
               <th className="cart-table-th">商品名</th>
-              <th>サイズ、価格(税抜)、数量</th>
+              <th>価格(税抜)、数量</th>
               <th>トッピング、価格(税抜)</th>
               <th>小計</th>
             </tr>
@@ -52,20 +68,29 @@ function CartPage() {
 
                   <td>
                     <span className="price">
-                      &nbsp;{cartitem.size}
+                      {/* &nbsp;{cartitem.size} */}
                     </span>
                     {cartitem.price}円 {cartitem.quantity}個
                   </td>
 
-                  <td>{cartitem.options}</td>
+                  <td>    
+                  {cartitem.options.map((option:any,index:any)=> {
+                    return(
+                    <li key={index}>{option}</li>
+                    )
+                    })}
+                  </td> 
 
-                  <div className="text-center">
-                    {cartitem.subtotal}
-                  </div>
+                  <td>
+                  <span className="text-center">
+                    {cartitem.subtotal}円
+                  </span>
+                  </td>
 
                   <td>
                     <button
-                      onClick={() => {
+                      onClick={(index:any) => {
+                        let number = index + 1
                         fetch(
                           `http://localhost:8000/cartItems/${cartitem.id}`,
                           { method: 'DELETE' }
@@ -84,9 +109,12 @@ function CartPage() {
       </div>
 
       <div className="row cart-total-price">
-        <div>消費税:8,000円</div>
-        <div>ご注文金額合計:38,000円 (税込)</div>
+        <p  style={{display:"none"}} >
+      {data.map((data: any) => 
+      total += data.subtotal)}
+      </p>
       </div>
+      <Total total={total} />
 
       <div className="row order-confirm-btn">
         <Link href={`http://localhost:3000/items/order_confirm`}>
@@ -100,18 +128,3 @@ function CartPage() {
 }
 
 export default CartPage;
-
-// function App() {
-//   const [total, setTotal] = useState(0);
-
-//   const addHandler = (sub:any) => {
-//     setTotal(total + sub);
-//   };
-
-//   return (
-//     <main>
-//       {/* <Items addHandler={addHandler} /> */}
-//       <p>合計{total}円</p>
-//     </main>
-//   );
-// }

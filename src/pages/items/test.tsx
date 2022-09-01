@@ -52,10 +52,8 @@ export default function ItemDetail({ items, options }: any) {
   const [imgText, setImgText] = useState(items.img);
   const [count, setCount] = useState(1);
   const [selectOptions, setSelectOptions] = useState({});
-  const [optionPrice,setOptionPrice] = useState(0);
-
   // const total = num;
-  const total = (count * priceText ) + optionPrice;
+  const total = count * priceText;
   /*
 チェックボックスがチェックされたらオプションの合計金額をだす
 初期表示がチェックがついているかいないかの確認
@@ -144,7 +142,7 @@ export default function ItemDetail({ items, options }: any) {
                               type="checkbox"
                               value="{option.price}"
                               className="checks"
-                              // onChange={(e) => {
+                              onChange={(e) => {
                                 // const optionId = option.price;
                                 // const checked =
                                 //   e.currentTarget.checked;
@@ -154,16 +152,11 @@ export default function ItemDetail({ items, options }: any) {
                                 //   option.name,
                                 //   e.currentTarget.checked
                                 // );
-                                onClick={() => {
-                                  setOptionPrice(optionPrice+200)
-                                }}
-                              // }}
-
+                              }}
                             />
-    
+
                             <p key={index}>{option.name}</p>
                             <p key={index}>{option.price}</p>
- 
                           </>
                         );
                       })}
