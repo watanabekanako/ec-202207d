@@ -5,7 +5,7 @@ export default function Page() {
     return (
         <>
         <Head>
-          <title>商品一</title>
+          <title>カート</title>
         </Head>
         <CartPage />
         </>
