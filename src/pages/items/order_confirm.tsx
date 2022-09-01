@@ -4,18 +4,6 @@ import {ShoppingCart} from "../../compornents/order_confirm_shoppingCart"
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
 
-const Total = () => {
-  return (
-    <div className="row">
-      <div className="col-xs-offset-2 col-xs-8">
-        <div className="form-group text-center">
-          <span id="total-price">消費税：8,000円</span><br />
-          <span id="total-price">ご注文金額合計：38,000円 (税込)</span>
-        </div>
-      </div>
-    </div>
-  )
-}
 
 export const Show = () => {
   const [times, Settimes] = useState(10)
@@ -32,7 +20,7 @@ export const Show = () => {
         <Nav />
         {/*table */}
         <ShoppingCart />
-        <Total />
+        {/* <Total /> */}
 
         {/*table */}
         <form action="#">
@@ -260,6 +248,8 @@ export const Show = () => {
                     let getTimeClass = document.getElementsByClassName("time") as HTMLCollectionOf<HTMLFormElement>
                     let getPayClass = document.getElementsByClassName("pay") as HTMLCollectionOf<HTMLFormElement>
 
+                    let payStatus = "";
+
                     console.log(getDateId.value)
 
 
@@ -270,6 +260,8 @@ export const Show = () => {
                         timeValue = getTimeClass[i].value;
                       }
                     }
+                    console.log(timeValue)
+                    console.log(getDateId.value)
 
                     // 支払方法取得
                     let payOpt = ""
@@ -278,6 +270,14 @@ export const Show = () => {
                         payOpt = getPayClass[i].value;
                       }
                     }
+
+                    if(payOpt === "代金引換"){
+                      payStatus = "1:未入金"
+                    }else{
+                      payStatus = "2:入金済"
+                    }
+                    console.log(payOpt)
+                    console.log(payStatus)
                     
                     // エラーを非表示
                     const errList = [
