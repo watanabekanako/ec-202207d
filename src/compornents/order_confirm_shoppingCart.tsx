@@ -4,11 +4,29 @@ import React, { useState } from 'react';
 
 const fetcher = (url: any) => fetch(url).then((res) => res.json());
 
+
+const Total = (props: any) => {
+  let tax = props.total * 0.1;
+  let totalPrice = tax + props.total;
+  return (
+    <div className="row">
+      <div className="col-xs-offset-2 col-xs-8">
+        <div className="form-group text-center">
+          <span id="total-price">消費税：{tax}円</span><br />
+          <span id="total-price">ご注文金額合計：{totalPrice}円 (税込)</span>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+
 // 仮表示
 export const ShoppingCart = () => {
   
-  const [total, SetTotal] = useState("")
-
+  // const [total, SetTotal] = useState()
+  // 合計金額（仮）
+  let total = 0;
   const { data, error, mutate } = useSWR("http://localhost:8000/cartItems", fetcher);
 
   if (error) return (
@@ -21,7 +39,7 @@ export const ShoppingCart = () => {
     </>
   );
   mutate();
-  console.log(data[0].options)
+  // console.log(data[0].options)
   return (
     <div className="row">
       <div
@@ -32,6 +50,8 @@ export const ShoppingCart = () => {
           <tbody>
             {
               data.map((data: any, index: any) => {
+                // 合計金額（仮）
+                total += data.subtotal
                 return (
                   <React.Fragment key={index}>
                     <tr>
@@ -71,9 +91,6 @@ export const ShoppingCart = () => {
                               <li key={index}>{option}&nbsp;300円</li>
                             )
                           })}
-                          {/* <li>ピーマン300円</li>
-                          <li>オニオン300円</li>
-                          <li>あらびきソーセージ300円</li> */}
                         </ul>
                       </td>
                       <td>
@@ -87,6 +104,7 @@ export const ShoppingCart = () => {
             }
           </tbody>
         </table>
+            <Total total={total} />
       </div>
     </div>
 
