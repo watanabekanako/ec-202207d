@@ -89,13 +89,11 @@ function CartPage() {
       </div>
 
       <div className="row order-confirm-btn">
-        <button
-          className="btn"
-          type="button"
-          onClick="location.href='order_confirm.html'"
-        >
-          <span>注文に進む</span>
-        </button>
+        <Link href={`http://localhost:3000/items/order_confirm`}>
+          <button className="btn" type="button">
+            <span>注文に進む</span>
+          </button>
+        </Link>
       </div>
     </>
   );

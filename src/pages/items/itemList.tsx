@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import useSWR, { useSWRConfig } from 'swr';
 import Image from 'next/image';
 import { isGeneratorFunction } from 'util/types';
+import Link from 'next/link';
 
 const fetcher = (url: any) => fetch(url).then((res) => res.json());
 function Page() {
@@ -92,21 +93,32 @@ function Page() {
             <p id="gaitou" style={{display:"none"}}>該当の商品がありません</p>
           )} */}
           {!search?.length &&
-            data.map((item: any) => {
+            data.map((item: any,index:any) => {
+              let number = index +1 ;
               return (
                 <tr>
+                  <Link href={`http://localhost:3000/items/${number}`}>
                   <Image src={item.img} width={200} height={143} />
+                  </Link>
+                  <Link href={`http://localhost:3000/items/${number}`}>
                   <td>{item.name}</td>
+                  </Link>
                   <td>{item.price}</td>
                 </tr>
               );
             })}
           {search?.length > 0 &&
-            search.map((item: any) => {
+            search.map((item: any,index:any) => {
+              let number = index +1 ;
               return (
                 <tr>
+                  <Link href={`http://localhost:3000/items/${number}`}>
                   <Image src={item.img} width={200} height={143} />
+                  </Link>
+
+                  <Link href={`http://localhost:3000/items/${number}`}>
                   <td>{item.name}</td>
+                  </Link>
                   <td>{item.price}</td>
                 </tr>
               );

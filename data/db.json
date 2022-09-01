@@ -103,7 +103,9 @@
       "size": "L",
       "price": 800,
       "quantity": 2,
+
       "options": ["ネギ", "チャーシュー"],
+
       "subtotal": 1600
     },
     {
