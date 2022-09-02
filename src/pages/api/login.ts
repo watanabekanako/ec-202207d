@@ -9,14 +9,14 @@ export default function LoginApi(
   // console.log(dataItem.email);
   // console.log(dataItem.pass);
   const url = `http://localhost:8000/users?mail=${dataItem.email}&pass=${dataItem.pass}`;
-  // console.log(url);
+  console.log(url);
   fetch(url)
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
       console.log(data[0].id);
-      if (data.length > 0 && data.length <= 1) {
-        res.setHeader('Set-Cookie', [`userId=${data[0].id}`]);
+      if (data.length === 1) {
+        res.setHeader('Set-Cookie', [`userId=${data[0].id}; max-age=86400; path=/items;`]);
         res.status(200).json('OK');
       } else if (data.length < 2) {
         console.log('複数取得されました');
