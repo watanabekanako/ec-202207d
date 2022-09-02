@@ -52,11 +52,13 @@ export default function ItemDetail({ items, options }: any) {
   const [idText, setIdText] = useState(items.id);
   const [imgText, setImgText] = useState(items.img);
   const [count, setCount] = useState(1);
+
   // const [selectOptions, setSelectOptions] = useState({});
   const [optionPrice, setOptionPrice] = useState(0);
   // const total = num;
   // const total = count * priceText;
   const total = count * priceText + optionPrice;
+
   /*
 チェックボックスがチェックされたらオプションの合計金額をだす
 初期表示がチェックがついているかいないかの確認

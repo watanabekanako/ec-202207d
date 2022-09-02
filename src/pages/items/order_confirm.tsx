@@ -1,7 +1,8 @@
-import { useState } from 'react';
-import { Nav } from '../../compornents/order_confirm_nav';
-import { ShoppingCart } from '../../compornents/order_confirm_shoppingCart';
-// import 'bootstrap/dist/css/bootstrap.min.css';
+import { useState } from "react"
+import {Nav} from "../../compornents/order_confirm_nav"
+import {ShoppingCart} from "../../compornents/order_confirm_shoppingCart"
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 export const Show = () => {
   const [times, Settimes] = useState(10);
