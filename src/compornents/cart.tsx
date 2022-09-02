@@ -57,7 +57,7 @@ function CartPage() {
                     {cartitem.price}円 {cartitem.quantity}個
                   </td>
 
-                  <td>{cartitem.options}</td>
+                  {/* <td>{cartitem.options}</td> */}
 
                   <div className="text-center">
                     {cartitem.subtotal}
