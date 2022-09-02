@@ -8,12 +8,8 @@ const logoutClick = () => {
     // alert(document.cookie);
     // const cookie = document.cookie;
     // alert(cookie);
-    var dt = new Date('1999-12-31T23:59:59Z');
-    document.cookie = "name=; value=; path=; expires=" + dt.toUTCString();
+    document.cookie = "userId=; max-age=0";
     console.log(document.cookie);
-
-    let result = cookieStore.delete('userId');
-console.log(result);
 }
 
 
