@@ -16,6 +16,7 @@ export const Show = () => {
   // const [flagTel, SetFlagTel] = useState("true");
   // const [flagDate, SetFlagDate] = useState("true");
 
+
   return (
     <>
       <div className="container">
@@ -27,9 +28,7 @@ export const Show = () => {
         {/*table */}
         <form action="#">
           <div className="row">
-            <div
-              className="table-responsive col-lg-offset-3 col-lg-6 col-md-offset-1 col-md-10 col-sm-10 col-xs-12"
-            >
+            <div className="table-responsive col-lg-offset-3 col-lg-6 col-md-offset-1 col-md-10 col-sm-10 col-xs-12">
               <h3 className="text-center">お届け先情報</h3>
               <table className="table table-striped item-list-table">
                 <tbody>
@@ -41,77 +40,84 @@ export const Show = () => {
                       <label
                         id="nameErr"
                         className="control-label"
-                        style={{ color: "red", display: "none" }}
+                        style={{ color: 'red', display: 'none' }}
                         htmlFor="inputPeriod"
-                      >名前を入力してください
+                      >
+                        名前を入力してください
                       </label>
                       <input type="text" id="name" />
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      <div className="text-center" >メールアドレス</div>
+                      <div className="text-center">
+                        メールアドレス
+                      </div>
                     </td>
                     <td>
                       <label
                         id="mailErr"
                         className="control-label"
-                        style={{ color: "red", display: "none" }}
+                        style={{ color: 'red', display: 'none' }}
                         htmlFor="inputPeriod"
-
-                      >メールアドレスを入力してください
+                      >
+                        メールアドレスを入力してください
                       </label>
                       <input type="text" id="mail" />
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      <div className="text-center" >郵便番号</div>
+                      <div className="text-center">郵便番号</div>
                     </td>
                     <td>
                       <label
                         id="zipErr"
                         className="control-label"
-                        style={{ color: "red", display: "none" }}
+                        style={{ color: 'red', display: 'none' }}
                         htmlFor="inputPeriod"
-                      >郵便番号を入力してください
+                      >
+                        郵便番号を入力してください
                       </label>
-                      <input type="text" id="zip" />&nbsp;&nbsp;<button>住所検索</button>
+                      <input type="text" id="zip" />
+                      &nbsp;&nbsp;<button>住所検索</button>
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      <div className="text-center" >住所</div>
+                      <div className="text-center">住所</div>
                     </td>
                     <td>
                       <label
                         id="addrErr"
                         className="control-label"
-                        style={{ color: "red", display: "none" }}
+                        style={{ color: 'red', display: 'none' }}
                         htmlFor="inputPeriod"
-                      >住所を入力してください
+                      >
+                        住所を入力してください
                       </label>
                       <input type="text" id="address" />
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      <div className="text-center" >電話番号</div>
+                      <div className="text-center">電話番号</div>
                     </td>
                     <td>
                       <label
                         id="telErr"
                         className="control-label"
-                        style={{ color: "red", display: "none" }}
+                        style={{ color: 'red', display: 'none' }}
                         htmlFor="inputPeriod"
-                      >電話番号を入力してください
+                      >
+                        電話番号を入力してください
                       </label>
                       <input type="text" id="tel" />
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      <div className="text-center" >配達日時</div>
+                      <div className="text-center">配達日時</div>
                     </td>
                     <td>
                       <div className="form-group">
@@ -120,10 +126,14 @@ export const Show = () => {
                             <label
                               id="dateErr"
                               className="control-label"
-                              style={{ color: "red", display: "none" }}
+                              style={{
+                                color: 'red',
+                                display: 'none',
+                              }}
                               htmlFor="inputPeriod"
-                            >配達日時を入力してください</label
                             >
+                              配達日時を入力してください
+                            </label>
                           </div>
                           <div className="col-sm-5">
                             <input
@@ -147,6 +157,7 @@ export const Show = () => {
                               />
                               10時
                             </label>
+
                             {
                               (() => {
                                 const radioList = [];
@@ -166,6 +177,7 @@ export const Show = () => {
 
                               })()
                             }
+
                             <br />
                           </div>
                         </div>
@@ -180,9 +192,7 @@ export const Show = () => {
         <form action="#">
           {/*table */}
           <div className="row">
-            <div
-              className="table-responsive col-lg-offset-3 col-lg-6 col-md-offset-1 col-md-10 col-sm-10 col-xs-12"
-            >
+            <div className="table-responsive col-lg-offset-3 col-lg-6 col-md-offset-1 col-md-10 col-sm-10 col-xs-12">
               <h3 className="text-center">お支払い方法</h3>
               <table className="table table-striped item-list-table">
                 <tbody>
@@ -209,7 +219,9 @@ export const Show = () => {
                   </tr>
                   <tr>
                     <td>
-                      <div className="text-center">クレジットカード決済</div>
+                      <div className="text-center">
+                        クレジットカード決済
+                      </div>
                     </td>
                     <td align="center">
                       <div className="row">
@@ -223,8 +235,10 @@ export const Show = () => {
                               value="クレジットカード"
                             />
                             クレジットカード
+
                           </label
                           ><br /><br />
+
                         </div>
                       </div>
                     </td>
@@ -241,6 +255,7 @@ export const Show = () => {
                   type="button"
                   value="この内容で注文する"
                   onClick={() => {
+
                     let getNameId = document.getElementById("name") as HTMLInputElement
                     let getMailId = document.getElementById("mail") as HTMLInputElement
                     let getZipId = document.getElementById("zip") as HTMLInputElement
@@ -258,14 +273,18 @@ export const Show = () => {
 
                     let payStatus = "";
 
+
                     // console.log(getDateId.value)
                     // 配達時間取得
+
                     let timeValue = ""
+
                     for (let i = 0; i < getTimeClass.length; i++) {
                       if (getTimeClass[i].checked === true) {
                         timeValue = getTimeClass[i].value;
                       }
                     }
+
                     // console.log(timeValue)
                     // console.log(getDateId.value)
                     const currentDate = new Date();
@@ -287,11 +306,13 @@ export const Show = () => {
 
                     // 支払方法取得
                     let payOpt = ""
+
                     for (let i = 0; i < getPayClass.length; i++) {
                       if (getPayClass[i].checked === true) {
                         payOpt = getPayClass[i].value;
                       }
                     }
+
 
                     if (payOpt === "代金引換") {
                       payStatus = "1:未入金"
@@ -301,17 +322,19 @@ export const Show = () => {
                     // console.log(payOpt)
                     // console.log(payStatus)
 
+
                     // エラーを非表示
                     const errList = [
-                      "nameErr",
-                      "addrErr",
-                      "mailErr",
-                      "zipErr",
-                      "telErr",
-                      "dateErr"
-                    ]
+                      'nameErr',
+                      'addrErr',
+                      'mailErr',
+                      'zipErr',
+                      'telErr',
+                      'dateErr',
+                    ];
 
                     errList.map((list) => {
+
                       let tag = document.getElementById(list) as HTMLInputElement;
                       tag.style.display = "none"
                     })
@@ -324,6 +347,7 @@ export const Show = () => {
                       getTelId.value &&
                       getDateId.value
                     ) {
+
 
                       if (!getMailId.value.includes('@')) {
                         let tag = document.getElementById("mailErr") as HTMLInputElement;
@@ -347,6 +371,7 @@ export const Show = () => {
                         tag.innerHTML = "電話番号はXXXX-XXXX-XXXXの形式で入力してください"
                         // SetFlagTel("")
                         flagTel = "";
+
                       }
 
                       //現時点から3時間後以前が入力された場合 処理
@@ -365,6 +390,7 @@ export const Show = () => {
                         flagDate
                       ) {
                         const data = {
+
                           pay: payStatus,
                           zip: getZipId.value,
                           address: getAddrId.value,
@@ -437,10 +463,12 @@ export const Show = () => {
                       if (!getAddrId.value) {
                         let tag = document.getElementById("addrErr") as HTMLInputElement;
                         tag.style.display = "inline-block"
+
                       }
 
                       // 配達日時　判定
                       if (!getDateId.value) {
+
                         let tag = document.getElementById("dateErr") as HTMLInputElement;
                         tag.style.display = "inline-block"
                       } else {
@@ -451,7 +479,6 @@ export const Show = () => {
                         }
                       }
 
-
                     }
                   }}
                 />
@@ -460,10 +487,7 @@ export const Show = () => {
           </div>
         </form>
       </div>
-
-
     </>
   );
-
-}
+};
 export default Show;
