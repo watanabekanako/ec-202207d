@@ -128,3 +128,42 @@ function CartPage() {
 }
 
 export default CartPage;
+
+
+// const [noneItem, setNoneItem] = useState('none'); 
+    // if(data.length == 0){
+      // setNoneItem('blook');
+      // }else{
+      //   setNoneItem('none');
+      // }
+
+  // 消去ボタン        
+  // const handleClick = (e: any,index:any) => {
+  //   let number = index + 1
+  //   fetch(
+  //     `http://localhost:8000/cartItems/${cartitem.id}`,
+  //     { method: 'DELETE' }
+  //   );
+  //   mutate('http://localhost:8000/cartItems');
+
+// 表示非表示の設定 （カート中にないです）
+  //   {if( data.length < 3){
+  //     let noneItem = document.getElementById('noneItem') as HTMLInputElement
+  //     noneItem.style.display = "block"
+  //   }else{
+  //     let noneItem = document.getElementById('noneItem') as HTMLInputElement
+  //     noneItem.style.display = "none"
+  //   }
+  // }
+
+  // 表示非表示の設定（注文ボタン、合計金額）
+//   {if( data.length >=1 ){
+//     let hyouji = document.getElementById('hyouji') as HTMLInputElement
+//     hyouji.style.display = "block"
+//   }else{
+//     let hyouji = document.getElementById('hyouji') as HTMLInputElement
+//     hyouji.style.display = "none"
+//   }
+// }
+      // console.log(data,"data",data.length)
+      // <p id="noneItem" style={{ display: "none" }} >カートに商品がありません</p> 
