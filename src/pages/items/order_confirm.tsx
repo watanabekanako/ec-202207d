@@ -1,17 +1,21 @@
 import { useState } from "react"
-import {Nav} from "../../compornents/order_confirm_nav"
-import {ShoppingCart} from "../../compornents/order_confirm_shoppingCart"
+import { Nav } from "../../compornents/order_confirm_nav"
+import { ShoppingCart } from "../../compornents/order_confirm_shoppingCart"
+import { useRouter } from "next/router";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
+
 export const Show = () => {
-  const [times, Settimes] = useState(10);
+  const [times, Settimes] = useState(10)
+  const router = useRouter();
 
   // フラグ
-  const [flagMailFormat, SetFlagMailFormat] = useState('true');
-  const [flagZip, SetFlagZip] = useState('true');
-  const [flagTel, SetFlagTel] = useState('true');
-  const [flagDate, SetFlagDate] = useState('true');
+  // const [flagMailFormat, SetFlagMailFormat] = useState("true");
+  // const [flagZip, SetFlagZip] = useState("true");
+  // const [flagTel, SetFlagTel] = useState("true");
+  // const [flagDate, SetFlagDate] = useState("true");
+
 
   return (
     <>
@@ -153,26 +157,27 @@ export const Show = () => {
                               />
                               10時
                             </label>
-                            {(() => {
-                              const radioList = [];
-                              for (let i = 11; i <= 18; i++) {
-                                radioList.push(
-                                  <label
-                                    className="radio-inline"
-                                    key={i}
-                                  >
-                                    <input
-                                      type="radio"
-                                      name="responsibleCompany"
-                                      value={i}
-                                      className="time"
-                                    />
-                                    {i}時
-                                  </label>
-                                );
-                              }
-                              return radioList;
-                            })()}
+
+                            {
+                              (() => {
+                                const radioList = [];
+                                for (let i = 11; i <= 18; i++) {
+                                  radioList.push(
+                                    <label className="radio-inline" key={i}>
+                                      <input
+                                        type="radio" name="responsibleCompany"
+                                        value={i}
+                                        className="time"
+                                      />
+                                      {i}時
+                                    </label>
+                                  )
+                                }
+                                return radioList;
+
+                              })()
+                            }
+
                             <br />
                           </div>
                         </div>
@@ -230,9 +235,10 @@ export const Show = () => {
                               value="クレジットカード"
                             />
                             クレジットカード
-                          </label>
-                          <br />
-                          <br />
+
+                          </label
+                          ><br /><br />
+
                         </div>
                       </div>
                     </td>
@@ -249,61 +255,73 @@ export const Show = () => {
                   type="button"
                   value="この内容で注文する"
                   onClick={() => {
-                    let getNameId = document.getElementById(
-                      'name'
-                    ) as HTMLInputElement;
-                    let getMailId = document.getElementById(
-                      'mail'
-                    ) as HTMLInputElement;
-                    let getZipId = document.getElementById(
-                      'zip'
-                    ) as HTMLInputElement;
-                    let getAddrId = document.getElementById(
-                      'address'
-                    ) as HTMLInputElement;
-                    let getTelId = document.getElementById(
-                      'tel'
-                    ) as HTMLInputElement;
-                    let getDateId = document.getElementById(
-                      'date'
-                    ) as HTMLInputElement;
-                    let getTimeClass =
-                      document.getElementsByClassName(
-                        'time'
-                      ) as HTMLCollectionOf<HTMLFormElement>;
-                    let getPayClass = document.getElementsByClassName(
-                      'pay'
-                    ) as HTMLCollectionOf<HTMLFormElement>;
 
-                    let payStatus = '';
+                    let getNameId = document.getElementById("name") as HTMLInputElement
+                    let getMailId = document.getElementById("mail") as HTMLInputElement
+                    let getZipId = document.getElementById("zip") as HTMLInputElement
+                    let getAddrId = document.getElementById("address") as HTMLInputElement
+                    let getTelId = document.getElementById("tel") as HTMLInputElement
+                    let getDateId = document.getElementById("date") as HTMLInputElement
+                    let getTimeClass = document.getElementsByClassName("time") as HTMLCollectionOf<HTMLFormElement>
+                    let getPayClass = document.getElementsByClassName("pay") as HTMLCollectionOf<HTMLFormElement>
 
-                    console.log(getDateId.value);
+                    // フラグ
+                    let flagMailFormat = "true";
+                    let flagZip = "true";
+                    let flagTel = "true";
+                    let flagDate = "true";
 
+                    let payStatus = "";
+
+
+                    // console.log(getDateId.value)
                     // 配達時間取得
-                    let timeValue = '';
+
+                    let timeValue = ""
+
                     for (let i = 0; i < getTimeClass.length; i++) {
                       if (getTimeClass[i].checked === true) {
                         timeValue = getTimeClass[i].value;
                       }
                     }
-                    console.log(timeValue);
-                    console.log(getDateId.value);
+
+                    // console.log(timeValue)
+                    // console.log(getDateId.value)
+                    const currentDate = new Date();
+                    const Specified = new Date();
+
+                    let split = getDateId.value.split('-');
+                    let month = Number(split[1]) - 1
+
+                    Specified.setFullYear(Number(split[0]));
+                    Specified.setMonth(month);
+                    Specified.setDate(Number(split[2]));
+                    Specified.setHours(Number(timeValue), 0, 0);
+                    // console.log(month)
+                    // console.log(Specified);
+
+                    if( Number(Specified) - Number(currentDate) < 10800000 ){
+                      flagDate = ""
+                    }
 
                     // 支払方法取得
-                    let payOpt = '';
+                    let payOpt = ""
+
                     for (let i = 0; i < getPayClass.length; i++) {
                       if (getPayClass[i].checked === true) {
                         payOpt = getPayClass[i].value;
                       }
                     }
 
-                    if (payOpt === '代金引換') {
-                      payStatus = '1:未入金';
+
+                    if (payOpt === "代金引換") {
+                      payStatus = "1:未入金"
                     } else {
-                      payStatus = '2:入金済';
+                      payStatus = "2:入金済"
                     }
-                    console.log(payOpt);
-                    console.log(payStatus);
+                    // console.log(payOpt)
+                    // console.log(payStatus)
+
 
                     // エラーを非表示
                     const errList = [
@@ -316,11 +334,10 @@ export const Show = () => {
                     ];
 
                     errList.map((list) => {
-                      let tag = document.getElementById(
-                        list
-                      ) as HTMLInputElement;
-                      tag.style.display = 'none';
-                    });
+
+                      let tag = document.getElementById(list) as HTMLInputElement;
+                      tag.style.display = "none"
+                    })
 
                     if (
                       getNameId.value &&
@@ -330,41 +347,41 @@ export const Show = () => {
                       getTelId.value &&
                       getDateId.value
                     ) {
+
+
                       if (!getMailId.value.includes('@')) {
-                        let tag = document.getElementById(
-                          'mailErr'
-                        ) as HTMLInputElement;
-                        tag.style.display = 'inline-block';
-                        let alart = (tag.innerHTML =
-                          'メールアドレスの形式が不正です');
-                        SetFlagMailFormat('');
+                        let tag = document.getElementById("mailErr") as HTMLInputElement;
+                        tag.style.display = "inline-block"
+                        tag.innerHTML = "メールアドレスの形式が不正です"
+                        // SetFlagMailFormat("")
+                        flagMailFormat = "";
                       }
 
-                      if (!getZipId.value.match(/^\d{3}-\d{4}$/)) {
-                        let tag = document.getElementById(
-                          'zipErr'
-                        ) as HTMLInputElement;
-                        tag.style.display = 'inline-block';
-                        let alart = (tag.innerHTML =
-                          '郵便番号はXXX-XXXXの形式で入力してください');
-                        SetFlagZip('');
+                      if (!(getZipId.value.match(/^\d{3}-\d{4}$/))) {
+                        let tag = document.getElementById("zipErr") as HTMLInputElement;
+                        tag.style.display = "inline-block"
+                        tag.innerHTML = "郵便番号はXXX-XXXXの形式で入力してください"
+                        // SetFlagZip("")
+                        flagZip = "";
                       }
 
-                      if (
-                        !getTelId.value.match(
-                          /^[0-9]*-[0-9]*-[0-9]*$/
-                        )
-                      ) {
-                        let tag = document.getElementById(
-                          'telErr'
-                        ) as HTMLInputElement;
-                        tag.style.display = 'inline-block';
-                        let alart = (tag.innerHTML =
-                          '電話番号はXXXX-XXXX-XXXXの形式で入力してください');
-                        SetFlagTel('');
+                      if (!(getTelId.value.match(/^[0-9]*-[0-9]*-[0-9]*$/))) {
+                        let tag = document.getElementById("telErr") as HTMLInputElement;
+                        tag.style.display = "inline-block"
+                        tag.innerHTML = "電話番号はXXXX-XXXX-XXXXの形式で入力してください"
+                        // SetFlagTel("")
+                        flagTel = "";
+
                       }
 
                       //現時点から3時間後以前が入力された場合 処理
+                      
+                    if( Number(Specified) - Number(currentDate) < 10800000 ){
+                      let tag = document.getElementById("dateErr") as HTMLInputElement;
+                      tag.style.display = "inline-block"
+                      tag.innerHTML = "今から3時間後の日時をご入力ください"
+                      flagDate = ""
+                    }
 
                       if (
                         flagMailFormat &&
@@ -373,106 +390,95 @@ export const Show = () => {
                         flagDate
                       ) {
                         const data = {
-                          pay: payOpt,
+
+                          pay: payStatus,
+                          zip: getZipId.value,
+                          address: getAddrId.value,
+                          name: getNameId.value,
+                          mail: getMailId.value,
+                          tel: getTelId.value,
+                          date: getDateId.value + "-" + timeValue
                         };
 
-                        fetch(`http://localhost:8000/shoppingCart`, {
-                          method: 'POST',
+                        // POST先（仮）　ユーザーごとのショッピングカートがないため
+                        fetch(`http://localhost:8000/payStatus`, {
+                          method: "POST",
                           headers: {
-                            'Content-Type': 'application/json',
+                            'Content-Type': 'application/json'
                           },
-                          body: JSON.stringify(data),
+                          body: JSON.stringify(data)
+                        }).then((response) => {
+                          return response.json();
+                        }).then((data) => {
+                          router.push("/items/order_finished");
                         })
-                          .then((response) => {
-                            return response.json();
-                          })
-                          .then((data) => {
-                            // router.push("/items/order_finished");
-                          });
                       }
+
+
                     } else {
+
                       if (getMailId.value) {
                         if (!getMailId.value.includes('@')) {
-                          let tag = document.getElementById(
-                            'mailErr'
-                          ) as HTMLInputElement;
-                          tag.style.display = 'inline-block';
-                          let alart = (tag.innerHTML =
-                            'メールアドレスの形式が不正です');
+                          let tag = document.getElementById("mailErr") as HTMLInputElement;
+                          tag.style.display = "inline-block"
+                          tag.innerHTML = "メールアドレスの形式が不正です"
                         }
                       } else {
-                        let tag = document.getElementById(
-                          'mailErr'
-                        ) as HTMLInputElement;
-                        tag.style.display = 'inline-block';
-                        let alart = (tag.innerHTML =
-                          'メールアドレスを入力してください');
+                        let tag = document.getElementById("mailErr") as HTMLInputElement;
+                        tag.style.display = "inline-block"
+                        tag.innerHTML = "メールアドレスを入力してください"
                       }
 
                       if (getZipId.value) {
-                        if (!getZipId.value.match(/^\d{3}-\d{4}$/)) {
-                          let tag = document.getElementById(
-                            'zipErr'
-                          ) as HTMLInputElement;
-                          tag.style.display = 'inline-block';
-                          let alart = (tag.innerHTML =
-                            '郵便番号はXXX-XXXXの形式で入力してください');
+                        if (!(getZipId.value.match(/^\d{3}-\d{4}$/))) {
+                          let tag = document.getElementById("zipErr") as HTMLInputElement;
+                          tag.style.display = "inline-block"
+                          tag.innerHTML = "郵便番号はXXX-XXXXの形式で入力してください"
                           // flagZip = ""
                         }
                       } else {
-                        let tag = document.getElementById(
-                          'zipErr'
-                        ) as HTMLInputElement;
-                        tag.style.display = 'inline-block';
-                        let alart = (tag.innerHTML =
-                          '郵便番号を入力してください');
+                        let tag = document.getElementById("zipErr") as HTMLInputElement;
+                        tag.style.display = "inline-block"
+                        tag.innerHTML = "郵便番号を入力してください"
                       }
 
                       if (getTelId.value) {
-                        if (
-                          !getTelId.value.match(
-                            /^[0-9]*-[0-9]*-[0-9]*$/
-                          )
-                        ) {
-                          let tag = document.getElementById(
-                            'telErr'
-                          ) as HTMLInputElement;
-                          tag.style.display = 'inline-block';
-                          let alart = (tag.innerHTML =
-                            '電話番号はXXXX-XXXX-XXXXの形式で入力してください');
+                        if (!(getTelId.value.match(/^[0-9]*-[0-9]*-[0-9]*$/))) {
+                          let tag = document.getElementById("telErr") as HTMLInputElement;
+                          tag.style.display = "inline-block"
+                          tag.innerHTML = "電話番号はXXXX-XXXX-XXXXの形式で入力してください"
                           // flagTel = ""
                         }
                       } else {
-                        let tag = document.getElementById(
-                          'telErr'
-                        ) as HTMLInputElement;
-                        tag.style.display = 'inline-block';
-                        let alart = (tag.innerHTML =
-                          '電話番号を入力してください');
+                        let tag = document.getElementById("telErr") as HTMLInputElement;
+                        tag.style.display = "inline-block"
+                        tag.innerHTML = "電話番号を入力してください"
                       }
 
                       if (!getNameId.value) {
-                        let tag = document.getElementById(
-                          'nameErr'
-                        ) as HTMLInputElement;
-                        tag.style.display = 'inline-block';
+                        let tag = document.getElementById("nameErr") as HTMLInputElement;
+                        tag.style.display = "inline-block"
                       }
 
                       if (!getAddrId.value) {
-                        let tag = document.getElementById(
-                          'addrErr'
-                        ) as HTMLInputElement;
-                        tag.style.display = 'inline-block';
+                        let tag = document.getElementById("addrErr") as HTMLInputElement;
+                        tag.style.display = "inline-block"
+
                       }
 
                       // 配達日時　判定
                       if (!getDateId.value) {
-                        let tag = document.getElementById(
-                          'dateErr'
-                        ) as HTMLInputElement;
-                        tag.style.display = 'inline-block';
+
+                        let tag = document.getElementById("dateErr") as HTMLInputElement;
+                        tag.style.display = "inline-block"
                       } else {
+                        if( Number(Specified) - Number(currentDate) < 10800000 ){
+                          let tag = document.getElementById("dateErr") as HTMLInputElement;
+                          tag.style.display = "inline-block"
+                          tag.innerHTML = "今から3時間後の日時をご入力ください"
+                        }
                       }
+
                     }
                   }}
                 />

@@ -1,4 +1,6 @@
-// import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Link from 'next/link';
+
 export const Show = () => {
 
   return(
@@ -67,13 +69,13 @@ export const Show = () => {
       <div className="row">
         <div className="col-xs-offset-5 col-xs-2">
           <div className="form-group">
-            <form action="order_finished.html">
-              <input
-                className="form-control btn btn-warning btn-block"
-                type="submit"
-                value="トップ画面を表示する"
-              />
+          <Link href={'./itemList'}>
+            <form action="#">
+              <button
+                className="form-control btn btn-warning btn-block" 
+              >トップ画面を表示する</button>
             </form>
+          </Link>
           </div>
         </div>
       </div>

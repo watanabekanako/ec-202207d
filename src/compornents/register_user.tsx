@@ -1,4 +1,5 @@
 import React from 'react';
+import { useRouter } from "next/router";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -15,3 +16,27 @@ export const Btn = (props: { item: string }) => {
     return null;
   }
 }
+
+
+export const loginCheck = () =>{
+  const router = useRouter();
+  let cookie = document.cookie;
+  if(cookie.includes("userId")){
+    router.push("/items/order_confirm");
+  }else{
+    router.push("/items/loginpage");
+    document.cookie="status=shopping"
+  }
+}
+
+export const cartLogin = () =>{
+  const router = useRouter();
+  let cookie = document.cookie;
+  if(cookie.includes("status=shopping")){
+    router.push("/items/order_confirm");
+  }else{
+    document.cookie="status=shopping; max-age=0"
+  }
+}
+
+// res.setHeader('Set-Cookie', [`userId=${data[0].id};path=/items`]);

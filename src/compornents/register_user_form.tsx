@@ -1,15 +1,19 @@
 import { Btn } from "./register_user"
 import 'bootstrap/dist/css/bootstrap.min.css';
-// import styles from '../styles/register_user.module.css'
+import styles from '../styles/register_user.module.css'
 
 export const Form = (props:any) => {
   return (
     <>
       {
         props.list.map((list: any, index:number) => {
+          let formType = "text";
+          if(list.item === "パスワード" || list.item === "確認用パスワード" ){
+            formType = "password"
+          }
           return (
-            <div className="form-group" key={index} >
-              <label htmlFor={list.id}>{list.item}:</label>
+            <div className={`form-group ${styles.formGroup}`} key={index} >
+              <label htmlFor={list.id} className={styles.title}>{list.item}:</label>
               <label
                 id={list.place}
                 className="control-label"
@@ -21,7 +25,7 @@ export const Form = (props:any) => {
               >{list.item}を入力してください</label>
               <Btn item={list.item} />
               <input
-                type="text"
+                type={formType}
                 id={list.id}
                 className="form-control"
                 placeholder={list.place}
