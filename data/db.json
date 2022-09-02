@@ -56,23 +56,28 @@
   "options": [
     {
       "id": 1,
-      "name": "卵"
+      "name": "卵",
+      "price": 200
     },
     {
       "id": 2,
-      "name": "チャーシュー"
+      "name": "チャーシュー",
+      "price": 200
     },
     {
       "id": 3,
-      "name": "めんま"
+      "name": "めんま",
+      "price": 200
     },
     {
       "id": 4,
-      "name": "海苔"
+      "name": "海苔",
+      "price": 200
     },
     {
       "id": 5,
-      "name": "ネギ"
+      "name": "ネギ",
+      "price": 200
     }
   ],
   "users": [
@@ -97,28 +102,20 @@
   ],
   "cartItems": [
     {
-      "img": "/img/2.jpg",
+      "img": "/img/1.jpg",
       "name": "豚骨ラーメン",
       "price": "800",
       "quantity": 1,
-      "options": [
-        "卵",
-        "ねぎ"
-      ],
       "subtotal": 800,
-      "id": 4
+      "id": 1
     },
     {
-      "img": "/img/2.jpg",
+      "img": "/img/1.jpg",
       "name": "豚骨ラーメン",
       "price": "800",
-      "quantity": 1,
-      "options": [
-        "卵",
-        "ねぎ"
-      ],
-      "subtotal": 800,
-      "id": 4
+      "quantity": "2",
+      "subtotal": 2400,
+      "id": 2
     }
   ]
 }

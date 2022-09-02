@@ -73,6 +73,7 @@ function CartPage() {
                     {cartitem.price}円 {cartitem.quantity}個
                   </td>
 
+
                   <td>    
                   {cartitem.options.map((option:any,index:any)=> {
                     return(
@@ -80,6 +81,7 @@ function CartPage() {
                     )
                     })}
                   </td> 
+
 
                   <td>
                   <span className="text-center">

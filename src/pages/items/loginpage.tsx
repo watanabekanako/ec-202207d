@@ -4,10 +4,12 @@ import { useRouter } from 'next/router';
 
 
 export default function Login() {
+
   const router = useRouter();
 
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
+  const [errorDisplay, setErrorDisplay] = useState('none');
 
   const HandleSubmit = (e: any) => {
     e.preventDefault();
@@ -23,58 +25,61 @@ export default function Login() {
       },
       body: JSON.stringify(dataItem),
     };
-    return (
       fetch('/api/login', request)
         .then((response) => response.json())
-        //           console.log(response.status); // 404
-        // console.log(response.statusText); // Not Found
-        // console.log(dataItem);
         .then((data) => {
-          console.log(data);
-          router.push('/items/itemList');
+          // console.log(data);
+          if(data === 'OK') {
+            router.push('/items/itemList');
+            setErrorDisplay('none');
+          } else if(data === 'NG') {
+            setErrorDisplay('block');
+          }
         })
-        // .then((datas) => {
-        // console.log(datas);
-        // })
         .catch((error) => {
           alert('エラーが発生しました！');
         })
-    );
   };
 
   return (
     <>
       <h1>ログイン</h1>
-      <p>メールアドレス、またはパスワードが間違っています</p>
-      <form action="#" method="POST" onSubmit={HandleSubmit}>
-        <p id="error" style={{ display: 'none' }}>
-          メールアドレス
+      <p style={{ display: errorDisplay }}>
+        メールアドレス、またはパスワードが間違っています
+        </p>
+      <form method="POST" onSubmit={HandleSubmit}>
+        <p>
+          メールアドレス:
         </p>
         <input
           id="email"
           type="email"
           name="email"
+          placeholder='Email'
           value={email}
           onChange={(event) => {
-            // console.log(email);
             setEmail(event.target.value);
           }}
         />
-        <p>パスワード</p>
+        <p>パスワード:</p>
         <input
           id="pass"
           type="password"
           name="pass"
+          placeholder='Password'
           value={pass}
           onChange={(event) => {
             setPass(event.target.value);
           }}
         />
         <br />
-        <button type="submit">送信</button>
+        <button type="submit">ログイン</button>
       </form>
-      <Link href={'/order_confirm'}>
+      <Link href={'/items/register_user'}>
         <a>ユーザー登録はこちら</a>
+      </Link>
+      <Link href={'/items/logout'}>
+        <a>ログアウト画面へ</a>
       </Link>
     </>
   );
