@@ -1,6 +1,7 @@
 import useSWR, { useSWRConfig } from 'swr'
 import Link from "next/link"; 
 import React, { useState } from 'react';
+import Image from 'next/image';
 
 const fetcher = (url: any) => fetch(url).then((res) => res.json());
 
@@ -48,13 +49,7 @@ export const ShoppingCart = () => {
         <h3 className="text-center">注文内容確認</h3>
         <table className="table table-striped item-list-table">
           <tbody>
-            {
-              data.map((data: any, index: any) => {
-                // 合計金額（仮）
-                total += data.subtotal
-                return (
-                  <React.Fragment key={index}>
-                    <tr>
+          <tr>
                       <th>
                         <div className="text-center">商品名</div>
                       </th>
@@ -68,14 +63,21 @@ export const ShoppingCart = () => {
                         <div className="text-center">小計</div>
                       </th>
                     </tr>
+            {
+              data.map((data: any, index: any) => {
+                // 合計金額（仮）
+                total += data.subtotal
+                return (
+                  <React.Fragment key={index}>
+
                     <tr>
                       <td>
                         <div className="center">
-                          <img
+                          <Image
                             src={data.img}
                             className="img-responsive img-rounded item-img-center"
-                            width="100"
-                            height="300"
+                            width="200%"
+                            height="150%"
                           /><br />
                           {data.name}
                         </div>
@@ -86,7 +88,7 @@ export const ShoppingCart = () => {
                       </td>
                       <td>
                         <ul>
-                          {data.options.map((option:any,index:any)=> {
+                          {!!data.options && data.options.map((option:any,index:any)=> {
                             return(
                               <li key={index}>{option}&nbsp;300円</li>
                             )

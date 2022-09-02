@@ -3,9 +3,10 @@ import { Title } from "../../compornents/register_user"
 import { clear } from "../../utils/register_user_clear"
 import { Form } from "../../compornents/register_user_form"
 import { useRouter } from "next/router";
-// import 'bootstrap/dist/css/bootstrap.min.css';
-
-// import styles from '../../styles/register_user.module.css'
+import Image from 'next/image';
+import Link from "next/link"; 
+import "bootstrap/dist/css/bootstrap.min.css";
+import styles from "../../styles/register_user.module.css"
 
 
 
@@ -58,50 +59,49 @@ const list = [
 const Show = () => {
   const router = useRouter();
   // フラグ
-  const [flagMailFormat, SetFlagMailFormat] = useState("true");
-  const [flagMailDup, SetFlagMailDup] = useState("true");
-  const [flagZip, SetFlagZip] = useState("true");
-  const [flagTel, SetFlagTel] = useState("true");
-  const [flagPassLength, SetFlagPassLength] = useState("true");
-  const [flagPassConf, SetFlagPassConf] = useState("true");
-  
-  
+  // const [flagMailFormat, SetFlagMailFormat] = useState("true");
+  // const [flagMailDup, SetFlagMailDup] = useState("true");
+  // const [flagZip, SetFlagZip] = useState("true");
+  // const [flagTel, SetFlagTel] = useState("true");
+  // const [flagPassLength, SetFlagPassLength] = useState("true");
+  // const [flagPassConf, SetFlagPassConf] = useState("true");
+  let flagMailFormat = "true";
+  let flagMailDup = "true";
+  let flagZip = "true";
+  let flagTel = "true";
+  let flagPassLength = "true";
+  let flagPassConf = "true";
+
+
   return (
-    <div className="container" >
+    <div className={`container`}>
       {/* navbar navbar-default */}
       {/* <nav className={styles.navbarNavbarDefault}> */}
-      <nav className="navbar navbar-default">
+      <nav className={`navbar navbar-default ${styles.nav}`}>
         <div className="container-fluid">
           {/*  <!-- Brand and toggle get grouped for better mobile display -->  */}
-          <div className="navbar-header">
-            <button
-              type="button"
-              className="navbar-toggle collapsed"
-              data-toggle="collapse"
-              data-target="#bs-example-navbar-collapse-1"
-              aria-expanded="false"
-            >
-              <span className="sr-only">Toggle navigation</span>
-              <span className="icon-bar"></span> <span className="icon-bar"></span>
-              <span className="icon-bar"></span>
-            </button>
-            <a className="navbar-brand" href="#">
-              {/* 企業ロゴ  */}
-              {/* <img
+          <div >
+            <Link  href="#">
+              {/* 企業ロゴ   */}
+              <Image
                 alt="main log"
-                src="../static/img_pizza/header_logo.png"
-                height="35"
-              /> */}
-            </a>
+                src="/img/1.jpg"
+                height={35}
+                width={70}
+              />
+            </Link >
           </div>
 
           {/*  Collect the nav links, forms, and other content for toggling   */}
           <div
-            className="collapse navbar-collapse"
             id="bs-example-navbar-collapse-1"
           >
-            <p className="navbar-text navbar-right">
-              <a href="cart_list.html" className="navbar-link">ショッピングカート</a
+            <p 
+            // className="navbar-text navbar-right"
+            >
+              <Link href="cart_list.html" className={`
+              // navbar-link 
+              ${styles.navbarLink}`}>ショッピングカート</Link
               >&nbsp;&nbsp;
             </p>
           </div>
@@ -111,7 +111,7 @@ const Show = () => {
       </nav>
 
       {/* <!-- login form --> */}
-      <div className="row">
+      <div className={`row ${styles.row}`}>
         <div
           className="col-lg-offset-3 col-lg-6 col-md-offset-2 col-md-8 col-sm-10 col-xs-12"
         >
@@ -119,9 +119,9 @@ const Show = () => {
             <form method="post" action="#">
               <fieldset>
                 <Title title="ユーザ登録" />
-                <Form  list={list}/>
+                <Form list={list} />
                 <div className="form-group">
-                  <button type="button" className="btn btn-primary" onClick={() => {
+                  <button type="button" className={`btn btn-primary ${styles.btn}`} onClick={() => {
 
                     // 要素取得
                     let getNameId = document.getElementById('inputName') as HTMLInputElement;
@@ -138,7 +138,7 @@ const Show = () => {
                       tag.style.display = "none"
                     })
 
-                     if (
+                    if (
                       getNameId.value &&
                       getMailId.value &&
                       getZipId.value &&
@@ -147,45 +147,50 @@ const Show = () => {
                       getPassId.value &&
                       getPassConfId.value
                     ) {
-                   
+
                       if (!getMailId.value.includes('@')) {
                         let tag = document.getElementsByClassName("control-label")[1] as HTMLElement;
                         tag.style.display = "inline-block"
-                          tag.innerHTML = "メールアドレスの形式が不正です"
+                        tag.innerHTML = "メールアドレスの形式が不正です"
 
-                        SetFlagMailFormat("")
+                        // SetFlagMailFormat("")
+                        flagMailFormat = "";
                       }
 
                       if (!(getZipId.value.match(/^\d{3}-\d{4}$/))) {
                         let tag = document.getElementsByClassName("control-label")[2] as HTMLElement;
                         tag.style.display = "inline-block"
-                          tag.innerHTML = "郵便番号はXXX-XXXXの形式で入力してください"
+                        tag.innerHTML = "郵便番号はXXX-XXXXの形式で入力してください"
 
-                        SetFlagZip("")
+                        // SetFlagZip("")
+                        flagZip = "";
                       }
 
                       if (!(getTelId.value.match(/^[0-9]*-[0-9]*-[0-9]*$/))) {
                         let tag = document.getElementsByClassName("control-label")[4] as HTMLElement;
                         tag.style.display = "inline-block"
-                          tag.innerHTML = "電話番号はXXXX-XXXX-XXXXの形式で入力してください"
+                        tag.innerHTML = "電話番号はXXXX-XXXX-XXXXの形式で入力してください"
 
-                        SetFlagTel("")
+                        // SetFlagTel("")
+                        flagTel = "";
                       }
 
                       if (!(getPassId.value.length <= 16 && getPassId.value.length >= 8)) {
                         let tag = document.getElementsByClassName("control-label")[5] as HTMLElement;
                         tag.style.display = "inline-block"
-                          tag.innerHTML = "パスワードは８文字以上１６文字以内で設定してください"
+                        tag.innerHTML = "パスワードは８文字以上１６文字以内で設定してください"
 
-                        SetFlagPassLength("")
+                        // SetFlagPassLength("")
+                        flagPassLength = "";
                       }
 
                       if (!(getPassId.value === getPassConfId.value)) {
                         let tag = document.getElementsByClassName("control-label")[6] as HTMLElement;
                         tag.style.display = "inline-block"
-                          tag.innerHTML = "パスワードと確認用パスワードが不一致です"
+                        tag.innerHTML = "パスワードと確認用パスワードが不一致です"
 
-                        SetFlagPassConf("")
+                        // SetFlagPassConf("")
+                        flagPassConf = "";
                       }
 
                       // 全てのフラグに値が入っている場合
@@ -203,8 +208,9 @@ const Show = () => {
                               if (data.length !== 0) {
                                 let tag = document.getElementsByClassName("control-label")[1] as HTMLElement;
                                 tag.style.display = "inline-block"
-                                  tag.innerHTML = "そのメールアドレスはすでに使われています"
-                                SetFlagMailDup("")
+                                tag.innerHTML = "そのメールアドレスはすでに使われています"
+                                // SetFlagMailDup("")
+                                flagMailDup = "";
                               }
                             })
                             .catch(error => {
@@ -242,24 +248,24 @@ const Show = () => {
                         post();
                       }
 
-                    // その他
+                      // その他
                     } else {
                       if (!getNameId.value) {
                         let tag = document.getElementsByClassName("control-label")[0] as HTMLElement;
                         tag.style.display = "inline-block"
-                          tag.innerHTML = "名前を入力してください"
+                        tag.innerHTML = "名前を入力してください"
                       }
 
                       if (!getMailId.value) {
                         let tag = document.getElementsByClassName("control-label")[1] as HTMLElement;
                         tag.style.display = "inline-block"
-                          tag.innerHTML = "メールアドレスを入力してください"
+                        tag.innerHTML = "メールアドレスを入力してください"
 
                       } else {
                         if (!getMailId.value.includes('@')) {
                           let tag = document.getElementsByClassName("control-label")[1] as HTMLElement;
                           tag.style.display = "inline-block"
-                            tag.innerHTML = "メールアドレスの形式が不正です"
+                          tag.innerHTML = "メールアドレスの形式が不正です"
                         } else {
                           fetch(`http://localhost:8000/users?mail=${getMailId.value}`)
                             .then(response => response.json())
@@ -267,7 +273,7 @@ const Show = () => {
                               if (data.length !== 0) {
                                 let tag = document.getElementsByClassName("control-label")[1] as HTMLElement;
                                 tag.style.display = "inline-block"
-                                  tag.innerHTML = "そのメールアドレスはすでに使われています"
+                                tag.innerHTML = "そのメールアドレスはすでに使われています"
                               }
                             })
                             .catch(error => {
@@ -279,60 +285,60 @@ const Show = () => {
                       if (!getZipId.value) {
                         let tag = document.getElementsByClassName("control-label")[2] as HTMLElement;
                         tag.style.display = "inline-block"
-                          document.getElementsByClassName("control-label")[2].innerHTML = "郵便番号を入力してください"
+                        document.getElementsByClassName("control-label")[2].innerHTML = "郵便番号を入力してください"
                       } else {
                         if (!(getZipId.value.match(/^\d{3}-\d{4}$/))) {
                           let tag = document.getElementsByClassName("control-label")[2] as HTMLElement;
                           tag.style.display = "inline-block"
-                            tag.innerHTML = "郵便番号はXXX-XXXXの形式で入力してください"
+                          tag.innerHTML = "郵便番号はXXX-XXXXの形式で入力してください"
                         }
                       }
 
                       if (!getAddrId.value) {
                         let tag = document.getElementsByClassName("control-label")[3] as HTMLElement;
                         tag.style.display = "inline-block"
-                          tag.innerHTML = "住所を入力してください"
+                        tag.innerHTML = "住所を入力してください"
                       }
 
                       if (!getTelId.value) {
                         let tag = document.getElementsByClassName("control-label")[4] as HTMLElement;
                         tag.style.display = "inline-block"
-                          tag.innerHTML = "電話番号を入力してください"
+                        tag.innerHTML = "電話番号を入力してください"
                       } else {
                         if (!(getTelId.value.match(/^[0-9]*-[0-9]*-[0-9]*$/))) {
                           let tag = document.getElementsByClassName("control-label")[4] as HTMLElement;
                           tag.style.display = "inline-block"
-                            tag.innerHTML = "電話番号はXXXX-XXXX-XXXXの形式で入力してください"
+                          tag.innerHTML = "電話番号はXXXX-XXXX-XXXXの形式で入力してください"
                         }
                       }
 
                       if (!getPassId.value) {
                         let tag = document.getElementsByClassName("control-label")[5] as HTMLElement;
                         tag.style.display = "inline-block"
-                          tag.innerHTML = "パスワードを入力してください"
+                        tag.innerHTML = "パスワードを入力してください"
                       } else {
                         if (!(getPassId.value.length <= 16 && getPassId.value.length >= 8)) {
                           let tag = document.getElementsByClassName("control-label")[5] as HTMLElement;
                           tag.style.display = "inline-block"
-                            tag.innerHTML = "パスワードは８文字以上１６文字以内で設定してください"
+                          tag.innerHTML = "パスワードは８文字以上１６文字以内で設定してください"
                         }
                       }
 
                       if (!getPassConfId.value) {
                         let tag = document.getElementsByClassName("control-label")[6] as HTMLElement;
                         tag.style.display = " inline-block"
-                          tag.innerHTML = "確認用パスワードを入力してください"
+                        tag.innerHTML = "確認用パスワードを入力してください"
                       } else {
                         if (!(getPassId.value === getPassConfId.value)) {
                           let tag = document.getElementsByClassName("control-label")[6] as HTMLElement;
                           tag.style.display = "inline-block"
-                            tag.innerHTML = "パスワードと確認用パスワードが不一致です"
+                          tag.innerHTML = "パスワードと確認用パスワードが不一致です"
                         }
                       }
                     }
 
                   }}>登録</button>
-                  <button type="reset" className="btn btn-primary" onClick={() => {
+                  <button type="reset" className={`btn btn-primary ${styles.btn}`} onClick={() => {
                     clear();
                     list.map((list) => {
                       let tag = document.getElementsByClassName("control-label")[list.num] as HTMLElement;
