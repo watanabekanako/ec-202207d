@@ -13,13 +13,16 @@ const Total = (props: any) => {
     <div className="row">
       <div className="col-xs-offset-2 col-xs-8">
         <div className="form-group text-center">
-          <span id="total-price">消費税：{tax}円</span><br />
-          <span id="total-price">ご注文金額合計：{totalPrice}円 (税込)</span>
+          <span id="total-price">消費税：{tax}円</span>
+          <br />
+          <span id="total-price">
+            ご注文金額合計：{totalPrice}円 (税込)
+          </span>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 function CartPage() {
   let total = 0;
@@ -29,8 +32,24 @@ function CartPage() {
     fetcher
   );
 
+  const [datas, setdatas] = useState(data);
   if (error) return <div>failed to load</div>;
   if (!data) return <div>loading...</div>;
+
+  console.log('data.length', data.length);
+  if (data.length < 1) {
+    let noneItem = document.getElementById(
+      'noneItem'
+    ) as HTMLInputElement;
+    noneItem.style.display = 'block';
+    console.log('block');
+  } else {
+    let noneItem = document.getElementById(
+      'noneItem'
+    ) as HTMLInputElement;
+    noneItem.style.display = 'none';
+    console.log('none');
+  }
 
   return (
     <>
@@ -73,31 +92,37 @@ function CartPage() {
                     {cartitem.price}円 {cartitem.quantity}個
                   </td>
 
-
-                  <td>    
-                  {cartitem.options.map((option:any,index:any)=> {
-                    return(
-                    <li key={index}>{option}</li>
-                    )
-                    })}
-                  </td> 
-
+                  <td>
+                    {cartitem.options.map(
+                      (option: any, index: any) => {
+                        return (
+                          <li key={index}>{option}&nbsp;200円</li>
+                        );
+                      }
+                    )}
+                  </td>
 
                   <td>
-                  <span className="text-center">
-                    {cartitem.subtotal}円
-                  </span>
+                    <span className="text-center">
+                      {cartitem.subtotal}円
+                    </span>
                   </td>
 
                   <td>
                     <button
-                      onClick={(index:any) => {
-                        let number = index + 1
-                        fetch(
+                      onClick={async () => {
+                        // let number = index + 1
+                        await fetch(
                           `http://localhost:8000/cartItems/${cartitem.id}`,
                           { method: 'DELETE' }
-                        );
-                        mutate('http://localhost:8000/cartItems');
+                        ).then((res) => {
+                          if (res.status === 200) {
+                            
+                    
+
+                            mutate('http://localhost:8000/cartItems');
+                          }
+                        });
                       }}
                     >
                       [削除]
@@ -111,10 +136,9 @@ function CartPage() {
       </div>
 
       <div className="row cart-total-price">
-        <p  style={{display:"none"}} >
-      {data.map((data: any) => 
-      total += data.subtotal)}
-      </p>
+        <p style={{ display: 'none' }}>
+          {data.map((data: any) => (total += data.subtotal))}
+        </p>
       </div>
       <Total total={total} />
 
@@ -125,40 +149,23 @@ function CartPage() {
           </button>
         </Link>
       </div>
+      <p id="noneItem" style={{ display: 'none' }}>
+        カートに商品がありません
+      </p>
     </>
   );
 }
 
 export default CartPage;
 
+// const [noneItem, setNoneItem] = useState('none');
+//     if(data.length == 0){
+//       setNoneItem('blook');
+//       }else{
+//         setNoneItem('none');
+//       }
 
-// const [noneItem, setNoneItem] = useState('none'); 
-    // if(data.length == 0){
-      // setNoneItem('blook');
-      // }else{
-      //   setNoneItem('none');
-      // }
-
-  // 消去ボタン        
-  // const handleClick = (e: any,index:any) => {
-  //   let number = index + 1
-  //   fetch(
-  //     `http://localhost:8000/cartItems/${cartitem.id}`,
-  //     { method: 'DELETE' }
-  //   );
-  //   mutate('http://localhost:8000/cartItems');
-
-// 表示非表示の設定 （カート中にないです）
-  //   {if( data.length < 3){
-  //     let noneItem = document.getElementById('noneItem') as HTMLInputElement
-  //     noneItem.style.display = "block"
-  //   }else{
-  //     let noneItem = document.getElementById('noneItem') as HTMLInputElement
-  //     noneItem.style.display = "none"
-  //   }
-  // }
-
-  // 表示非表示の設定（注文ボタン、合計金額）
+//   表示非表示の設定（注文ボタン、合計金額）
 //   {if( data.length >=1 ){
 //     let hyouji = document.getElementById('hyouji') as HTMLInputElement
 //     hyouji.style.display = "block"
@@ -167,5 +174,3 @@ export default CartPage;
 //     hyouji.style.display = "none"
 //   }
 // }
-      // console.log(data,"data",data.length)
-      // <p id="noneItem" style={{ display: "none" }} >カートに商品がありません</p> 
