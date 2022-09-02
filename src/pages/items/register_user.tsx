@@ -85,9 +85,9 @@ const Show = () => {
               {/* 企業ロゴ   */}
               <Image
                 alt="main log"
-                src="/img/1.jpg"
+                src="/img/header_logo.jpg"
                 height={35}
-                width={70}
+                width={100}
               />
             </Link >
           </div>
