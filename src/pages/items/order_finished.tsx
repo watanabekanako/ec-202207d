@@ -1,56 +1,16 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Link from 'next/link';
+import { Nav } from "../../compornents/nav_format"
+import style from  "../../styles/register_user.module.css";
 
 export const Show = () => {
 
   return(
     <div className="container">
-      <nav className="navbar navbar-default">
-        <div className="container-fluid">
-           {/* Brand and toggle get grouped for better mobile display */}
-          <div className="navbar-header">
-            <button
-              type="button"
-              className="navbar-toggle collapsed"
-              data-toggle="collapse"
-              data-target="#bs-example-navbar-collapse-1"
-              aria-expanded="false"
-            >
-              <span className="sr-only">Toggle navigation</span>
-              <span className="icon-bar"></span> <span className="icon-bar"></span>
-              <span className="icon-bar"></span>
-            </button>
-            <a className="navbar-brand" href="item_list_pizza.html">
-               {/* 企業ロゴ */}
-              <img
-                alt="main log"
-                src="../static/img_pizza/header_logo.png"
-                height="35"
-              />
-            </a>
-          </div>
-
-           {/* Collect the nav links, forms, and other content for toggling */}
-          <div
-            className="collapse navbar-collapse"
-            id="bs-example-navbar-collapse-1"
-          >
-            <p className="navbar-text navbar-right">
-              <a href="cart_list.html" className="navbar-link">ショッピングカート</a
-              >&nbsp;&nbsp;
-              <a href="order_history.html" className="navbar-link">注文履歴</a
-              >&nbsp;&nbsp;
-              <a href="login.html" className="navbar-link">ログイン</a>&nbsp;&nbsp;
-              <a href="item_list_pizza.html" className="navbar-link">ログアウト</a>
-            </p>
-          </div>
-           {/* /.navbar-collapse */}
-        </div>
-         {/* /.container-fluid */}
-      </nav>
+      <Nav name="" />
 
        {/* table */}
-      <div className="row">
+      <div className={`row  ${style.row}` }>
         <div
           className="table-responsive col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10 col-sm-10 col-xs-12"
         >

@@ -28,7 +28,6 @@ export async function getItemsIds() {
   const items = await fetch('http://localhost:8000/items').then(
     (res) => res.json()
   );
-
   return items.map((item: { id: string }) => {
     return {
       params: {
@@ -190,6 +189,7 @@ export default function ItemDetail({ items, options }: any) {
                         {options.map((option: any, index: any) => {
                           return (
                             <>
+                            
                               {/* オプションの値段を取得する方法を考える */}
                               <input
                                 type="checkbox"
