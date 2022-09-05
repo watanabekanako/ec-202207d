@@ -81,27 +81,6 @@
       "id": 2
     }
   ],
-  "cartItems": [
-    {
-      "img": "/img/2.jpg",
-      "name": "家系ラーメン1",
-      "price": 1000,
-      "quantity": "2",
-      "options": [],
-      "subtotal": 2600,
-      "id": 1
-    }
-  ],
-  "payStatus": [
-    {
-      "pay": "2:入金済",
-      "zip": "245-0014",
-      "address": "横浜市",
-      "name": "ワタナベカナコ",
-      "mail": "kanako.w0308@gmail.com",
-      "tel": "000-0000-0000",
-      "date": "2022-09-22-11",
-      "id": 1
-    }
-  ]
+  "cartItems": [],
+  "payStatus": []
 }

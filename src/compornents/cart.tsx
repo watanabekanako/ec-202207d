@@ -177,4 +177,19 @@ function CartPage() {
   );
 }
 
+// console.log('data.length', data.length);
+if (datas.length < 1) {
+  let noneItem = document.getElementById(
+    'noneItem'
+  ) as HTMLInputElement;
+  noneItem.style.display = 'block';
+  // console.log('block');
+} else {
+  let noneItem = document.getElementById(
+    'noneItem'
+  ) as HTMLInputElement;
+  noneItem.style.display = 'none';
+  console.log('none');
+}
+
 export default CartPage;
