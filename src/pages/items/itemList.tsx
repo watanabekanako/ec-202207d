@@ -117,34 +117,33 @@ function Page() {
             <th>価格</th>
           </tr>
         </thead> */}
+        
 
         <tbody>
 
           {!search?.length &&
-            data.map((item: any,index:any) => {
-              let number = index +1 ;
+            data.map((item: any) => {
               return (
                 <tr>
-                  <Link href={`http://localhost:3000/items/${number}`}>
+                  <Link href={`http://localhost:3000/items/${item.id}`}>
                   <Image src={item.img} width={200} height={143} className="img-responsive img-rounded item-img-center" />
                   </Link>
-                  <Link href={`http://localhost:3000/items/${number}`}>
+                  <Link href={`http://localhost:3000/items/${item.id}`}>
                   <td>{item.name}</td>
                   </Link>
-                  <td>{item.price}</td>
+                  <td>{item.price}円</td>
                 </tr>
               );
             })}
           {search?.length > 0 &&
-            search.map((item: any,index:any) => {
-              let number = index +1 ;
+            search.map((item: any) => {
+              // let number = index + 1 ;
               return (
                 <tr>
-                  <Link href={`http://localhost:3000/items/${number}`}>
+                  <Link href={`http://localhost:3000/items/${item.id}`}>
                   <Image src={item.img} width={200} height={143} className="img-responsive img-rounded item-img-center"/>
                   </Link>
-
-                  <Link href={`http://localhost:3000/items/${number}`}>
+                  <Link href={`http://localhost:3000/items/${item.id}`}>
                   <td>{item.name}</td>
                   </Link>
                   <td>{item.price}円

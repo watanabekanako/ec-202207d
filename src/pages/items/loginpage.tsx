@@ -29,9 +29,17 @@ export default function Login() {
         .then((response) => response.json())
         .then((data) => {
           // console.log(data);
-          if(data === 'OK') {
-            router.push('/items/itemList');
+          if(data === 'OK') {            
+            // router.push('/items/itemList');
             setErrorDisplay('none');
+
+            let cookie = document.cookie;
+            if(cookie.includes("status=shopping")){
+              router.push("/items/order_confirm");
+            }else{
+              router.push('/items/itemList');
+            }
+
           } else if(data === 'NG') {
             setErrorDisplay('block');
           }
