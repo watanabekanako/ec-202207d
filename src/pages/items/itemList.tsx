@@ -5,6 +5,7 @@ import useSWR, { useSWRConfig } from 'swr';
 import Image from 'next/image';
 import { isGeneratorFunction } from 'util/types';
 import Link from 'next/link';
+import { Nav } from "../../compornents/nav_format"
 
 const fetcher = (url: any) => fetch(url).then((res) => res.json());
 function Page() {
@@ -53,6 +54,8 @@ function Page() {
       <Head>
         <title>ラクスヌードル</title>
       </Head>
+
+      <Nav name=""/>
 
       <div className="row">
         <div className="col-lg-offset-3 col-lg-6 col-md-offset-2 col-md-8 col-sm-10 col-xs-12">
