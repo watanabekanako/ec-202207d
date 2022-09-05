@@ -1,9 +1,11 @@
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
+import { Nav } from "../../compornents/nav_format"
 
 
 export default function Login() {
+
 
   const router = useRouter();
 
@@ -51,6 +53,7 @@ export default function Login() {
 
   return (
     <>
+    <Nav name="ログイン" />
       <h1>ログイン</h1>
       <p style={{ display: errorDisplay }}>
         メールアドレス、またはパスワードが間違っています
