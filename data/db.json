@@ -29,37 +29,6 @@
       "price": "1200"
     }
   ],
-  "options1": [
-    {
-      "options5": "卵"
-    }
-  ],
-  "options2": [
-    {
-      "options5": "チャーシュー"
-    }
-  ],
-  "options3": [
-    {
-      "options5": "めんま"
-    }
-  ],
-  "options4": [
-    {
-      "options5": "海苔"
-    }
-  ],
-  "options5": [
-    {
-      "options5": "ネギ"
-    },
-    {
-      "name": "ssss",
-      "description": "sssssss",
-      "price": "sssss",
-      "id": 3
-    }
-  ],
   "options": [
     {
       "id": 1,
@@ -85,6 +54,11 @@
       "id": 5,
       "name": "ネギ",
       "price": 200
+    },
+    {
+      "id": 6,
+      "name": "大盛り",
+      "price": 300
     }
   ],
   "users": [
@@ -105,99 +79,8 @@
       "tel": "090-1234-1234",
       "pass": "passpass",
       "id": 2
-    },
-    {
-      "name": "aaa",
-      "mail": "m@mail.com",
-      "zip": "123-1234",
-      "address": "1",
-      "tel": "123-1234-1234",
-      "pass": "passpass",
-      "id": 3
     }
   ],
-  "cartItems": [
-    {
-      "img": "/img/2.jpg",
-      "name": "豚骨ラーメン",
-      "price": "800",
-      "quantity": 1,
-      "options": [
-        "卵",
-        "ねぎ"
-      ],
-      "subtotal": 800,
-      "id": 1
-    },
-    {
-      "img": "/img/1.jpg",
-      "name": "塩ラーメン",
-      "price": "900",
-      "quantity": 1,
-      "options": [
-        "卵",
-        "ねぎ"
-      ],
-      "subtotal": 800,
-      "id": 2
-    },
-    {
-      "img": "/img/2.jpg",
-      "name": "家系ラーメン1",
-      "price": "1000",
-      "quantity": 1,
-      "options": [
-        "卵",
-        "ねぎ"
-      ],
-      "subtotal": 800,
-      "id": 3
-    },
-    {
-      "img": "/img/1.jpg",
-      "name": "家系ラーメン2",
-      "price": "1200",
-      "quantity": 1,
-      "options": [
-        "卵",
-        "ねぎ"
-      ],
-      "subtotal": 800,
-      "id": 4
-    },
-    {
-      "img": "/img/1.jpg",
-      "name": "豚骨ラーメン",
-      "price": "800",
-      "quantity": "12",
-      "subtotal": 10600,
-      "options": [
-        "卵",
-        "ねぎ"
-      ],
-      "id": 5
-    }
-  ],
-  "payStatus": [
-    {
-      "pay": "2:入金済",
-      "zip": "123-1234",
-      "address": "1",
-      "name": "q",
-      "mail": "@",
-      "tel": "123-1234-1234",
-      "date": "2022-09-03-10",
-      "id": 3
-    },
-    {
-      "pay": "1:未入金",
-      "zip": "123-1234",
-      "address": "123",
-      "name": "name",
-      "mail": "ito@",
-      "tel": "123-1234-1234",
-      "date": "2022-09-24-10",
-      "id": 4
-    }
-  ]
+  "cartItems": [],
+  "payStatus": []
 }

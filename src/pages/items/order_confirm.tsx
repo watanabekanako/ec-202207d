@@ -1,8 +1,9 @@
 import { useState } from "react"
-import { Nav } from "../../compornents/order_confirm_nav"
+import { Nav } from "../../compornents/nav_format"
 import { ShoppingCart } from "../../compornents/order_confirm_shoppingCart"
 import { useRouter } from "next/router";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import style from  "../../styles/register_user.module.css";
 
 
 
@@ -19,24 +20,30 @@ export const Show = () => {
 
   return (
     <>
-      <div className="container">
-        <Nav />
+      <div className={`container`}>
+        <Nav name="ログイン"/>
         {/*table */}
         <ShoppingCart />
         {/* <Total /> */}
 
         {/*table */}
         <form action="#">
-          <div className="row">
-            <div className="table-responsive col-lg-offset-3 col-lg-6 col-md-offset-1 col-md-10 col-sm-10 col-xs-12">
+          <div className={`row g-3 ${style.row}`}>
+            <div className="table-responsive col-lg-offset-3 col-lg-7 col-md-offset-1 col-md-10 col-sm-10 col-xs-12">
               <h3 className="text-center">お届け先情報</h3>
               <table className="table table-striped item-list-table">
                 <tbody>
                   <tr>
                     <td>
-                      <div className="text-center">お名前</div>
+                      <div className="text-center">
+                        お名前
+                      </div>
                     </td>
                     <td>
+                        <span className={`${style.requiredLabel}`}>必須</span>
+                        <input type="text" id="name" 
+                        // className="form-control"
+                         />
                       <label
                         id="nameErr"
                         className="control-label"
@@ -45,7 +52,6 @@ export const Show = () => {
                       >
                         名前を入力してください
                       </label>
-                      <input type="text" id="name" />
                     </td>
                   </tr>
                   <tr>
@@ -55,6 +61,8 @@ export const Show = () => {
                       </div>
                     </td>
                     <td>
+                      <span className={`${style.requiredLabel}`}>必須</span>
+                      <input type="text" id="mail" />
                       <label
                         id="mailErr"
                         className="control-label"
@@ -63,14 +71,18 @@ export const Show = () => {
                       >
                         メールアドレスを入力してください
                       </label>
-                      <input type="text" id="mail" />
                     </td>
                   </tr>
                   <tr>
                     <td>
-                      <div className="text-center">郵便番号</div>
+                      <div className="text-center">
+                        郵便番号
+                      </div>
                     </td>
                     <td>
+                      <span className={`${style.requiredLabel}`}>必須</span>
+                      <input type="text" id="zip" />
+                      &nbsp;&nbsp;<button>住所検索</button>
                       <label
                         id="zipErr"
                         className="control-label"
@@ -79,8 +91,6 @@ export const Show = () => {
                       >
                         郵便番号を入力してください
                       </label>
-                      <input type="text" id="zip" />
-                      &nbsp;&nbsp;<button>住所検索</button>
                     </td>
                   </tr>
                   <tr>
@@ -88,6 +98,8 @@ export const Show = () => {
                       <div className="text-center">住所</div>
                     </td>
                     <td>
+                      <span className={`${style.requiredLabel}`}>必須</span>
+                      <input type="text" id="address" />
                       <label
                         id="addrErr"
                         className="control-label"
@@ -96,7 +108,6 @@ export const Show = () => {
                       >
                         住所を入力してください
                       </label>
-                      <input type="text" id="address" />
                     </td>
                   </tr>
                   <tr>
@@ -104,6 +115,8 @@ export const Show = () => {
                       <div className="text-center">電話番号</div>
                     </td>
                     <td>
+                      <span className={`${style.requiredLabel}`}>必須</span>
+                      <input type="text" id="tel" />
                       <label
                         id="telErr"
                         className="control-label"
@@ -112,7 +125,6 @@ export const Show = () => {
                       >
                         電話番号を入力してください
                       </label>
-                      <input type="text" id="tel" />
                     </td>
                   </tr>
                   <tr>
@@ -123,6 +135,16 @@ export const Show = () => {
                       <div className="form-group">
                         <div className="row">
                           <div className="col-sm-12">
+                          </div>
+                          <div className="col-sm-5">
+                            <span className={`${style.requiredLabel}`}>必須</span>
+                            <input
+                              type="date"
+                              name="name"
+                              id="date"
+                              className="form-control input-sm"
+                              pattern="\d{4},\d{1},\d{1}"
+                            />
                             <label
                               id="dateErr"
                               className="control-label"
@@ -134,15 +156,6 @@ export const Show = () => {
                             >
                               配達日時を入力してください
                             </label>
-                          </div>
-                          <div className="col-sm-5">
-                            <input
-                              type="date"
-                              name="name"
-                              id="date"
-                              className="form-control input-sm"
-                              pattern="\d{4},\d{1},\d{1}"
-                            />
                           </div>
                         </div>
                         <div className="row">
@@ -191,8 +204,8 @@ export const Show = () => {
         </form>
         <form action="#">
           {/*table */}
-          <div className="row">
-            <div className="table-responsive col-lg-offset-3 col-lg-6 col-md-offset-1 col-md-10 col-sm-10 col-xs-12">
+          <div className={`row  ${style.row}`}>
+            <div className="table-responsive col-lg-offset-3 col-lg-7 col-md-offset-1 col-md-10 col-sm-10 col-xs-12">
               <h3 className="text-center">お支払い方法</h3>
               <table className="table table-striped item-list-table">
                 <tbody>

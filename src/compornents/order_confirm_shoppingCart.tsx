@@ -2,6 +2,7 @@ import useSWR, { useSWRConfig } from 'swr'
 import Link from "next/link"; 
 import React, { useState } from 'react';
 import Image from 'next/image';
+import style from  "../styles/register_user.module.css";
 
 const fetcher = (url: any) => fetch(url).then((res) => res.json());
 
@@ -10,7 +11,7 @@ const Total = (props: any) => {
   let tax = props.total * 0.1;
   let totalPrice = tax + props.total;
   return (
-    <div className="row">
+    <div className={`row  ${style.row}`}>
       <div className="col-xs-offset-2 col-xs-8">
         <div className="form-group text-center">
           <span id="total-price">消費税：{tax}円</span><br />
@@ -42,9 +43,9 @@ export const ShoppingCart = () => {
   mutate();
   // console.log(data[0].options)
   return (
-    <div className="row">
+    <div className={`row  ${style.row}`}>
       <div
-        className="table-responsive col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10 col-sm-10 col-xs-12"
+        className="table-responsive col-lg-offset-1 col-lg-7 col-md-offset-1 col-md-10 col-sm-10 col-xs-12"
       >
         <h3 className="text-center">注文内容確認</h3>
         <table className="table table-striped item-list-table">
@@ -83,14 +84,14 @@ export const ShoppingCart = () => {
                         </div>
                       </td>
                       <td>
-                        <span className="price">&nbsp;Ｌ</span>&nbsp;&nbsp;{data.price}円
+                        <span className="price">&nbsp;</span>&nbsp;&nbsp;{data.price}円
                         &nbsp;&nbsp;{data.quantity}個
                       </td>
                       <td>
                         <ul>
                           {!!data.options && data.options.map((option:any,index:any)=> {
                             return(
-                              <li key={index}>{option}&nbsp;300円</li>
+                              <li key={index} className={style.list}>{option}&nbsp;300円</li>
                             )
                           })}
                         </ul>

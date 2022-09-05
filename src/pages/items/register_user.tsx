@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { Title } from "../../compornents/register_user"
 import { clear } from "../../utils/register_user_clear"
-import { Form } from "../../compornents/register_user_form"
+import { Form } from "../../compornents/register_user_form";
+import { Nav } from "../../compornents/nav_format";
 import { useRouter } from "next/router";
 import Image from 'next/image';
-import Link from "next/link"; 
+import Link from "next/link";
 import "bootstrap/dist/css/bootstrap.min.css";
-import styles from "../../styles/register_user.module.css"
+import styles from "../../styles/register_user.module.css";
 
 
 
@@ -75,40 +76,7 @@ const Show = () => {
 
   return (
     <div className={`container`}>
-      {/* navbar navbar-default */}
-      {/* <nav className={styles.navbarNavbarDefault}> */}
-      <nav className={`navbar navbar-default ${styles.nav}`}>
-        <div className="container-fluid">
-          {/*  <!-- Brand and toggle get grouped for better mobile display -->  */}
-          <div >
-            <Link  href="#">
-              {/* 企業ロゴ   */}
-              <Image
-                alt="main log"
-                src="/img/header_logo.jpg"
-                height={35}
-                width={100}
-              />
-            </Link >
-          </div>
-
-          {/*  Collect the nav links, forms, and other content for toggling   */}
-          <div
-            id="bs-example-navbar-collapse-1"
-          >
-            <p 
-            // className="navbar-text navbar-right"
-            >
-              <Link href="cart_list.html" className={`
-              // navbar-link 
-              ${styles.navbarLink}`}>ショッピングカート</Link
-              >&nbsp;&nbsp;
-            </p>
-          </div>
-          {/*<!-- /.navbar-collapse -->  */}
-        </div>
-        {/* !-- /.container-fluid -->  */}
-      </nav>
+      <Nav  name="新規登録画面"/>
 
       {/* <!-- login form --> */}
       <div className={`row ${styles.row}`}>
@@ -338,6 +306,7 @@ const Show = () => {
                     }
 
                   }}>登録</button>
+
                   <button type="reset" className={`btn btn-primary ${styles.btn}`} onClick={() => {
                     clear();
                     list.map((list) => {
