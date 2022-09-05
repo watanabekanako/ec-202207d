@@ -86,9 +86,6 @@ export default function Login() {
       <Link href={'/items/register_user'}>
         <a>ユーザー登録はこちら</a>
       </Link>
-      <Link href={'/items/logout'}>
-        <a>ログアウト画面へ</a>
-      </Link>
     </>
   );
 }
