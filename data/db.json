@@ -81,6 +81,16 @@
       "id": 2
     }
   ],
-  "cartItems": [],
+  "cartItems": [
+    {
+      "img": "/img/1.jpg",
+      "name": "豚骨ラーメン",
+      "price": 1300,
+      "quantity": 1,
+      "options": [],
+      "subtotal": 1800,
+      "id": 1
+    }
+  ],
   "payStatus": []
 }

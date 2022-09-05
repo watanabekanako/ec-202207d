@@ -9,7 +9,7 @@ export default function Page() {
           <title>カート</title>
         </Head>
         <Nav name="ショッピングカート"/>
-        <CartPage />
+        <CartPage />       
         </>
     );
 }
