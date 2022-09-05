@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Head from 'next/head';
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Nav } from '../../compornents/nav_format';
 export async function getStaticProps({ params }: any) {
   const res = await fetch(
     `http://localhost:8000/items/${params.id} `
@@ -138,6 +139,7 @@ export default function ItemDetail({ items, options }: any) {
 
   return (
     <div className="container">
+      <Nav name="" />
       <form action="cart_list.html">
         <div className="row">
           <div className="col-xs-offset-2 col-xs-8">
@@ -189,7 +191,6 @@ export default function ItemDetail({ items, options }: any) {
                         {options.map((option: any, index: any) => {
                           return (
                             <>
-                            
                               {/* オプションの値段を取得する方法を考える */}
                               <input
                                 type="checkbox"
