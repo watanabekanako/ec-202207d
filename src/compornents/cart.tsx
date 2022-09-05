@@ -36,20 +36,28 @@ function CartPage() {
   if (error) return <div>failed to load</div>;
   if (!data) return <div>loading...</div>;
 
-  console.log('data.length', data.length);
-  if (data.length < 1) {
-    let noneItem = document.getElementById(
-      'noneItem'
-    ) as HTMLInputElement;
-    noneItem.style.display = 'block';
-    console.log('block');
-  } else {
-    let noneItem = document.getElementById(
-      'noneItem'
-    ) as HTMLInputElement;
-    noneItem.style.display = 'none';
-    console.log('none');
-  }
+  // console.log('data.length', data.length);
+  // if (data.length < 1) {
+  //   let noneItem = document.getElementById(
+  //     'noneItem'
+  //   ) as HTMLInputElement;
+  //   noneItem.style.display = 'block';
+  //   // console.log('block');
+  // } else {
+  //   let noneItem = document.getElementById(
+  //     'noneItem'
+  //   ) as HTMLInputElement;
+  //   noneItem.style.display = 'none';
+  //   console.log('none');
+  // }
+
+    // if(data.length >= 1){
+  // let hyouji = document.getElementById('hyouji')as HTMLInputElement;
+  // hyouji.style.display = 'block'
+  // }else{
+  // let hyouji2 = document.getElementById('hyouji')as HTMLInputElement;
+  // hyouji2.style.display = 'none'
+  // }
 
   return (
     <>
@@ -157,20 +165,3 @@ function CartPage() {
 }
 
 export default CartPage;
-
-// const [noneItem, setNoneItem] = useState('none');
-//     if(data.length == 0){
-//       setNoneItem('blook');
-//       }else{
-//         setNoneItem('none');
-//       }
-
-//   表示非表示の設定（注文ボタン、合計金額）
-//   {if( data.length >=1 ){
-//     let hyouji = document.getElementById('hyouji') as HTMLInputElement
-//     hyouji.style.display = "block"
-//   }else{
-//     let hyouji = document.getElementById('hyouji') as HTMLInputElement
-//     hyouji.style.display = "none"
-//   }
-// }

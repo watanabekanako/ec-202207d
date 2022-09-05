@@ -117,6 +117,7 @@ function Page() {
             <th>価格</th>
           </tr>
         </thead> */}
+        
 
         <tbody>
 

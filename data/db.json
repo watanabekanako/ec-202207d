@@ -29,37 +29,6 @@
       "price": 1200
     }
   ],
-  "options1": [
-    {
-      "options5": "卵"
-    }
-  ],
-  "options2": [
-    {
-      "options5": "チャーシュー"
-    }
-  ],
-  "options3": [
-    {
-      "options5": "めんま"
-    }
-  ],
-  "options4": [
-    {
-      "options5": "海苔"
-    }
-  ],
-  "options5": [
-    {
-      "options5": "ネギ"
-    },
-    {
-      "name": "ssss",
-      "description": "sssssss",
-      "price": "sssss",
-      "id": 3
-    }
-  ],
   "options": [
     {
       "id": 1,
@@ -85,6 +54,11 @@
       "id": 5,
       "name": "ネギ",
       "price": 200
+    },
+    {
+      "id": 6,
+      "name": "大盛り",
+      "price": 300
     }
   ],
   "users": [
@@ -105,48 +79,8 @@
       "tel": "090-1234-1234",
       "pass": "passpass",
       "id": 2
-    },
-    {
-      "name": "yasuo",
-      "mail": "yasuo@gmail.com",
-      "zip": "132-0035",
-      "address": "東京都江戸川区平井6-1-11",
-      "tel": "090-0000-0000",
-      "pass": "eeeeeeee",
-      "id": 3
     }
   ],
   "cartItems": [],
-  "payStatus": [
-    {
-      "pay": "2:入金済",
-      "zip": "123-1234",
-      "address": "1",
-      "name": "q",
-      "mail": "@",
-      "tel": "123-1234-1234",
-      "date": "2022-09-03-10",
-      "id": 3
-    },
-    {
-      "pay": "1:未入金",
-      "zip": "151-0051",
-      "address": "f",
-      "name": "emiri",
-      "mail": "a@gmail.com",
-      "tel": "444-4444-4444",
-      "date": "2022-09-15-10",
-      "id": 4
-    },
-    {
-      "pay": "2:入金済",
-      "zip": "151-0051",
-      "address": "f",
-      "name": "test2",
-      "mail": "a@gmail.com",
-      "tel": "4444-4444-4444",
-      "date": "2022-09-29-11",
-      "id": 5
-    }
-  ]
+  "payStatus": []
 }
