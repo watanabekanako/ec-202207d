@@ -79,8 +79,38 @@
       "tel": "090-1234-1234",
       "pass": "passpass",
       "id": 2
+    },
+    {
+      "name": "yasuo",
+      "mail": "yasuo@gmail.com",
+      "zip": "132-0035",
+      "address": "東京都江戸川区平井6-1-11",
+      "tel": "090-0000-0000",
+      "pass": "11111111",
+      "id": 3
     }
   ],
-  "cartItems": [],
-  "payStatus": []
+  "cartItems": [
+    {
+      "img": "/img/2.jpg",
+      "name": "塩ラーメン",
+      "price": 900,
+      "quantity": 1,
+      "options": [],
+      "subtotal": 1100,
+      "id": 1
+    }
+  ],
+  "payStatus": [
+    {
+      "pay": "2:入金済",
+      "zip": "151-0051",
+      "address": "f",
+      "name": "あ",
+      "mail": "a@gmail.com",
+      "tel": "4444-4444-4444",
+      "date": "2022-09-16-10",
+      "id": 1
+    }
+  ]
 }
