@@ -34,31 +34,20 @@ function CartPage() {
     fetcher
   );
 
-  const [datas, setdatas] = useState(data);
+  const [datas, setDatas] = useState('none');
   if (error) return <div>failed to load</div>;
   if (!data) return <div>loading...</div>;
 
-  // console.log('data.length', data.length);
   // if (data.length < 1) {
-  //   let noneItem = document.getElementById(
-  //     'noneItem'
-  //   ) as HTMLInputElement;
-  //   noneItem.style.display = 'block';
-  //   // console.log('block');
+  //   setDatas('block')
   // } else {
-  //   let noneItem = document.getElementById(
-  //     'noneItem'
-  //   ) as HTMLInputElement;
-  //   noneItem.style.display = 'none';
-  //   console.log('none');
+  //   setDatas('none')
   // }
 
-    // if(data.length >= 1){
-  // let hyouji = document.getElementById('hyouji')as HTMLInputElement;
-  // hyouji.style.display = 'block'
+  //   if(data.length >= 1){
+  //     setDatas('block')
   // }else{
-  // let hyouji2 = document.getElementById('hyouji')as HTMLInputElement;
-  // hyouji2.style.display = 'none'
+  //   setDatas('none')
   // }
 
   return (
@@ -72,7 +61,7 @@ function CartPage() {
       <div className="row">
         <table className="striped">
           <thead>
-            <tr>
+            <tr key={""}>
               <th className="cart-table-th">商品名</th>
               <th>価格(税抜)、数量</th>
               <th>トッピング、価格(税抜)</th>
@@ -83,7 +72,7 @@ function CartPage() {
           <tbody>
             {data.map((cartitem: any) => {
               return (
-                <tr>
+                <tr key={""}>
                   <td className="cart-item-name">
                     <div className="cart-item-icon">
                       <Image
@@ -166,30 +155,15 @@ function CartPage() {
 
           }}
           >
-            <span>注文に進む</span>
+            <span style={{ display: datas }}>注文に進む</span>
           </button>
         {/* </Link> */}
       </div>
-      <p id="noneItem" style={{ display: 'none' }}>
+      <p id="noneItem" style={{ display: datas }}>
         カートに商品がありません
       </p>
     </>
   );
 }
-
-// console.log('data.length', data.length);
-// if (datas.length < 1) {
-//   let noneItem = document.getElementById(
-//     'noneItem'
-//   ) as HTMLInputElement;
-//   noneItem.style.display = 'block';
-//   // console.log('block');
-// } else {
-//   let noneItem = document.getElementById(
-//     'noneItem'
-//   ) as HTMLInputElement;
-//   noneItem.style.display = 'none';
-//   console.log('none');
-// }
 
 export default CartPage;
