@@ -4,12 +4,14 @@ export default function LoginApi(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  // console.log(req.body);
+
+  // ログイン画面の入力フォームデータ
   let dataItem = JSON.parse(req.body);
-  // console.log(dataItem.email);
-  // console.log(dataItem.pass);
+
+  //　ユーザー取得
   const url = `http://localhost:8000/users?mail=${dataItem.email}&pass=${dataItem.pass}`;
-  console.log(url);
+
+  // cookieのセット
   fetch(url)
     .then((response) => response.json())
     .then((data) => {
@@ -27,7 +29,5 @@ export default function LoginApi(
     .catch((error) => {
       console.log('失敗');
       res.status(404).json('NG');
-      // console.log(res.status(404));
-      // res.status(404).send("メールとパスワードが間違っています");
     });
 }
