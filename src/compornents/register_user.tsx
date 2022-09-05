@@ -40,3 +40,8 @@ export const cartLogin = () =>{
 }
 
 // res.setHeader('Set-Cookie', [`userId=${data[0].id};path=/items`]);
+
+// let cookie = document.cookie;
+// if(cookie.includes("status=shopping")){
+//   document.cookie="status=shopping; max-age=0"
+// }

@@ -3,6 +3,7 @@ import Link from 'next/link';
 import useSWR, { useSWRConfig } from 'swr';
 import Image from 'next/image';
 import { useState } from 'react';
+import { useRouter } from "next/router";
 
 const fetcher = (url: any) => fetch(url).then((res) => res.json());
 
@@ -25,6 +26,7 @@ const Total = (props: any) => {
 };
 
 function CartPage() {
+  const router = useRouter();
   let total = 0;
   const { mutate } = useSWRConfig();
   const { data, error } = useSWR(
@@ -151,11 +153,22 @@ function CartPage() {
       <Total total={total} />
 
       <div className="row order-confirm-btn">
-        <Link href={`http://localhost:3000/items/order_confirm`}>
-          <button className="btn" type="button">
+        {/* <Link href={`http://localhost:3000/items/order_confirm`}> */}
+          <button className="btn" type="button"
+          onClick={() =>{
+            let cookie = document.cookie;
+            if(cookie.includes("userId")){
+              router.push("/items/order_confirm");
+            }else{
+              router.push("/items/loginpage");
+              document.cookie="status=shopping"
+            }
+
+          }}
+          >
             <span>注文に進む</span>
           </button>
-        </Link>
+        {/* </Link> */}
       </div>
       <p id="noneItem" style={{ display: 'none' }}>
         カートに商品がありません
