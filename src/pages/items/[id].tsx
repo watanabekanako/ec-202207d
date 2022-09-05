@@ -23,6 +23,7 @@ export async function getStaticProps({ params }: any) {
     },
   };
 }
+
 export async function getItemsIds() {
   const items = await fetch('http://localhost:8000/items').then(
     (res) => res.json()
@@ -56,8 +57,29 @@ export default function ItemDetail({ items, options }: any) {
   const [optionPrice, setOptionPrice] = useState(0);
   // const total = num;
   // const total = count * priceText;
-  const total = count * priceText + optionPrice;
+  // オプション1と2が選択されている場合、 `const selectOptions = { 1: true, 2: true };` と同等になる
+  const [selectOptions, setSelectOptions] = useState<
+    Record<number, boolean>
+  >({});
+  // onChangeで変更処理があったオプションの情報を、selectOptionsステートにも反映する
+  function optionChanged(optionId: number, value: boolean) {
+    selectOptions[optionId] = value;
+    setSelectOptions({ ...selectOptions });
+  }
+  // selectOptionsの値段を集計する
+  let optionTotalPrice = 0;
+  for (const id in selectOptions) {
+    // selectOptions[??]の値がtrueの場合にのみ値段を加算する
+    const foundOption = options.find(
+      (option: { id: number }) => option.id === Number(id)
+    );
+    if (selectOptions[id] && foundOption) {
+      optionTotalPrice += foundOption.price;
+    }
+  }
 
+  const total = priceText + optionTotalPrice;
+  const totalall = count * total;
   /*
 チェックボックスがチェックされたらオプションの合計金額をだす
 初期表示がチェックがついているかいないかの確認
@@ -74,23 +96,44 @@ export default function ItemDetail({ items, options }: any) {
   // }
 
   const onClickCreate = () => {
-    return fetch('http://localhost:8000/cartItems', {
-      method: 'POST',
-      headers: { 'Content-type': 'application/json' },
-      body: JSON.stringify({
-        img: imgText,
-        name: nameText,
-        price: priceText,
-        quantity: count,
-        options: options.name,
-        subtotal: total,
-        // id: idText,
-      }),
-    })
-      .then((res) => res.json)
-      .catch((error) => {
-        console.error(error);
-      });
+    let optionTotalPrice = 0;
+    for (const id in selectOptions) {
+      // selectOptions[??]の値がtrueの場合にのみ値段を加算する
+      const foundOption = options.find(
+        (option: { id: number }) => option.id === Number(id)
+      );
+      if (selectOptions[id] && foundOption) {
+        optionTotalPrice += foundOption.price;
+      }
+      const optionsArray = Object.entries(selectOptions)
+        .filter(([id, selected]) => selected)
+        .map(([id, selected]) => {
+          const option = options.find(
+            (op: any) => op.id === Number(id)
+          );
+          return {
+            ...option,
+            quantity: count,
+          };
+        });
+      return fetch('http://localhost:8000/cartItems', {
+        method: 'POST',
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify({
+          img: imgText,
+          name: nameText,
+          price: priceText,
+          quantity: count,
+          options: [],
+          subtotal: totalall,
+          // id: idText,
+        }),
+      })
+        .then((res) => res.json)
+        .catch((error) => {
+          console.error(error);
+        });
+    }
   };
 
   return (
@@ -141,9 +184,7 @@ export default function ItemDetail({ items, options }: any) {
                     <div className="col-sm-12">
                       <div className="col-sm-12">
                         <label className="inputResponsibleCompany">
-                          トッピング：&nbsp;1つにつき
-                          <span>&nbsp;&nbsp;</span>
-                          &nbsp;&nbsp;＋200円(税抜)
+                          トッピング
                         </label>
                         {options.map((option: any, index: any) => {
                           return (
@@ -155,8 +196,11 @@ export default function ItemDetail({ items, options }: any) {
                                 value="{option.price}"
                                 className="checks"
                                 // onChange={(e) => {
-                                onClick={() => {
-                                  setOptionPrice(200 + optionPrice);
+                                onClick={(e) => {
+                                  const optionId = option.id; // オプションのID　mapループの変数から取得
+                                  const checked =
+                                    e.currentTarget.checked; // チェックボックスが選択されているかどうか true/fales
+                                  optionChanged(optionId, checked); // hooksのステートに保存するための処理を呼び出し
                                 }}
                               />
 
@@ -216,7 +260,7 @@ export default function ItemDetail({ items, options }: any) {
                 <div className="form-group">
                   <span id="total-price">
                     合計金額
-                    {total}
+                    {totalall}
                   </span>
                 </div>
               </div>
