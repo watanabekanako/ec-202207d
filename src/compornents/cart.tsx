@@ -6,6 +6,8 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+
+
 const fetcher = (url: any) => fetch(url).then((res) => res.json());
 
 function CartPage() {
@@ -41,7 +43,6 @@ function CartPage() {
 
   if (error) return <div>failed to load</div>;
   if (!data) return <div>loading...</div>;
-
 
   const Total = (props: any) => {
     let tax = props.total * 0.1;
@@ -175,6 +176,7 @@ function CartPage() {
           className="btn"
           type="button"
           style={{ display: botan }}
+
           onClick={() => {
             let cookie = document.cookie;
             if (cookie.includes('userId')) {
