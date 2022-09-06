@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { isGeneratorFunction } from 'util/types';
 import Link from 'next/link';
 import { Nav } from "../../compornents/nav_format"
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const fetcher = (url: any) => fetch(url).then((res) => res.json());
 function Page() {
