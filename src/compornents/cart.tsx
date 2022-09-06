@@ -3,7 +3,7 @@ import Link from 'next/link';
 import useSWR, { useSWRConfig } from 'swr';
 import Image from 'next/image';
 import { useState } from 'react';
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
 
 const fetcher = (url: any) => fetch(url).then((res) => res.json());
 
@@ -53,7 +53,7 @@ function CartPage() {
   //   console.log('none');
   // }
 
-    // if(data.length >= 1){
+  // if(data.length >= 1){
   // let hyouji = document.getElementById('hyouji')as HTMLInputElement;
   // hyouji.style.display = 'block'
   // }else{
@@ -127,9 +127,6 @@ function CartPage() {
                           { method: 'DELETE' }
                         ).then((res) => {
                           if (res.status === 200) {
-                            
-                    
-
                             mutate('http://localhost:8000/cartItems');
                           }
                         });
@@ -154,20 +151,21 @@ function CartPage() {
 
       <div className="row order-confirm-btn">
         {/* <Link href={`http://localhost:3000/items/order_confirm`}> */}
-          <button className="btn" type="button"
-          onClick={() =>{
+        <button
+          className="btn"
+          type="button"
+          onClick={() => {
             let cookie = document.cookie;
-            if(cookie.includes("userId")){
-              router.push("/items/order_confirm");
-            }else{
-              router.push("/items/loginpage");
-              document.cookie="status=shopping"
+            if (cookie.includes('userId')) {
+              router.push('/items/order_confirm');
+            } else {
+              router.push('/items/loginpage');
+              document.cookie = 'status=shopping';
             }
-
           }}
-          >
-            <span>注文に進む</span>
-          </button>
+        >
+          <span>注文に進む</span>
+        </button>
         {/* </Link> */}
       </div>
       <p id="noneItem" style={{ display: 'none' }}>
