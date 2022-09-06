@@ -97,44 +97,57 @@ export default function ItemDetail({ items, options }: any) {
   // }
 
   const onClickCreate = () => {
-    let optionTotalPrice = 0;
-    for (const id in selectOptions) {
-      // selectOptions[??]の値がtrueの場合にのみ値段を加算する
-      const foundOption = options.find(
-        (option: { id: number }) => option.id === Number(id)
-      );
-      if (selectOptions[id] && foundOption) {
-        optionTotalPrice += foundOption.price;
-      }
-      const optionsArray = Object.entries(selectOptions)
-        .filter(([id, selected]) => selected)
-        .map(([id, selected]) => {
-          const option = options.find(
-            (op: any) => op.id === Number(id)
-          );
-          return {
-            ...option,
-            quantity: count,
-          };
-        });
-      return fetch('http://localhost:8000/cartItems', {
-        method: 'POST',
-        headers: { 'Content-type': 'application/json' },
-        body: JSON.stringify({
-          img: imgText,
-          name: nameText,
-          price: priceText,
+    // let optionTotalPrice = 0;
+    // for (const id in selectOptions) {
+    //   // selectOptions[??]の値がtrueの場合にのみ値段を加算する
+    //   const foundOption = options.find(
+    //     (option: { id: number }) => option.id === Number(id)
+    //   );
+    //   if (selectOptions[id] && foundOption) {
+    //     optionTotalPrice += foundOption.price;
+    //   }
+    //   const optionsArray = Object.entries(selectOptions)
+    //     .filter(([id, selected]) => selected)
+    //     .map(([id, selected]) => {
+    //       const option = options.find(
+    //         (op: any) => op.id === Number(id)
+    //       );
+    //       return {
+    //         ...option,
+    //         quantity: count,
+    //       };
+    //     });
+    const optionsArray = Object.entries(selectOptions)
+      .filter(([id, selected]) => selected)
+      .map(([id, selected]) => {
+        const option = options.find(
+          (op: any) => op.id === Number(id)
+        );
+        return {
+          ...option,
           quantity: count,
-          options: [],
-          subtotal: totalall,
-          // id: idText,
-        }),
-      })
-        .then((res) => res.json)
-        .catch((error) => {
-          console.error(error);
-        });
-    }
+        };
+      });
+    const optionTotalPrice = optionsArray
+      .map((option) => option.price * option.quantity)
+      .reduce((a, b) => a + b, 0);
+    return fetch('http://localhost:8000/cartItems', {
+      method: 'POST',
+      headers: { 'Content-type': 'application/json' },
+      body: JSON.stringify({
+        img: imgText,
+        name: nameText,
+        price: priceText,
+        quantity: count,
+        options: optionsArray,
+        subtotal: totalall,
+        // id: idText,
+      }),
+    })
+      .then((res) => res.json)
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (
@@ -171,7 +184,7 @@ export default function ItemDetail({ items, options }: any) {
                     <div className="col-sm-12"></div>
                     <div className="col-sm-12">
                       <label className="radio-inline">
-                        {priceText}
+                        {priceText}円
                       </label>
                     </div>
                   </div>
@@ -191,7 +204,6 @@ export default function ItemDetail({ items, options }: any) {
                         {options.map((option: any, index: any) => {
                           return (
                             <>
-                              {/* オプションの値段を取得する方法を考える */}
                               <input
                                 type="checkbox"
                                 value="{option.price}"
@@ -211,7 +223,7 @@ export default function ItemDetail({ items, options }: any) {
                               >
                                 {option.name}
                               </p>
-                              <p key={index}>{option.price}</p>
+                              <p key={index}>{option.price}円</p>
                             </>
                           );
                         })}
@@ -261,7 +273,7 @@ export default function ItemDetail({ items, options }: any) {
                 <div className="form-group">
                   <span id="total-price">
                     合計金額
-                    {totalall}
+                    {totalall.toLocaleString()}
                   </span>
                 </div>
               </div>
