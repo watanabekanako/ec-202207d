@@ -79,8 +79,54 @@
       "tel": "090-1234-1234",
       "pass": "passpass",
       "id": 2
+    },
+    {
+      "name": "a",
+      "mail": "mail@com",
+      "zip": "123-1234",
+      "address": "1",
+      "tel": "123-1234-1234",
+      "pass": "passpass",
+      "id": 3
+    },
+    {
+      "name": "name",
+      "mail": "mail@a",
+      "zip": "123-1234",
+      "address": "1",
+      "tel": "123-1234-1234",
+      "pass": "passpass",
+      "id": 4
     }
   ],
-  "cartItems": [],
+  "cartItems": [
+    {
+      "img": "/img/2.jpg",
+      "name": "塩ラーメン",
+      "price": 900,
+      "quantity": 1,
+      "options": [],
+      "subtotal": 1200,
+      "id": 1
+    },
+    {
+      "img": "/img/1.jpg",
+      "name": "豚骨ラーメン",
+      "price": 1300,
+      "quantity": 1,
+      "options": [],
+      "subtotal": 1500,
+      "id": 2
+    },
+    {
+      "img": "/img/2.jpg",
+      "name": "塩ラーメン",
+      "price": 900,
+      "quantity": 1,
+      "options": [],
+      "subtotal": 1300,
+      "id": 3
+    }
+  ],
   "payStatus": []
 }

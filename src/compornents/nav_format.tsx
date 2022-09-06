@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import Logout from 'pages/items/logout';
 import styles from "../styles/register_user.module.css"
 
 export const Nav = (props: {name: string} ) => {
@@ -43,8 +44,13 @@ export const Nav = (props: {name: string} ) => {
             {
             pageList.map((page, index) => {
               if(props.name !== page.name){
-                return (
+                if(page.name === "ログイン"){
                   <li className="nav-item" key={index}>
+                    Logout();
+                  </li>                  
+                }else{
+                  return (
+                    <li className="nav-item" key={index}>
                     <Link href={`${page.url}`}>
                       <a className="nav-link" >
                       {page.name}
@@ -53,6 +59,7 @@ export const Nav = (props: {name: string} ) => {
   
                 </li>
                 )
+              }
               }
               })
             }

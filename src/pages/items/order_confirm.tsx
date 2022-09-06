@@ -2,14 +2,17 @@ import { useState } from "react"
 import { Nav } from "../../compornents/nav_format"
 import { ShoppingCart } from "../../compornents/order_confirm_shoppingCart"
 import { useRouter } from "next/router";
+import useSWR, { useSWRConfig } from 'swr'
 import "bootstrap/dist/css/bootstrap.min.css";
 import style from  "../../styles/register_user.module.css";
+import Head from "next/head";
 
-
+const fetcher = (url: any) => fetch(url).then((res) => res.json());
 
 export const Show = () => {
   const [times, Settimes] = useState(10)
   const router = useRouter();
+  const { data, error, mutate } = useSWR("http://localhost:8000/cartItems", fetcher);
 
   // フラグ
   // const [flagMailFormat, SetFlagMailFormat] = useState("true");
@@ -20,6 +23,9 @@ export const Show = () => {
 
   return (
     <>
+      <Head>
+        <title>注文内容確認画面</title>
+      </Head>
       <div className={`container`}>
         <Nav name="ログイン"/>
         {/*table */}
