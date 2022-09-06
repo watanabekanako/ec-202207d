@@ -81,22 +81,13 @@
       "id": 2
     },
     {
-      "name": "a",
-      "mail": "mail@com",
-      "zip": "123-1234",
-      "address": "1",
-      "tel": "123-1234-1234",
-      "pass": "passpass",
+      "name": "yasuo",
+      "mail": "yasuo@gmail.com",
+      "zip": "132-0035",
+      "address": "東京都江戸川区平井6-1-11",
+      "tel": "090-0000-0000",
+      "pass": "11111111",
       "id": 3
-    },
-    {
-      "name": "name",
-      "mail": "mail@a",
-      "zip": "123-1234",
-      "address": "1",
-      "tel": "123-1234-1234",
-      "pass": "passpass",
-      "id": 4
     }
   ],
   "cartItems": [
@@ -106,27 +97,12 @@
       "price": 900,
       "quantity": 1,
       "options": [],
-      "subtotal": 1200,
+      "subtotal": 1100,
       "id": 1
-    },
-    {
-      "img": "/img/1.jpg",
-      "name": "豚骨ラーメン",
-      "price": 1300,
-      "quantity": 1,
-      "options": [],
-      "subtotal": 1500,
-      "id": 2
-    },
-    {
-      "img": "/img/2.jpg",
-      "name": "塩ラーメン",
-      "price": 900,
-      "quantity": 1,
-      "options": [],
-      "subtotal": 1300,
-      "id": 3
     }
   ],
+
   "payStatus": []
+
 }
+
