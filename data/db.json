@@ -167,6 +167,7 @@
       "id": 3
     }
   ],
+<<<<<<< HEAD
   "cartItems": [],
   "payStatus": [
     {
@@ -199,5 +200,7 @@
       "date": "2022-09-21-15",
       "id": 3
     }
-  ]
+  ],
+  "cartItems": [],
+  "payStatus": []
 }
