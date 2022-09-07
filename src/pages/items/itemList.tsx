@@ -7,8 +7,7 @@ import { isGeneratorFunction } from 'util/types';
 import Link from 'next/link';
 import { Nav } from "../../compornents/nav_format"
 import 'bootstrap/dist/css/bootstrap.min.css';
-// import '../styles/bootstrap.css';
-// import '../../styles/itemList.css'
+import style from '../../styles/itemList.module.css';
 
 const fetcher = (url: any) => fetch(url).then((res) => res.json());
 function Page() {
@@ -44,13 +43,10 @@ function Page() {
     }
   };
 
-  // console.log('search', search);
-  // console.log('kensaku', kensaku.length);
-
-  // const narabikae = [data];
-  // data.sort((a: any, b: any) => {
-  //   return a.price < b.price ? -1 : 1;
-  // });
+  const narabikae = [data];
+  data.sort((a: any, b: any) => {
+    return a.price < b.price ? -1 : 1;
+  });
 
   return (
     <>
@@ -60,39 +56,39 @@ function Page() {
 
       <Nav name=""/>
 
-      <div className="row">
-        <div className="col-lg-offset-3 col-lg-6 col-md-offset-2 col-md-8 col-sm-10 col-xs-12 mannaka">
-          <div className="panel panel-default">
-            <div className="panel-heading">
-            <div className="panel-title">商品を検索する</div>
+      <div className={`${style.row}`}>
+        <div className={`col-lg-offset-3 col-lg-6 col-md-offset-2 col-md-8 col-sm-10 col-xs-12 ${style.mannaka}`}>
+          <div className={`panel panel-default${style.default} `}>
+            <div className={`${style.panel} panel-heading`}>
+            <div className={`${style.title} panel-title `}>商品を検索する</div>
             </div>
-            <div className="panel-body">
+            <div className={`${style.body} panel-body`}>
               <form method="post" action="#" className="form-horizontal">
                 <div className="form-group" />
-                  <label  className="control-label col-sm-2">商品名</label>
+                  {/* <label  className={`${style.syouhinmei} control-label col-sm-2 `}>商品名</label> */}
                   
-      <div className="col-sm-9">
-      <div className="col-sm-9">
+      <div className="">
+      <div className="">
                     <input
                       type="text"
                       name="kensaku"
                       id="form1"
-                      className="form-control input-sm"
+                      className={`${style.kensakunakami} form-control input-sm`}
                       value={kensaku}
                       onChange={(e) => setKensaku(e.target.value)}
                     />
                   </div>
                   </div>
         
-                  <div className="text-center">
-        <button type="button" value="検索" className="btn btn-primary" onClick={(e) => handleClick(e)}>
+                  <div className={`${kensaku} text-center `}>
+        <button type="button" value="検索" className={`${style.btnDatail} `}  onClick={(e) => handleClick(e)}>
           検索
         </button>
 
         <button
           type="button"
           value="クリア"
-          className="btn btn-default"
+          className={`${style.clea}  `}
           onClick={() => {
             setKensaku('');
             // setGaitouDisplay('none');
@@ -108,12 +104,12 @@ function Page() {
       </div>
 
 
-      <p id="gaitou"  className="gaitou" style={{ display: gaitouDisplay }}>
+      <p id="gaitou"  className={`${style.gaitou}`} style={{ display: gaitouDisplay }}>
         該当の商品がありません
       </p>
-      <div className="row">
+      <div className={`${style.row}`}>
         <div
-          className="table-responsive col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10 col-sm-10 col-xs-12 mannaka"
+          className={`table-responsive col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10 col-sm-10 col-xs-12 ${style.mannaka}`}
         >
           <table className="table table-striped item-list-table">
         {/* <thead>
@@ -126,7 +122,7 @@ function Page() {
          */}
 
         <tbody>
-        <div className="wrapper">
+        <div className={`${style.wrapper}`}>
           
           {!search?.length &&
 
@@ -135,11 +131,11 @@ function Page() {
                 <tr className="flexbox flexbox-center">
                   <td className="imag">
                   <Link href={`http://localhost:3000/items/${item.id}`}>
-                 <a> <Image src={item.img} width={200} height={143} className="img-responsive img-rounded item-img-cente" /></a>
+                 <a> <Image src={item.img} width={200} height={143} className={`img-responsive img-rounded item-img-cente ${style.img} `}/></a>
                   </Link>
                   </td>
                   <Link href={`http://localhost:3000/items/${item.id}`}>
-                  <a><td className="haba">{item.name}</td></a>
+                  <div><td className={`${style.haha} haba no-underline`}>{item.name}</td></div>
                   </Link>
                   <td className="haba">{item.price}円</td>
                 </tr>
@@ -147,7 +143,7 @@ function Page() {
             })}
             </div>
 
-          <div className="wrapper">
+            <div className={`${style.wrapper}`}>
           {search?.length > 0 &&
             search.map((item: any) => {
               // let number = index + 1 ;
@@ -155,11 +151,11 @@ function Page() {
                 <tr className="flexbox flexbox-center">
                 <td className="imag">
                 <Link href={`http://localhost:3000/items/${item.id}`}>
-                <a><Image src={item.img} width={200} height={143} className="img-responsive img-rounded item-img-cente" /></a>
+                <a><Image src={item.img} width={200} height={143} className={`img-responsive img-rounded item-img-cente ${style.img} `} /></a>
                 </Link>
                 </td>
                 <Link href={`http://localhost:3000/items/${item.id}`}>
-                <a><td className="haba">{item.name}</td></a>
+                <div><td className={`${style.haha} haba no-underline`}>{item.name}</td></div>
                 </Link>
                 <td className="haba">{item.price}円</td>
               </tr>
