@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import { Nav } from "../../compornents/nav_format"
+import { Nav } from "../../compornents/nav_format";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 
 export default function Login() {
@@ -49,10 +50,13 @@ export default function Login() {
         .catch((error) => {
           alert('エラーが発生しました！');
         })
-  };
+
+
+  };  
 
   return (
     <>
+    <div className={`container`}>
     <Nav name="ログイン" />
       <h1>ログイン</h1>
       <p style={{ display: errorDisplay }}>
@@ -89,6 +93,7 @@ export default function Login() {
       <Link href={'/items/register_user'}>
         <a>ユーザー登録はこちら</a>
       </Link>
+      </div>
     </>
   );
 }
