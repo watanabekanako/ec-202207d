@@ -78,6 +78,15 @@ function CartPage() {
       <Head>
         <title>ラクスヌードル</title>
       </Head>
+
+
+      <h1 className="page-title">ショッピングカート</h1>
+
+   
+  
+
+
+
       <div className={`${styles.bodyColor}`}>
         <div className={`${style.wrapper}`}>
           {/* <h1 className="page-title">ショッピングカート</h1> */}
@@ -85,13 +94,16 @@ function CartPage() {
           <div className="row">
             <table className="striped">
               <thead>
-                <tr key={''}>
-                  <th className="cart-table-th">商品名</th>
-                  <th>価格(税抜)、数量</th>
-                  <th>トッピング、価格(税抜)</th>
-                  <th>小計</th>
-                </tr>
-              </thead>
+
+    
+<tr key={''}>
+              <th  style={{ display: botan }}className="cart-table-th">商品名</th>
+              <th style={{ display: botan }}>価格(税抜)、数量</th>
+              <th style={{ display: botan }}>トッピング、価格(税抜)</th>
+              <th style={{ display: botan }}>小計</th>
+            </tr>
+          </thead>
+    
 
               <tbody>
                 {data.map((cartitem: any) => {
