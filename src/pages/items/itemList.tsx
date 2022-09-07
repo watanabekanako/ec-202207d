@@ -7,6 +7,8 @@ import { isGeneratorFunction } from 'util/types';
 import Link from 'next/link';
 import { Nav } from "../../compornents/nav_format"
 import 'bootstrap/dist/css/bootstrap.min.css';
+// import '../styles/bootstrap.css';
+// import '../../styles/itemList.css'
 
 const fetcher = (url: any) => fetch(url).then((res) => res.json());
 function Page() {
@@ -45,10 +47,10 @@ function Page() {
   // console.log('search', search);
   // console.log('kensaku', kensaku.length);
 
-  const narabikae = [data];
-  data.sort((a: any, b: any) => {
-    return a.price < b.price ? -1 : 1;
-  });
+  // const narabikae = [data];
+  // data.sort((a: any, b: any) => {
+  //   return a.price < b.price ? -1 : 1;
+  // });
 
   return (
     <>
@@ -59,7 +61,7 @@ function Page() {
       <Nav name=""/>
 
       <div className="row">
-        <div className="col-lg-offset-3 col-lg-6 col-md-offset-2 col-md-8 col-sm-10 col-xs-12">
+        <div className="col-lg-offset-3 col-lg-6 col-md-offset-2 col-md-8 col-sm-10 col-xs-12 mannaka">
           <div className="panel panel-default">
             <div className="panel-heading">
             <div className="panel-title">商品を検索する</div>
@@ -106,55 +108,64 @@ function Page() {
       </div>
 
 
-      <p id="gaitou" style={{ display: gaitouDisplay }}>
+      <p id="gaitou"  className="gaitou" style={{ display: gaitouDisplay }}>
         該当の商品がありません
       </p>
       <div className="row">
         <div
-          className="table-responsive col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10 col-sm-10 col-xs-12"
+          className="table-responsive col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10 col-sm-10 col-xs-12 mannaka"
         >
           <table className="table table-striped item-list-table">
         {/* <thead>
           <tr>
-            <th>画像</th>
-            <th>商品名</th>
-            <th>価格</th>
+            <th className="haba">画像</th>
+            <th className="haba">商品名</th>
+            <th className="haba">価格</th>
           </tr>
-        </thead> */}
-        
+        </thead>
+         */}
 
         <tbody>
-
+        <div className="wrapper">
+          
           {!search?.length &&
+
             data.map((item: any) => {
               return (
-                <tr>
+                <tr className="flexbox flexbox-center">
+                  <td className="imag">
                   <Link href={`http://localhost:3000/items/${item.id}`}>
-                  <Image src={item.img} width={200} height={143} className="img-responsive img-rounded item-img-center" />
+                 <a> <Image src={item.img} width={200} height={143} className="img-responsive img-rounded item-img-cente" /></a>
                   </Link>
+                  </td>
                   <Link href={`http://localhost:3000/items/${item.id}`}>
-                  <td>{item.name}</td>
+                  <a><td className="haba">{item.name}</td></a>
                   </Link>
-                  <td>{item.price}円</td>
+                  <td className="haba">{item.price}円</td>
                 </tr>
               );
             })}
+            </div>
+
+          <div className="wrapper">
           {search?.length > 0 &&
             search.map((item: any) => {
               // let number = index + 1 ;
               return (
-                <tr>
-                  <Link href={`http://localhost:3000/items/${item.id}`}>
-                  <Image src={item.img} width={200} height={143} className="img-responsive img-rounded item-img-center"/>
-                  </Link>
-                  <Link href={`http://localhost:3000/items/${item.id}`}>
-                  <td>{item.name}</td>
-                  </Link>
-                  <td>{item.price}円
-                  </td>
-                </tr>
+                <tr className="flexbox flexbox-center">
+                <td className="imag">
+                <Link href={`http://localhost:3000/items/${item.id}`}>
+                <a><Image src={item.img} width={200} height={143} className="img-responsive img-rounded item-img-cente" /></a>
+                </Link>
+                </td>
+                <Link href={`http://localhost:3000/items/${item.id}`}>
+                <a><td className="haba">{item.name}</td></a>
+                </Link>
+                <td className="haba">{item.price}円</td>
+              </tr>
               );
             })}
+            </div>
         </tbody>
       </table>
         </div>
