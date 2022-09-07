@@ -2,11 +2,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import styles from '../styles/register_user.module.css';
 import React, { useState, useEffect} from 'react';
-<<<<<<< HEAD
 import { useRouter } from "next/router";
-=======
 import useSWR, { useSWRConfig } from 'swr'
->>>>>>> main
 
 export const Nav = (props: { name: string }) => {
   const router = useRouter();
@@ -115,7 +112,7 @@ export const Nav = (props: { name: string }) => {
           <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
 
 
-            <li className={styles.show}>こんにちは&nbsp;&nbsp;{nameValue}さん</li>
+            <li className={styles.show}>こんにちは&nbsp;&nbsp;&nbsp;{nameValue}&nbsp;さん</li>
 
             {pageList.map((page, index) => {
                 if (props.name !== page.name) {
@@ -146,7 +143,7 @@ export const Nav = (props: { name: string }) => {
 
             }
             <li>
-              <button onClick={logoutClick} className={`btn btn-primary `}>
+              <button onClick={logoutClick} className={` nav-link btn btn-link text-decoration-none `} >
               {/* <Link href={'/items/logout'} ><a className={`${styles.navLink}`}> */}
                 ログアウト
                 {/* </a></Link> */}
@@ -155,6 +152,7 @@ export const Nav = (props: { name: string }) => {
           </ul>
         </div>
       </div>
+
       <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"

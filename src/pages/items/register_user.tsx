@@ -77,10 +77,10 @@ const Show = () => {
 
 
   return (
-    <div className={`${styles.bodyColor}`}>
+    <div className={`${style.bodyColor} ${styles.height}`}>
       <div className={`container`}>
         <Head>
-          <title>新規登録画面</title>
+          <title>ラクラクヌードル／新規登録画面</title>
           <link rel="icon" href="/3506.png" />
         </Head>
 
@@ -89,15 +89,15 @@ const Show = () => {
         {/* <!-- login form --> */}
         <div className={`row ${styles.row}`}>
           <div
-            className="col-lg-offset-3 col-lg-6 col-md-offset-2 col-md-8 col-sm-10 col-xs-12"
+            className="col-lg-offset-3 col-lg-5 col-md-offset-2 col-md-8 col-sm-10 col-xs-12"
           >
             <div className="well">
               <form method="post" action="#">
                 <fieldset>
-                  <Title title="ユーザ登録" />
+                  <Title title="ユーザー登録" />
                   <Form list={list} />
-                  <div className="form-group">
-                    <button type="button" className={`btn btn-primary ${styles.btn}`} onClick={() => {
+                  <div className="form-group   ">
+                    <button type="button" className={` ${styles.btn}`} onClick={() => {
 
                       // 要素取得
                       let getNameId = document.getElementById('inputName') as HTMLInputElement;
@@ -344,7 +344,7 @@ const Show = () => {
 
                     }}>登録</button>
 
-                    <button type="reset" className={`btn btn-primary ${styles.btn}`} onClick={() => {
+                    <button type="reset" className={`${styles.btnClear}`} onClick={() => {
                       clear();
                       list.map((list) => {
                         let tag = document.getElementsByClassName("control-label")[list.num] as HTMLElement;

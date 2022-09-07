@@ -13,7 +13,7 @@ export const Form = (props:any) => {
           }
           return (
             <div className={`form-group ${styles.formGroup}`} key={index} >
-              <label htmlFor={list.id} className={styles.title}>{list.item}:</label>
+              <label htmlFor={list.id} className={styles.title}>{list.item}</label>
               <Btn item={list.item} />
               <label
                 id={list.place}
@@ -27,7 +27,7 @@ export const Form = (props:any) => {
               <input
                 type={formType}
                 id={list.id}
-                className="form-control"
+                className="form-control form-control-lg "
                 placeholder={list.place}
               />
             </div>
