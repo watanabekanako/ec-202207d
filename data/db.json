@@ -194,6 +194,15 @@
       "options": [],
       "subtotal": 1300,
       "id": 3
+    },
+    {
+      "img": "/img/10.jpg",
+      "name": "旨辛味噌麺",
+      "price": 800,
+      "quantity": 1,
+      "options": [],
+      "subtotal": 800,
+      "id": 4
     }
   ],
   "payStatus": []
