@@ -9,13 +9,13 @@ import style from "../styles/register_user.module.css";
 
 export const Title = (props: { title: string }) => {
   return (
-    <legend>{props.title}</legend>
+    <legend className={style.titleA}>{props.title}</legend>
   );
 }
 
 export const Btn = (props: { item: string }) => {
   if (props.item === "郵便番号") {
-    return (<input type="button" value="住所検索" onClick={()=>{
+    return (<input type="button" value="住所検索" className={style.btnRed} onClick={()=>{
       let getZipId = document.getElementById('inputZipcode') as HTMLInputElement;
       let getAddrId = document.getElementById('inputAddress') as HTMLInputElement;
       let tag = document.getElementsByClassName("control-label")[2] as HTMLElement;
@@ -51,7 +51,7 @@ export const Btn = (props: { item: string }) => {
 
 export const BtnSearch = (props: { item: string }) => {
   if (props.item === "郵便番号") {
-    return (<input type="button" value="住所検索" onClick={()=>{
+    return (<input type="button" value="住所検索" className={style.btnRed} onClick={()=>{
       let getZipId = document.getElementById('zip') as HTMLInputElement;
       let getAddrId = document.getElementById('address') as HTMLInputElement;
       let tag = document.getElementById('zipErr') as HTMLInputElement;
