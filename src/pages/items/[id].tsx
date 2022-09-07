@@ -7,6 +7,8 @@ import Head from 'next/head';
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Nav } from '../../compornents/nav_format';
+import style from '../../styles/detail.module.css';
+import styles from '../../styles/common.module.css';
 export async function getStaticProps({ params }: any) {
   const res = await fetch(
     `http://localhost:8000/items/${params.id} `
@@ -151,149 +153,193 @@ export default function ItemDetail({ items, options }: any) {
   };
 
   return (
-    <div className="container">
-      <Nav name="" />
-      <form action="cart_list.html">
-        <div className="row">
-          <div className="col-xs-offset-2 col-xs-8">
-            <h3 className="text-center">商品詳細</h3>
-            <div className="row">
-              <div className="col-xs-5">
-                <Image
-                  src={imgText}
-                  width={200}
-                  height={143}
-                  className="img-responsive img-rounded item-img-center"
-                />
-              </div>
-
-              <div className="col-xs-5">
-                <div className="bs-component">
-                  <h4>{nameText}</h4>
-                  <br />
-                  <br />
-                  <p>{descText}</p>
-                </div>
-              </div>
-            </div>
-            <br />
+    <div className={`${styles.bodyColor}`}>
+      <div className="container">
+        <Head>
+          <title>ラクスヌードル</title>
+          <link rel="icon" href="/3506.png" />
+        </Head>
+        <Nav name="" />
+        <form action="cart_list.html">
+          <div className={`${style.wrapper}`}>
             <div className="row">
               <div className="col-xs-offset-2 col-xs-8">
-                <div className="form-group">
-                  <div className="row">
-                    <div className="col-sm-12"></div>
-                    <div className="col-sm-12">
-                      <label className="radio-inline">
-                        {priceText}円
-                      </label>
-                    </div>
+                <h3 className={`text-center ${style.title}`}>
+                  商品詳細情報
+                </h3>
+                {/* <div className="row">
+                <div className="col-xs-5">
+                  <Image
+                    src={imgText}
+                    width={200}
+                    height={143}
+                    className="img-responsive img-rounded item-img-center"
+                  />
+                </div>
+
+                <div className="col-xs-5">
+                  <div className="bs-component">
+                    <h4>{nameText}</h4>
+                    <br />
+                    <br />
+                    <p>{descText}</p>
                   </div>
                 </div>
-              </div>
-            </div>
-            <br />
-            <div className="row">
-              <div className="col-xs-offset-2 col-xs-8">
-                <div className="form-group">
-                  <div className="row">
-                    <div className="col-sm-12">
-                      <div className="col-sm-12">
-                        <label className="inputResponsibleCompany">
-                          トッピング
-                        </label>
-                        {options.map((option: any, index: any) => {
-                          return (
-                            <>
-                              <input
-                                type="checkbox"
-                                value="{option.price}"
-                                className="checks"
-                                // onChange={(e) => {
-                                onClick={(e) => {
-                                  const optionId = option.id; // オプションのID　mapループの変数から取得
-                                  const checked =
-                                    e.currentTarget.checked; // チェックボックスが選択されているかどうか true/fales
-                                  optionChanged(optionId, checked); // hooksのステートに保存するための処理を呼び出し
-                                }}
-                              />
-
-                              <p
-                                className="checkbox-inline"
-                                key={index}
-                              >
-                                {option.name}
-                              </p>
-                              <p key={index}>{option.price}円</p>
-                            </>
-                          );
-                        })}
+              </div> */}
+                <div className={`${style.box}`}>
+                  <div className={`${style.pict}`}>
+                    <Image
+                      src={imgText}
+                      width={200}
+                      height={143}
+                      className="img-responsive img-rounded item-img-center"
+                    />
+                  </div>
+                  <div className={`${style.text}`}>
+                    <h4>{nameText}</h4>
+                    <p>{descText}</p>
+                    <p className={`${style.priceSize}`}>
+                      {priceText}円
+                    </p>
+                  </div>
+                </div>
+                <br />
+                <div className="row">
+                  <div className="col-xs-offset-2 col-xs-8">
+                    <div className="form-group">
+                      <div className="row">
+                        <div className="col-sm-12"></div>
+                        <div className="col-sm-12">
+                          {/* <label className="radio-inline">
+                          {priceText}円
+                        </label> */}
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-xs-offset-2 col-xs-8">
-                <div className="form-group">
-                  <div className="row">
-                    <div className="col-xs-5 col-sm-5">
-                      <label>数量:</label>
-                      <label className="control-label">
-                        数量を選択してください
-                      </label>
-                      <select
-                        name=""
-                        className="form-control"
-                        onChange={(e: any) =>
-                          setCount(e.target.value)
-                        }
-                      >
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                      </select>
+                <br />
+                <div className="row">
+                  <div className="col-xs-offset-2 col-xs-8">
+                    <div className="form-group">
+                      <div className="row">
+                        <div className="col-sm-12">
+                          <div className="col-sm-12">
+                            <p>トッピング</p>
+                            <label className="inputResponsibleCompany">
+                              {options.map(
+                                (option: any, index: any) => {
+                                  return (
+                                    <>
+                                      <input
+                                        type="checkbox"
+                                        value="{option.price}"
+                                        className="checks"
+                                        // onChange={(e) => {
+                                        onClick={(e) => {
+                                          const optionId = option.id; // オプションのID　mapループの変数から取得
+                                          const checked =
+                                            e.currentTarget.checked; // チェックボックスが選択されているかどうか true/fales
+                                          optionChanged(
+                                            optionId,
+                                            checked
+                                          ); // hooksのステートに保存するための処理を呼び出し
+                                        }}
+                                      />
+
+                                      <p
+                                        className={
+                                          style.checkboxInline
+                                        }
+                                        key={index}
+                                      >
+                                        {option.name}
+                                      </p>
+                                      <p
+                                        className={
+                                          style.checkboxInline
+                                        }
+                                        key={index}
+                                      >
+                                        {option.price}円
+                                      </p>
+                                    </>
+                                  );
+                                }
+                              )}
+                            </label>
+                          </div>
+                        </div>
+                      </div>
                     </div>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-xs-offset-2 col-xs-8">
+                    <div className="form-group">
+                      <div className="row">
+                        <div className="col-xs-5 col-sm-5">
+                          <label>数量:</label>
+                          <label className="control-label">
+                            数量を選択してください
+                          </label>
+                          <select
+                            name=""
+                            className="form-control"
+                            onChange={(e: any) =>
+                              setCount(e.target.value)
+                            }
+                          >
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <br />
+                <div className="row">
+                  <div className="col-xs-offset-2 col-xs-10">
+                    {/* <div className="form-group"> */}
+                    <span className={`${style.totalPrice}`}>
+                      合計金額
+                      {totalall.toLocaleString()}円
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-xs-offset-2 col-xs-3">
+                  <div className="form-group">
+                    <p>
+                      <Link href="http://localhost:3000/items/cartPage">
+                        <button
+                          className={`${style.btnDatail}`}
+                          onClick={() => onClickCreate()}
+                        >
+                          カートに入れる
+                        </button>
+                      </Link>
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
-            <br />
-            <div className="row">
-              <div className="col-xs-offset-2 col-xs-10">
-                <div className="form-group">
-                  <span id="total-price">
-                    合計金額
-                    {totalall.toLocaleString()}
-                  </span>
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-xs-offset-2 col-xs-3">
-                <div className="form-group">
-                  <p>
-                    <Link href="http://localhost:3000/items/cartPage">
-                      <button onClick={() => onClickCreate()}>
-                        カートに入れる
-                      </button>
-                    </Link>
-                  </p>
-                </div>
-              </div>
-            </div>
           </div>
-        </div>
-      </form>
+          {/* </div> */}
+        </form>
+      </div>
     </div>
   );
 }

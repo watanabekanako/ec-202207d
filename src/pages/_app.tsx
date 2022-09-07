@@ -1,7 +1,6 @@
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
-// import '../styles/bootstrap.css';
-// import '../styles/itemList.css';
+// import '../styles/bootstrap.css';xs
 function MyApp({ Component, pageProps }: AppProps) {
   return <Component {...pageProps} />;
 }
