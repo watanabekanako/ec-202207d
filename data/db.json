@@ -167,54 +167,7 @@
       "id": 3
     }
   ],
-<<<<<<< HEAD
-  "cartItems": [
-    {
-      "img": "/img/2.jpg",
-      "name": "とんこつラーメン",
-      "price": 800,
-      "quantity": 1,
-      "options": [],
-      "subtotal": 800,
-      "id": 1
-    }
-  ],
-=======
-<<<<<<< HEAD
   "cartItems": [],
-  "payStatus": [
-    {
-      "pay": "2:入金済",
-      "zip": "132-0035",
-      "address": "東京都江戸川区平井6-1-11",
-      "name": "yasuo",
-      "mail": "yasuo@gmail.com",
-      "tel": "090-0000-0000",
-      "date": "2022-09-08-11",
-      "id": 1
-    },
-    {
-      "pay": "2:入金済",
-      "zip": "132-0035",
-      "address": "東京都江戸川区平井6-1-11",
-      "name": "yasuo",
-      "mail": "yasuo@gmail.com",
-      "tel": "090-0000-0000",
-      "date": "2022-09-07-17",
-      "id": 2
-    },
-    {
-      "pay": "2:入金済",
-      "zip": "132-0035",
-      "address": "東京都江戸川区平井6-1-11",
-      "name": "yasuo",
-      "mail": "yasuo@gmail.com",
-      "tel": "090-0000-0000",
-      "date": "2022-09-21-15",
-      "id": 3
-    }
-  ],
-  "cartItems": [],
->>>>>>> main
   "payStatus": []
+
 }

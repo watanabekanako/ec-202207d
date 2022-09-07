@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import styles from '../styles/register_user.module.css';
 import React, { useState, useEffect} from 'react';
+import useSWR, { useSWRConfig } from 'swr'
 
 export const Nav = (props: { name: string }) => {
   const pageList = [
@@ -21,17 +22,51 @@ export const Nav = (props: { name: string }) => {
 
   const [cookie, setCookie] = useState('');
   const [cookieuser, setCookieUser] = useState('');
+  const [userID, SetUserID] = useState("");
+
+  const fetcher = (url: any) => fetch(url).then((res) => res.json());
 
   useEffect(() => {
     let cookie2 = document.cookie
     if(cookie2.includes('userId') && cookie2.includes('userName')){
         setCookie(document.cookie);
         // console.log(document.cookie);
-        setCookieUser(cookie2.split( '; ' )[ 1 ].split( '=' )[ 1 ]);
     } else {
-        console.log('cookieがありません')
+        // console.log('cookieがありません')
     }
+
+    const splitCookie = document.cookie.split(";");
+    const list = []
+
+    for(let i = 0; i < splitCookie.length; i++){
+        list.push(splitCookie[i].split("="))
+      }
+      
+    list.map((number)=> {
+      number.map((show)=>{
+        if(show.match(/[0-9].*/)){
+          SetUserID(show)
+        }
+    })})
+
+
   },[]);
+
+  const { data, error, mutate } = useSWR(`http://localhost:8000/users?id=${userID}`, fetcher);
+
+  if (error) return <div>Failed to load</div>;
+  if (!data) return <div>Loading...</div>;
+
+  let  nameValue = ""
+
+  if(userID.length !== 0){
+    nameValue = data[0].name;  
+  }  else {
+    nameValue = 'ゲスト'
+  }
+
+
+  
 
   const logoutClick = () => {
     document.cookie = 'userId=; max-age=0';
@@ -73,7 +108,7 @@ export const Nav = (props: { name: string }) => {
         <div className="collapse navbar-collapse" id="Navber">
           <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
 
-            <li>こんにちは&nbsp;&nbsp;{cookieuser}さん</li>
+            <li>こんにちは&nbsp;&nbsp;{nameValue}さん</li>
             {pageList.map((page, index) => {
                 if (props.name !== page.name) {
                   if (
@@ -115,35 +150,5 @@ export const Nav = (props: { name: string }) => {
       ></script>
     </nav>
   );
-};
 
-{
-  /* <li className="nav-item">
-<Link href="/items/cartPage">
-  <a className="nav-link" >
-    ショッピングカート
-  </a>
-</Link >
-</li>
-<li className="nav-item">
-<Link href="#">
-  <a className="nav-link" >
-    注文履歴
-  </a>
-</Link >
-</li>
-<li className="nav-item">
-<Link href="/items/loginpage">
-  <a className="nav-link" >
-    ログイン
-  </a>
-</Link >
-</li>
-<li className="nav-item">
-<Link href="/items/logout">
-  <a className="nav-link" >
-    ログアウト
-  </a>
-</Link >
-</li> */
-}
+          }

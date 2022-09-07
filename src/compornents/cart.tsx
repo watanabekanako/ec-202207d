@@ -80,8 +80,6 @@ function CartPage() {
       </Head>
 
 
-      <h1 className="page-title">ショッピングカート</h1>
-
    
   
 
