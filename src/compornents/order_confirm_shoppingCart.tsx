@@ -91,7 +91,7 @@ export const ShoppingCart = () => {
                         <ul>
                           {!!data.options && data.options.map((option:any,index:any)=> {
                             return(
-                              <li key={index} className={style.list}>{option}&nbsp;300円</li>
+                              <li key={index} className={style.list}>{option.name}&nbsp;300円</li>
                             )
                           })}
                         </ul>
