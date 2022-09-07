@@ -167,7 +167,34 @@
       "id": 3
     }
   ],
-  "cartItems": [],
+  "cartItems": [
+    {
+      "img": "/img/15.jpg",
+      "name": "追い鰹チャーシュー",
+      "price": 1100,
+      "quantity": 1,
+      "options": [],
+      "subtotal": 1100,
+      "id": 1
+    },
+    {
+      "img": "/img/15.jpg",
+      "name": "追い鰹チャーシュー",
+      "price": 1100,
+      "quantity": 1,
+      "options": [],
+      "subtotal": 1100,
+      "id": 2
+    },
+    {
+      "img": "/img/7.jpg",
+      "name": "台湾まぜそば",
+      "price": 1300,
+      "quantity": 1,
+      "options": [],
+      "subtotal": 1300,
+      "id": 3
+    }
+  ],
   "payStatus": []
-
 }

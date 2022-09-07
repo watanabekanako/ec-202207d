@@ -2,11 +2,11 @@ import Link from 'next/link';
 import Image from 'next/image';
 import styles from '../styles/register_user.module.css';
 import React, { useState, useEffect} from 'react';
-<<<<<<< HEAD
+
 import { useRouter } from "next/router";
-=======
+
 import useSWR, { useSWRConfig } from 'swr'
->>>>>>> main
+
 
 export const Nav = (props: { name: string }) => {
   const router = useRouter();

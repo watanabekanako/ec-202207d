@@ -143,7 +143,7 @@ function Page() {
                   <Link href={`http://localhost:3000/items/${item.id}`}>
                   <div><td className={`${style.haha} haba no-underline`}>{item.name}</td></div>
                   </Link>
-                  <td className="haba">{item.price}円</td>
+                  <td className="haba">{item.price.toLocaleString()}円</td>
                 </tr>
               );
             })}
@@ -163,7 +163,7 @@ function Page() {
                 <Link href={`http://localhost:3000/items/${item.id}`}>
                 <div><td className={`${style.haha} haba no-underline`}>{item.name}</td></div>
                 </Link>
-                <td className="haba">{item.price}円</td>
+                <td className="haba">{item.price.toLocaleString()}円</td>
               </tr>
               );
             })}
