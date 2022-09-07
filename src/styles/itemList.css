@@ -1,0 +1,47 @@
+.imag{
+  width: 200px;
+}
+
+.flexbox{
+  display: flex;
+  flex-direction: column;
+}  
+
+.flexbox-center{
+align-items: flex-center; 
+width: 200px;
+
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; 
+  /* grid-template-rows: 200px 200px;  */
+  grid-gap: 10px; 
+  /* margin-bottom: 20px; */
+}
+/* .wrapper > div { */
+  /* border-radius: 5px; */
+  /* background: rgb(207,232,220); */
+  /* border: 2px solid rgb(79,185,227); */
+  /* padding: 1em; */
+/* } */
+
+.mannaka{
+  display: block;
+  margin-left: auto;
+  margin-right: auto
+}
+
+.gaitou{
+  text-align: center;
+  margin: 30px;
+  font-size:20px;
+
+}
+
+/* .row{
+  display: block;
+  margin-left: auto;
+  margin-right: auto 
+} */ 
