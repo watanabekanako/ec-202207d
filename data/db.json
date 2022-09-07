@@ -167,6 +167,36 @@
       "id": 3
     }
   ],
-  "cartItems": [],
-  "payStatus": []
+  "cartItems": [
+    {
+      "img": "/img/1.jpg",
+      "name": "坦々麺",
+      "price": 900,
+      "quantity": 1,
+      "options": [],
+      "subtotal": 900,
+      "id": 1
+    },
+    {
+      "img": "/img/1.jpg",
+      "name": "坦々麺",
+      "price": 900,
+      "quantity": 1,
+      "options": [],
+      "subtotal": 900,
+      "id": 2
+    }
+  ],
+  "payStatus": [
+    {
+      "pay": "2:入金済",
+      "zip": "132-0035",
+      "address": "東京都江戸川区平井",
+      "name": "name",
+      "mail": "mail@gmail.com",
+      "tel": "090-1234-1234",
+      "date": "2022-09-22-10",
+      "id": 1
+    }
+  ]
 }
