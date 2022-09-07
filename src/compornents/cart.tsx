@@ -80,10 +80,10 @@ function CartPage() {
         <table className="striped">
           <thead>
             <tr key={''}>
-              <th className="cart-table-th">商品名</th>
-              <th>価格(税抜)、数量</th>
-              <th>トッピング、価格(税抜)</th>
-              <th>小計</th>
+              <th  style={{ display: botan }}className="cart-table-th">商品名</th>
+              <th style={{ display: botan }}>価格(税抜)、数量</th>
+              <th style={{ display: botan }}>トッピング、価格(税抜)</th>
+              <th style={{ display: botan }}>小計</th>
             </tr>
           </thead>
 

@@ -167,6 +167,16 @@
       "id": 3
     }
   ],
-  "cartItems": [],
+  "cartItems": [
+    {
+      "img": "/img/2.jpg",
+      "name": "とんこつラーメン",
+      "price": 800,
+      "quantity": 1,
+      "options": [],
+      "subtotal": 800,
+      "id": 1
+    }
+  ],
   "payStatus": []
 }
