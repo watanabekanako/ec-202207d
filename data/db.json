@@ -167,55 +167,6 @@
       "id": 3
     }
   ],
-  "cartItems": [
-    {
-      "img": "/img/2.jpg",
-      "name": "家系ラーメン1",
-      "price": 1000,
-      "quantity": 1,
-      "options": [
-        {
-          "id": 1,
-          "name": "卵",
-          "price": 200,
-          "quantity": 1
-        }
-      ],
-      "subtotal": 1200,
-      "id": 2
-    },
-    {
-      "img": "/img/1.jpg",
-      "name": "豚骨ラーメン",
-      "price": 1300,
-      "quantity": 1,
-      "options": [
-        {
-          "id": 6,
-          "name": "大盛り",
-          "price": 300,
-          "quantity": 1
-        }
-      ],
-      "subtotal": 1600,
-      "id": 3
-    },
-    {
-      "img": "/img/4.jpg",
-      "name": "塩ラーメン",
-      "price": 900,
-      "quantity": 1,
-      "options": [
-        {
-          "id": 2,
-          "name": "チャーシュー",
-          "price": 200,
-          "quantity": 1
-        }
-      ],
-      "subtotal": 1100,
-      "id": 7
-    }
-  ],
+  "cartItems": [],
   "payStatus": []
 }
