@@ -81,6 +81,16 @@
       "id": 2
     }
   ],
-  "cartItems": [],
+  "cartItems": [
+    {
+      "img": "/img/2.jpg",
+      "name": "塩ラーメン",
+      "price": 900,
+      "quantity": 1,
+      "options": [],
+      "subtotal": 1100,
+      "id": 1
+    }
+  ],
   "payStatus": []
 }

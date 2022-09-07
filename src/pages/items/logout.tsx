@@ -4,6 +4,7 @@ const Logout = () => {
 
   const logoutClick = () => {
     document.cookie = 'userId=; max-age=0';
+    document.cookie = 'userName=; max-age=0';
 
     let cookie = document.cookie;
 
@@ -14,10 +15,10 @@ const Logout = () => {
 
   return (
     <>
-      <button onClick={logoutClick}>ログアウトする</button>
-      <Link href={'/items/loginpage'}>
+      <button onClick={logoutClick}>ログアウト</button>
+      {/* <Link href={'/items/loginpage'}>
         <a>ログインページに戻る</a>
-      </Link>
+      </Link> */}
     </>
   );
 };

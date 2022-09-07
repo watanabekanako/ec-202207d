@@ -19,19 +19,20 @@ export const Nav = (props: { name: string }) => {
     },
   ];
 
-  const [cookie, setCookie] = useState('');
-  const [cookieuser, setCookieUser] = useState('');
+  const [cookie, setCookie] = useState(document.cookie);
 
   useEffect(() => {
-    let cookie2 = document.cookie
-    if(cookie2.includes('userId') && cookie2.includes('userName')){
-        setCookie(document.cookie);
-        // console.log(document.cookie);
-        setCookieUser(cookie2.split( '; ' )[ 1 ].split( '=' )[ 1 ]);
+    
+    if(document.cookie === 'userId'){
+        let cookieDisplay = document.cookie;
     } else {
-        console.log('cookieがありません')
+        console.log('クッキーがありません')
     }
+    
   },[]);
+
+  
+
 
   const logoutClick = () => {
     document.cookie = 'userId=; max-age=0';
@@ -43,6 +44,10 @@ export const Nav = (props: { name: string }) => {
       document.cookie = 'status=shopping; max-age=0';
     }
   };
+
+
+
+
 
   return (
     <nav className={`navbar navbar-expand-lg bg-light ${styles.nav}`}>
@@ -72,11 +77,11 @@ export const Nav = (props: { name: string }) => {
 
         <div className="collapse navbar-collapse" id="Navber">
           <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-            <li>こんにちは&nbsp;&nbsp;{cookieuser}さん</li>
+            <li>こんにちは</li>
             {pageList.map((page, index) => {
                 if (props.name !== page.name) {
                   if (
-                    cookie.includes('userId') &&
+                    cookie === 'userId' &&
                     page.name !== 'ログイン'
                   ) {                              
                     return (
@@ -106,11 +111,12 @@ export const Nav = (props: { name: string }) => {
           </ul>
         </div>
       </div>
-      <script
+      
+      {/* <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
         crossOrigin="anonymous"
-      ></script>
+      ></script> */}
     </nav>
   );
 };
