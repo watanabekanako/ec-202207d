@@ -2,9 +2,14 @@ import Link from 'next/link';
 import Image from 'next/image';
 import styles from '../styles/register_user.module.css';
 import React, { useState, useEffect} from 'react';
+<<<<<<< HEAD
+import { useRouter } from "next/router";
+=======
 import useSWR, { useSWRConfig } from 'swr'
+>>>>>>> main
 
 export const Nav = (props: { name: string }) => {
+  const router = useRouter();
   const pageList = [
     {
       name: 'ショッピングカート',
@@ -77,6 +82,7 @@ export const Nav = (props: { name: string }) => {
     if (cookie.includes('status=shopping')) {
       document.cookie = 'status=shopping; max-age=0';
     }
+    router.push("/items/loginpage");
   };
 
   return (
@@ -108,7 +114,9 @@ export const Nav = (props: { name: string }) => {
         <div className="collapse navbar-collapse" id="Navber">
           <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
 
-            <li>こんにちは&nbsp;&nbsp;{nameValue}さん</li>
+
+            <li className={styles.show}>こんにちは&nbsp;&nbsp;{nameValue}さん</li>
+
             {pageList.map((page, index) => {
                 if (props.name !== page.name) {
                   if (
@@ -137,9 +145,13 @@ export const Nav = (props: { name: string }) => {
             )
 
             }
-            <li><button onClick={logoutClick}>
-              <Link href={'/items/itemList'}><a>ログアウト</a></Link>
-              </button></li>
+            <li>
+              <button onClick={logoutClick} className={`btn btn-primary `}>
+              {/* <Link href={'/items/logout'} ><a className={`${styles.navLink}`}> */}
+                ログアウト
+                {/* </a></Link> */}
+              </button>
+              </li>
           </ul>
         </div>
       </div>

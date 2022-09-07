@@ -46,7 +46,7 @@ export const ShoppingCart = () => {
   return (
     <div className={`row  ${style.row}`}>
       <div className="table-responsive col-lg-offset-1 col-lg-7 col-md-offset-1 col-md-10 col-sm-10 col-xs-12">
-        <h3 className="text-center">注文内容確認</h3>
+        <h3 className={`text-center ${style.titleA}`}>注文内容確認</h3>
         <table className="table table-striped item-list-table">
           <tbody>
 

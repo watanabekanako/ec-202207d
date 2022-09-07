@@ -103,7 +103,9 @@ margin-right: auto
 
 .clea{
   border-color: gray;
-  border-color: #d9534f;
+  background-color: white;
+  border-radius: 10px;
+  margin: 5px;
 }
 
 .haha{
