@@ -49,6 +49,7 @@ export const ShoppingCart = () => {
         <h3 className="text-center">注文内容確認</h3>
         <table className="table table-striped item-list-table">
           <tbody>
+
             <tr>
               <th>
                 <div className="text-center">商品名</div>
@@ -96,12 +97,10 @@ export const ShoppingCart = () => {
                           data.options.map(
                             (option: any, index: any) => {
                               return (
-                                <li
-                                  key={index}
-                                  className={style.list}
-                                >
-                                  {option}&nbsp;300円
-                                </li>
+                                <li key={index}>
+                                {option?.name}: {option?.price}円 ×
+                                {option?.quantity}
+                              </li>
                               );
                             }
                           )}
@@ -116,6 +115,7 @@ export const ShoppingCart = () => {
                 </React.Fragment>
               );
             })}
+
           </tbody>
         </table>
         <Total total={total} />

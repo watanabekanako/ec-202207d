@@ -14,6 +14,7 @@ export const Form = (props:any) => {
           return (
             <div className={`form-group ${styles.formGroup}`} key={index} >
               <label htmlFor={list.id} className={styles.title}>{list.item}:</label>
+              <Btn item={list.item} />
               <label
                 id={list.place}
                 className="control-label"
@@ -23,7 +24,6 @@ export const Form = (props:any) => {
                 }}
                 htmlFor="inputError"
               >{list.item}を入力してください</label>
-              <Btn item={list.item} />
               <input
                 type={formType}
                 id={list.id}

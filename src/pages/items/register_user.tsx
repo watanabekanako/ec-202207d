@@ -4,6 +4,7 @@ import { clear } from "../../utils/register_user_clear"
 import { Form } from "../../compornents/register_user_form";
 import { Nav } from "../../compornents/nav_format";
 import { useRouter } from "next/router";
+import Head from "next/head";
 import Image from 'next/image';
 import Link from "next/link";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -76,6 +77,10 @@ const Show = () => {
 
   return (
     <div className={`container`}>
+      <Head>
+        <title>新規登録画面</title>
+      </Head>
+
       <Nav  name="新規登録画面"/>
 
       {/* <!-- login form --> */}
@@ -132,6 +137,16 @@ const Show = () => {
 
                         // SetFlagZip("")
                         flagZip = "";
+                      }else{
+                        fetch(`https://zipcloud.ibsnet.co.jp/api/search?zipcode=${getZipId?.value}`)
+                        .then(response => response.json())
+                        .then(json => console.log(json.results[0].address1))
+                        .catch((error) => {
+                          let tag = document.getElementsByClassName("control-label")[2] as HTMLElement;;
+                          tag.style.display = "inline-block"
+                          tag.innerHTML = "この郵便番号は存在しません"
+                          flagZip = "";
+                          });
                       }
 
                       if (!(getTelId.value.match(/^[0-9]*-[0-9]*-[0-9]*$/))) {
@@ -256,10 +271,29 @@ const Show = () => {
                         document.getElementsByClassName("control-label")[2].innerHTML = "郵便番号を入力してください"
                       } else {
                         if (!(getZipId.value.match(/^\d{3}-\d{4}$/))) {
-                          let tag = document.getElementsByClassName("control-label")[2] as HTMLElement;
-                          tag.style.display = "inline-block"
-                          tag.innerHTML = "郵便番号はXXX-XXXXの形式で入力してください"
+                          // if(getZipId.value.includes("-")){
+                            // if(getZipId.value.length !== 8){
+                              let tag = document.getElementsByClassName("control-label")[2] as HTMLElement;
+                              tag.style.display = "inline-block"
+                              tag.innerHTML = "郵便番号はXXX-XXXXの形式で入力してください"
+                        }else{
+                          fetch(`https://zipcloud.ibsnet.co.jp/api/search?zipcode=${getZipId?.value}`)
+                          .then(response => response.json())
+                          .then(json => console.log(json.results[0].address1))
+                          .catch((error) => {
+                            let tag = document.getElementsByClassName("control-label")[2] as HTMLElement;;
+                            tag.style.display = "inline-block"
+                            tag.innerHTML = "この郵便番号は存在しません"
+                            });
                         }
+                          // }else{
+                          //   if(getZipId.value.length !== 7){
+                          //     let tag = document.getElementsByClassName("control-label")[2] as HTMLElement;
+                          //     tag.style.display = "inline-block"
+                          //     tag.innerHTML = "郵便番号は7桁の数字で入力してください"
+                          //   }
+                          // }
+                        // }
                       }
 
                       if (!getAddrId.value) {

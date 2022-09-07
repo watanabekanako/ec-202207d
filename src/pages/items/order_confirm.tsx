@@ -2,32 +2,37 @@ import { useState } from "react"
 import { Nav } from "../../compornents/nav_format"
 import { ShoppingCart } from "../../compornents/order_confirm_shoppingCart"
 import { useRouter } from "next/router";
+import useSWR, { useSWRConfig } from 'swr'
 import "bootstrap/dist/css/bootstrap.min.css";
-import style from  "../../styles/register_user.module.css";
+import style from "../../styles/register_user.module.css";
+import Head from "next/head";
+import { UserInfo, cartLogin } from "../../compornents/register_user";
 
 
-
-export const Show = () => {
+export const Show = (data:any) => {
   const [times, Settimes] = useState(10)
   const router = useRouter();
-
+ 
   // フラグ
   // const [flagMailFormat, SetFlagMailFormat] = useState("true");
   // const [flagZip, SetFlagZip] = useState("true");
   // const [flagTel, SetFlagTel] = useState("true");
   // const [flagDate, SetFlagDate] = useState("true");
 
-
   return (
     <>
-      <div className={`container`}>
-        <Nav name="ログイン"/>
+      <Head>
+        <title>注文内容確認画面</title>
+      </Head>
+      {/* <div className={`container`}> */}
+        <Nav name="ログイン" />
         {/*table */}
         <ShoppingCart />
         {/* <Total /> */}
 
         {/*table */}
-        <form action="#">
+        <UserInfo />
+        {/* <form action="#">
           <div className={`row g-3 ${style.row}`}>
             <div className="table-responsive col-lg-offset-3 col-lg-7 col-md-offset-1 col-md-10 col-sm-10 col-xs-12">
               <h3 className="text-center">お届け先情報</h3>
@@ -40,10 +45,10 @@ export const Show = () => {
                       </div>
                     </td>
                     <td>
-                        <span className={`${style.requiredLabel}`}>必須</span>
-                        <input type="text" id="name" 
-                        // className="form-control"
-                         />
+                      <span className={`${style.requiredLabel}`}>必須</span>
+                      <input type="text" id="name"
+                      // className="form-control"
+                      />
                       <label
                         id="nameErr"
                         className="control-label"
@@ -201,7 +206,7 @@ export const Show = () => {
               </table>
             </div>
           </div>
-        </form>
+        </form> */}
         <form action="#">
           {/*table */}
           <div className={`row  ${style.row}`}>
@@ -267,8 +272,8 @@ export const Show = () => {
                   className="form-control btn btn-warning btn-block"
                   type="button"
                   value="この内容で注文する"
-                  onClick={() => {
-
+                  onClick={async() => {
+                   
                     let getNameId = document.getElementById("name") as HTMLInputElement
                     let getMailId = document.getElementById("mail") as HTMLInputElement
                     let getZipId = document.getElementById("zip") as HTMLInputElement
@@ -313,7 +318,7 @@ export const Show = () => {
                     // console.log(month)
                     // console.log(Specified);
 
-                    if( Number(Specified) - Number(currentDate) < 10800000 ){
+                    if (Number(Specified) - Number(currentDate) < 10800000) {
                       flagDate = ""
                     }
 
@@ -371,11 +376,23 @@ export const Show = () => {
                       }
 
                       if (!(getZipId.value.match(/^\d{3}-\d{4}$/))) {
-                        let tag = document.getElementById("zipErr") as HTMLInputElement;
-                        tag.style.display = "inline-block"
-                        tag.innerHTML = "郵便番号はXXX-XXXXの形式で入力してください"
-                        // SetFlagZip("")
-                        flagZip = "";
+                        // if(getZipId.value.length !== 7){
+                          let tag = document.getElementById("zipErr") as HTMLInputElement;
+                          tag.style.display = "inline-block"
+                          tag.innerHTML = "郵便番号はXXX-XXXXの形式で入力してくださいで入力してください"
+                          // tag.innerHTML = "郵便番号はXXX-XXXXの形式または数字7桁で入力してくださいで入力してください"
+                          // SetFlagZip("")
+                          flagZip = "";
+                        // }
+                      }else{
+                       await fetch(`https://zipcloud.ibsnet.co.jp/api/search?zipcode=${getZipId?.value}`)
+                        .then(response => response.json())
+                        .then(json => console.log(json.results[0].address1))
+                        .catch((error) => {
+                          let tag = document.getElementById("zipErr") as HTMLInputElement;
+                          tag.style.display = "inline-block"
+                          tag.innerHTML = "この郵便番号は存在しません"
+                          flagZip = "";})
                       }
 
                       if (!(getTelId.value.match(/^[0-9]*-[0-9]*-[0-9]*$/))) {
@@ -388,13 +405,13 @@ export const Show = () => {
                       }
 
                       //現時点から3時間後以前が入力された場合 処理
-                      
-                    if( Number(Specified) - Number(currentDate) < 10800000 ){
-                      let tag = document.getElementById("dateErr") as HTMLInputElement;
-                      tag.style.display = "inline-block"
-                      tag.innerHTML = "今から3時間後の日時をご入力ください"
-                      flagDate = ""
-                    }
+
+                      if (Number(Specified) - Number(currentDate) < 10800000) {
+                        let tag = document.getElementById("dateErr") as HTMLInputElement;
+                        tag.style.display = "inline-block"
+                        tag.innerHTML = "今から3時間後の日時をご入力ください"
+                        flagDate = ""
+                      }
 
                       if (
                         flagMailFormat &&
@@ -414,7 +431,7 @@ export const Show = () => {
                         };
 
                         // POST先（仮）　ユーザーごとのショッピングカートがないため
-                        fetch(`http://localhost:8000/payStatus`, {
+                       await fetch(`http://localhost:8000/payStatus`, {
                           method: "POST",
                           headers: {
                             'Content-Type': 'application/json'
@@ -423,7 +440,7 @@ export const Show = () => {
                         }).then((response) => {
                           return response.json();
                         }).then((data) => {
-                          router.push("/items/order_finished");
+                          router.replace("/items/order_finished");
                         })
                       }
 
@@ -444,10 +461,22 @@ export const Show = () => {
 
                       if (getZipId.value) {
                         if (!(getZipId.value.match(/^\d{3}-\d{4}$/))) {
-                          let tag = document.getElementById("zipErr") as HTMLInputElement;
-                          tag.style.display = "inline-block"
-                          tag.innerHTML = "郵便番号はXXX-XXXXの形式で入力してください"
-                          // flagZip = ""
+                          // if(getZipId.value.length !== 7){
+                            let tag = document.getElementById("zipErr") as HTMLInputElement;
+                            tag.style.display = "inline-block"
+                            // tag.innerHTML = "郵便番号はXXX-XXXXの形式または数字7桁で入力してください"
+                            tag.innerHTML = "郵便番号はXXX-XXXXの形式で入力してください"
+                            // flagZip = ""
+                          // }
+                        }else{
+                         await fetch(`https://zipcloud.ibsnet.co.jp/api/search?zipcode=${getZipId?.value}`)
+                          .then(response => response.json())
+                          .then(json => console.log(json.results[0].address1))
+                          .catch((error) => {
+                            let tag = document.getElementById("zipErr") as HTMLInputElement;
+                            tag.style.display = "inline-block"
+                            tag.innerHTML = "この郵便番号は存在しません"
+                          })
                         }
                       } else {
                         let tag = document.getElementById("zipErr") as HTMLInputElement;
@@ -457,10 +486,12 @@ export const Show = () => {
 
                       if (getTelId.value) {
                         if (!(getTelId.value.match(/^[0-9]*-[0-9]*-[0-9]*$/))) {
-                          let tag = document.getElementById("telErr") as HTMLInputElement;
-                          tag.style.display = "inline-block"
-                          tag.innerHTML = "電話番号はXXXX-XXXX-XXXXの形式で入力してください"
-                          // flagTel = ""
+                          // if(!(getTelId.value.length <= 15  && getTelId.value.length >= 10)){
+                            let tag = document.getElementById("telErr") as HTMLInputElement;
+                            tag.style.display = "inline-block"
+                            tag.innerHTML = "電話番号はXXXX-XXXX-XXXXの形式で入力してください"
+                            // flagTel = ""
+                          // }
                         }
                       } else {
                         let tag = document.getElementById("telErr") as HTMLInputElement;
@@ -485,7 +516,7 @@ export const Show = () => {
                         let tag = document.getElementById("dateErr") as HTMLInputElement;
                         tag.style.display = "inline-block"
                       } else {
-                        if( Number(Specified) - Number(currentDate) < 10800000 ){
+                        if (Number(Specified) - Number(currentDate) < 10800000) {
                           let tag = document.getElementById("dateErr") as HTMLInputElement;
                           tag.style.display = "inline-block"
                           tag.innerHTML = "今から3時間後の日時をご入力ください"
@@ -499,8 +530,9 @@ export const Show = () => {
             </div>
           </div>
         </form>
-      </div>
+      {/* </div> */}
     </>
   );
 };
+
 export default Show;

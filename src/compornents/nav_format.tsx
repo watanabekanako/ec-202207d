@@ -72,6 +72,7 @@ export const Nav = (props: { name: string }) => {
 
         <div className="collapse navbar-collapse" id="Navber">
           <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+
             <li>こんにちは&nbsp;&nbsp;{cookieuser}さん</li>
             {pageList.map((page, index) => {
                 if (props.name !== page.name) {
@@ -99,6 +100,7 @@ export const Nav = (props: { name: string }) => {
                 }
             } 
             )
+
             }
             <li><button onClick={logoutClick}>
               <Link href={'/items/itemList'}><a>ログアウト</a></Link>
