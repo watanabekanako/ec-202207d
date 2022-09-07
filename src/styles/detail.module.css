@@ -80,7 +80,7 @@ span.price {
   font-weight: normal;
   vertical-align: middle;
   cursor: pointer;
-  vertical-align: 0.3em;
+  vertical-align: 0.1em;
   margin-right: 4px;
 }
 .countLabel {
@@ -93,4 +93,34 @@ span.price {
   border: none;
   color: #fff;
   width: 300px;
+}
+.wrapper {
+  width: 750px;
+  margin: 0 auto;
+}
+
+.box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.pict {
+  width: 100%;
+  margin-left: 3%;
+}
+
+.pict img {
+  width: 100%;
+  height: auto;
+}
+.title {
+  background: linear-gradient(transparent 70%, #ff99ab 70%);
+  width: 30%;
+  margin: 50px auto;
+  margin-top: 0;
+  padding-top: 20px;
+}
+.priceSize {
+  font-size: 22px;
 }

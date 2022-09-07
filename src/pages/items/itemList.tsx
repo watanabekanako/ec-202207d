@@ -8,7 +8,9 @@ import Link from 'next/link';
 import { Nav } from "../../compornents/nav_format"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import style from '../../styles/itemList.module.css';
+
 import styles from '../../styles/common.module.css';
+
 
 const fetcher = (url: any) => fetch(url).then((res) => res.json());
 function Page() {
@@ -55,10 +57,11 @@ function Page() {
         <title>ラクスヌードル</title>
         <link rel="icon" href="/3506.png" />
       </Head>
-      <div className={`${style.bodyColor}`}>
+      <div className={`${styles.bodyColor}`}>
       <div className="container">
+
       <Nav name=""/>
-      
+
       <div className={`${style.row}`}>
         <div className={`col-lg-offset-3 col-lg-6 col-md-offset-2 col-md-8 col-sm-10 col-xs-12 ${style.mannaka}`}>
           <div className={`panel panel-default${style.default} `}>
