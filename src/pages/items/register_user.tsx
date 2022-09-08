@@ -80,7 +80,7 @@ const Show = () => {
     <div className={`${style.bodyColor} ${styles.height}`}>
       <div className={`container`}>
         <Head>
-          <title>ラクラクヌードル／新規登録画面</title>
+          <title>ラクラクヌードル／ユーザー登録画面</title>
           <link rel="icon" href="/3506.png" />
         </Head>
 

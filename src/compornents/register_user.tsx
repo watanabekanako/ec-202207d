@@ -181,7 +181,7 @@ export const UserInfo = () => {
             <tbody>
               <tr>
                 <td>
-                  <div className="text-center">
+                  <div className={`text-center ${style.confirm}`}>
                     お名前
                   </div>
                 </td>
@@ -199,7 +199,7 @@ export const UserInfo = () => {
                       </label>
                       <input type="text" id="name"
                         defaultValue={nameValue}
-                        className={`form-control input-sm ${style.form}`}
+                        className={`form-control input-sm form-control-lg ${style.form}`}
                       />
                     </div>
                   </div>
@@ -223,7 +223,7 @@ export const UserInfo = () => {
                       >
                         メールアドレスを入力してください
                       </label>
-                      <input type="text" id="mail" defaultValue={mail}  className={`form-control input-sm ${style.form}`} />
+                      <input type="text" id="mail" defaultValue={mail}  className={`form-control input-sm form-control-lg ${style.form}`} />
                     </div>
                   </div>
                 </td>
@@ -247,7 +247,7 @@ export const UserInfo = () => {
                       >
                         郵便番号を入力してください
                       </label>
-                      <input type="text" id="zip" defaultValue={zip}  className={`form-control input-sm ${style.form}`} />
+                      <input type="text" id="zip" defaultValue={zip}  className={`form-control input-sm form-control-lg ${style.form}`} />
                       {/* &nbsp;&nbsp; */}
                     </div>
                   </div>
@@ -269,7 +269,7 @@ export const UserInfo = () => {
                       >
                         住所を入力してください
                       </label>
-                      <input type="text" id="address"  className={`form-control input-sm ${style.form}`} defaultValue={address} />
+                      <input type="text" id="address"  className={`form-control input-sm form-control-lg ${style.form}`} defaultValue={address} />
                     </div>
                   </div>
                 </td>
@@ -290,7 +290,7 @@ export const UserInfo = () => {
                       >
                         電話番号を入力してください
                       </label>
-                      <input type="text" id="tel" defaultValue={tel}  className={`form-control input-sm ${style.form}`} />
+                      <input type="text" id="tel" defaultValue={tel}  className={`form-control input-sm form-control-lg ${style.form}`} />
 
                     </div>
                   </div>
@@ -320,7 +320,7 @@ export const UserInfo = () => {
                           type="date"
                           name="name"
                           id="date"
-                          className={`form-control input-sm ${style.form}`}
+                          className={`form-control input-sm form-control-lg ${style.form}`}
                           pattern="\d{4},\d{1},\d{1}"
                         />
                       </div>
@@ -332,7 +332,7 @@ export const UserInfo = () => {
                             type="radio"
                             name="responsibleCompany"
                             defaultChecked={true}
-                            className="time"
+                            className="time "
                             value={10}
                           />
                           10時

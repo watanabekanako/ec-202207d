@@ -93,11 +93,11 @@ export const Show = (data:any) => {
               </div>
             </div>
             <div className={`row ${style.row}`}>
-              <div className="col-sm-7">
+              <div className="col-sm-4">
                 <div className={`form-group ${style.table}`}>
                   <input
-                    // className={`form-control btn btn-warning btn-block ${style.confirmBtn}`}
-                    className={`form-control btn btn-warning  ${style.totalBtn}`}
+                    className={`form-control btn btn-warning btn-block ${style.totalBtn}`}
+                    // className={`${style.totalBtn}`}
                     type="button"
                     value="この内容で注文する"
                     onClick={async() => {
