@@ -156,7 +156,7 @@ export default function ItemDetail({ items, options }: any) {
     <div className={`${styles.bodyColor}`}>
       <div className="container">
         <Head>
-          <title>ラクスヌードル</title>
+          <title>ラクラクヌードル／商品詳細</title>
           <link rel="icon" href="/3506.png" />
         </Head>
         <Nav name="" />
@@ -233,8 +233,9 @@ export default function ItemDetail({ items, options }: any) {
                                     <>
                                       <input
                                         type="checkbox"
-                                        value="{option.price}"
+                                        value="{option.id}"
                                         className="checks"
+                                        id={`checks_${option.id}`}
                                         // onChange={(e) => {
                                         onClick={(e) => {
                                           const optionId = option.id; // オプションのID　mapループの変数から取得
@@ -246,23 +247,26 @@ export default function ItemDetail({ items, options }: any) {
                                           ); // hooksのステートに保存するための処理を呼び出し
                                         }}
                                       />
-
-                                      <p
-                                        className={
-                                          style.checkboxInline
-                                        }
-                                        key={index}
+                                      <label
+                                        htmlFor={`checks_${option.id}`}
                                       >
-                                        {option.name}
-                                      </p>
-                                      <p
-                                        className={
-                                          style.checkboxInline
-                                        }
-                                        key={index}
-                                      >
-                                        {option.price}円
-                                      </p>
+                                        <p
+                                          className={
+                                            style.checkboxInline
+                                          }
+                                          key={index}
+                                        >
+                                          {option.name}
+                                        </p>
+                                        <p
+                                          className={
+                                            style.checkboxInline
+                                          }
+                                          key={index}
+                                        >
+                                          {option.price}円
+                                        </p>
+                                      </label>
                                     </>
                                   );
                                 }
@@ -285,7 +289,7 @@ export default function ItemDetail({ items, options }: any) {
                           </label>
                           <select
                             name=""
-                            className="form-control"
+                            className={`form-control ${style.countPull}`}
                             onChange={(e: any) =>
                               setCount(e.target.value)
                             }
@@ -312,17 +316,17 @@ export default function ItemDetail({ items, options }: any) {
                 <div className="row">
                   <div className="col-xs-offset-2 col-xs-10">
                     {/* <div className="form-group"> */}
-                    <span className={`${style.totalPrice}`}>
+                    <p className={`${style.totalPrice}`}>
                       合計金額
                       {totalall.toLocaleString()}円
-                    </span>
+                    </p>
                   </div>
                 </div>
               </div>
               <div className="row">
                 <div className="col-xs-offset-2 col-xs-3">
                   <div className="form-group">
-                    <p>
+                    <p className={`${style.btnCenter}`}>
                       <Link href="http://localhost:3000/items/cartPage">
                         <button
                           className={`${style.btnDatail}`}

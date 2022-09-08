@@ -26,6 +26,7 @@ span.price {
 /* 合計金額の文字の大きさを変える */
 .totalPrice {
   font-size: 35px;
+  text-align: center;
 }
 
 /* 商品一覧の画像を中央寄せにする*/
@@ -91,8 +92,9 @@ span.price {
   padding: 10px 40px;
   border-radius: 10px;
   border: none;
-  color: #fff;
-  width: 300px;
+  color: #000;
+  width: 250px;
+  box-shadow: 4px 4px #615b4d;
 }
 .wrapper {
   width: 750px;
@@ -123,4 +125,10 @@ span.price {
 }
 .priceSize {
   font-size: 22px;
+}
+.btnCenter {
+  text-align: center;
+}
+.countPull {
+  margin: 20px 0;
 }

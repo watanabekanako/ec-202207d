@@ -2,11 +2,17 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Link from 'next/link';
 import { Nav } from "../../compornents/nav_format"
 import style from  "../../styles/register_user.module.css";
+import Head from "next/head";
+
 
 export const Show = () => {
 
   return(
     <div className="container">
+      <Head>
+        <title >ラクラクヌードル／注文確定画面</title>
+        <link rel="icon" href="/3506.png" />
+      </Head>
       <Nav name="" />
 
        {/* table */}
