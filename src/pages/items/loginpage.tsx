@@ -1,11 +1,11 @@
 import Link from 'next/link';
-import Head from "next/head";
+import Head from 'next/head';
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { Nav } from '../../compornents/nav_format';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import style from '../../styles/login.module.css';
-
+import styles from '../../styles/common.module.css';
 export default function Login() {
   const router = useRouter();
 
@@ -52,11 +52,11 @@ export default function Login() {
 
   return (
     <>
-      <div className={`${style.bodyColor}`}>
-      <Head>
-        <title>ログインページ</title>
-        <link rel="icon" href="/3506.png" />
-      </Head>
+      <div className={`${styles.bodyColor}`}>
+        <Head>
+          <title>ログインページ</title>
+          <link rel="icon" href="/3506.png" />
+        </Head>
         <div className={`container`}>
           <Nav name="ログイン" />
           <div className={`${style.box}`}>
@@ -72,7 +72,9 @@ export default function Login() {
               >
                 メールアドレス、またはパスワードが間違っています
               </p>
-              <label htmlFor='email' className={`${style.border}`}>メールアドレス</label>
+              <label htmlFor="email" className={`${style.border}`}>
+                メールアドレス
+              </label>
               <br />
               <input
                 id="email"
@@ -86,7 +88,9 @@ export default function Login() {
                 }}
               />
               <br />
-              <label htmlFor='pass' className={`${style.border}`}>パスワード</label>
+              <label htmlFor="pass" className={`${style.border}`}>
+                パスワード
+              </label>
               <br />
               <input
                 id="pass"
