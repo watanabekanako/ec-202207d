@@ -156,7 +156,7 @@ export default function ItemDetail({ items, options }: any) {
     <div className={`${styles.bodyColor}`}>
       <div className="container">
         <Head>
-          <title>ラクラクヌードル/商品詳細</title>
+          <title>ラクラクヌードル／商品詳細</title>
           <link rel="icon" href="/3506.png" />
         </Head>
         <Nav name="" />

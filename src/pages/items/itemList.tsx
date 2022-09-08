@@ -53,7 +53,7 @@ function Page() {
   return (
     <>
       <Head>
-        <title>ラクラクヌードル/商品一覧</title>
+        <title>ラクラクヌードル／商品一覧</title>
         <link rel="icon" href="/3506.png" />
       </Head>
       <div className={`${styles.bodyColor}`}>

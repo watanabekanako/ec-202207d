@@ -8,7 +8,7 @@ export default function Page() {
   return (
     <>
       <Head>
-        <title>ラクラクヌードル・ショッピングカート</title>
+        <title>ラクラクヌードル／ショッピングカート</title>
         <link rel="icon" href="/3506.png" />
       </Head>
       <div className={`${styles.bodyColor}`}>

@@ -78,6 +78,7 @@ const Show = () => {
 
   return (
     <div className={`${style.bodyColor} ${styles.height}`}>
+
       <div className={`container`}>
         <Head>
           <title>ラクラクヌードル／ユーザー登録画面</title>

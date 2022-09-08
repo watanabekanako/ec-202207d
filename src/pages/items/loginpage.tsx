@@ -5,7 +5,11 @@ import { useRouter } from 'next/router';
 import { Nav } from '../../compornents/nav_format';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import style from '../../styles/login.module.css';
-import styles from '../../styles/common.module.css';
+import styles from '../../styles/common.module.css'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+
 
 export default function Login() {
   const router = useRouter();
@@ -13,6 +17,7 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
   const [errorDisplay, setErrorDisplay] = useState('none');
+  const [isRevealPassword, setIsRevealPassword] = useState(false);
 
   const HandleSubmit = (e: any) => {
     e.preventDefault();
@@ -51,23 +56,31 @@ export default function Login() {
       });
   };
 
+  const togglePassword = () => {
+    setIsRevealPassword((prevState) => !prevState);
+  }
+
   return (
     <>
       <div className={`${styles.bodyColor}`}>
-        <Head>
-          <title>ログインページ</title>
-          <link rel="icon" href="/3506.png" />
-        </Head>
+      <Head>
+        <title>ラクラクヌードル／ログインページ</title>
+        <link rel="icon" href="/3506.png" />
+      </Head>
 
         <div className={`container`}>
           <Nav name="ログイン" />
           <div className={`${style.box}`}>
             <h1 className={`${style.title}`}>ログイン</h1>
+            
             <form
               method="POST"
               onSubmit={HandleSubmit}
               className={`${style.form}`}
             >
+              
+              <label htmlFor='email' className={`${style.border}`}>メールアドレス</label>
+
               <p
                 style={{ display: errorDisplay }}
                 className={`${style.errormessage}`}
@@ -77,6 +90,7 @@ export default function Login() {
               <label htmlFor="email" className={`${style.border}`}>
                 メールアドレス
               </label>
+
               <br />
               <input
                 id="email"
@@ -96,7 +110,7 @@ export default function Login() {
               <br />
               <input
                 id="pass"
-                type="password"
+                type={isRevealPassword ? 'text' : 'password'}
                 name="pass"
                 placeholder="Password"
                 className={`${style.input}`}
@@ -105,7 +119,24 @@ export default function Login() {
                   setPass(event.target.value);
                 }}
               />
+              <span
+	onClick={togglePassword}
+        role="presentation"
+        className={`${style.PasswordReveal}`}
+    >
+      {isRevealPassword ? (
+	 <FontAwesomeIcon icon={faEye} className={`${style.passicon}`}/>
+      ) : (
+        <FontAwesomeIcon icon={faEyeSlash} className={`${style.passicon}`}/>
+      )}
+     </span>
               <br />
+              <p
+                style={{ display: errorDisplay }}
+                className={`${style.errormessage}`}
+              >
+                メールアドレス、またはパスワードが間違っています
+              </p>
               <button type="submit" className={`${style.button}`}>
                 ログイン
               </button>

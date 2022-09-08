@@ -30,10 +30,10 @@ export const Nav = (props: { name: string }) => {
   const fetcher = (url: any) => fetch(url).then((res) => res.json());
 
   useEffect(() => {
-    let cookie2 = document.cookie;
-    if (cookie2.includes('userId') && cookie2.includes('userName')) {
-      setCookie(document.cookie);
-      // console.log(document.cookie);
+    let cookie2 = document.cookie
+    if(cookie2.includes('userId')){
+        setCookie(document.cookie);
+        // console.log(document.cookie);
     } else {
       // console.log('cookieがありません')
     }
@@ -79,7 +79,8 @@ export const Nav = (props: { name: string }) => {
     if (cookie.includes('status=shopping')) {
       document.cookie = 'status=shopping; max-age=0';
     }
-    router.push('/items/loginpage');
+    router.push("/items/itemList");
+
   };
 
   return (
@@ -151,11 +152,11 @@ export const Nav = (props: { name: string }) => {
         </div>
       </div>
 
-      <script
+      {/* <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
         crossOrigin="anonymous"
-      ></script>
+      ></script> */}
     </nav>
   );
 };
