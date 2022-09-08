@@ -13,10 +13,10 @@ const Total = (props: any) => {
     <div className={`row  ${style.row}`}>
       <div className="col-xs-offset-2 col-xs-8">
         <div className="form-group text-center">
-          <span id="total-price">消費税：{tax}円</span>
+          <span id="total-price" className={style.totalPrice}>消費税：{tax.toLocaleString()}円</span>
           <br />
-          <span id="total-price">
-            ご注文金額合計：{totalPrice}円 (税込)
+          <span id="total-price" className={style.totalPrice}>
+            ご注文金額合計：{totalPrice.toLocaleString()}円 (税込)
           </span>
         </div>
       </div>
@@ -38,7 +38,7 @@ export const ShoppingCart = () => {
   if (!data)
     return (
       <>
-        <div>Loading...</div>
+        <div></div>
       </>
     );
   mutate();
@@ -74,41 +74,47 @@ export const ShoppingCart = () => {
               return (
                 <React.Fragment key={index}>
                   <tr>
-                    <td>
-                      <div className="center">
-                        <Image
-                          src={data.img}
-                          className="img-responsive img-rounded item-img-center"
-                          width="200%"
-                          height="150%"
-                        />
-                        <br />
-                        {data.name}
+                    <td >
+                      <div className={`text-center  ${style.subTotal}`}>
+                        <div>
+                          <Image
+                            src={data.img}
+                            className="img-responsive img-rounded item-img-center"
+                            width="200%"
+                            height="150%"
+                          /><br />
+                          {data.name}
+                        </div>
+
+                      </div>
+                    </td>
+                    <td >
+                      <div className={`text-center ${style.price }`}>
+                       {data.price.toLocaleString()}円 &nbsp;&nbsp;
+                        {data.quantity}個
                       </div>
                     </td>
                     <td>
-                      <span className="price">&nbsp;</span>
-                      &nbsp;&nbsp;{data.price}円 &nbsp;&nbsp;
-                      {data.quantity}個
+                      <div className={`text-center  ${style.subTotal}`}>
+
+                        <ul className={`${style.list}`}>
+                          {!!data.options &&
+                            data.options.map(
+                              (option: any, index: any) => {
+                                return (
+                                  <li key={index}>
+                                    {option?.name}: {option?.price.toLocaleString()}円 ×
+                                    {option?.quantity}
+                                  </li>
+                                );
+                              }
+                            )}
+                        </ul>
+                      </div>
                     </td>
                     <td>
-                      <ul>
-                        {!!data.options &&
-                          data.options.map(
-                            (option: any, index: any) => {
-                              return (
-                                <li key={index}>
-                                {option?.name}: {option?.price}円 ×
-                                {option?.quantity}
-                              </li>
-                              );
-                            }
-                          )}
-                      </ul>
-                    </td>
-                    <td>
-                      <div className="text-center">
-                        {data.subtotal}円
+                      <div className={`text-center  ${style.subTotal}`}>
+                        {data.subtotal.toLocaleString()}円
                       </div>
                     </td>
                   </tr>

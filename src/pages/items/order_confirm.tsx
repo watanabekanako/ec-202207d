@@ -1,4 +1,5 @@
 import { useState } from "react"
+import React, { useEffect } from 'react';
 import { Nav } from "../../compornents/nav_format"
 import { ShoppingCart } from "../../compornents/order_confirm_shoppingCart"
 import { useRouter } from "next/router";
@@ -13,6 +14,8 @@ import styles from '../../styles/common.module.css'
 export const Show = (data:any) => {
   const [times, Settimes] = useState(10)
   const router = useRouter();
+  const [userID, SetUserID] = useState("");
+  
  
   // フラグ
   // const [flagMailFormat, SetFlagMailFormat] = useState("true");
@@ -20,10 +23,30 @@ export const Show = (data:any) => {
   // const [flagTel, SetFlagTel] = useState("true");
   // const [flagDate, SetFlagDate] = useState("true");
 
+  if (typeof document !== "undefined") {
+
+    const cookie = document.cookie;
+    const splitCookie = document.cookie.split(";");
+    const list = []
+
+    for (let i = 0; i < splitCookie.length; i++) {
+      list.push(splitCookie[i].split("="))
+    }
+
+    list.map((number) => {
+      number.map((show) => {
+        if (show.match(/[0-9].*/)) {
+          useEffect(() => { SetUserID(show) })
+        }
+      })
+    })
+  }
+
+  if (userID.length !== 0) { 
   return (
     <>
       <Head>
-        <title >注文内容確認画面</title>
+        <title >ラクラクヌードル／注文内容確認画面</title>
         <link rel="icon" href="/3506.png" />
       </Head>
       <div className={`${styles.bodyColor}`}>
@@ -35,181 +58,7 @@ export const Show = (data:any) => {
 
           {/*table */}
           <UserInfo />
-          {/* <form action="#">
-            <div className={`row g-3 ${style.row}`}>
-              <div className="table-responsive col-lg-offset-3 col-lg-7 col-md-offset-1 col-md-10 col-sm-10 col-xs-12">
-                <h3 className="text-center">お届け先情報</h3>
-                <table className="table table-striped item-list-table">
-                  <tbody>
-                    <tr>
-                      <td>
-                        <div className="text-center">
-                          お名前
-                        </div>
-                      </td>
-                      <td>
-                        <span className={`${style.requiredLabel}`}>必須</span>
-                        <input type="text" id="name"
-                        // className="form-control"
-                        />
-                        <label
-                          id="nameErr"
-                          className="control-label"
-                          style={{ color: 'red', display: 'none' }}
-                          htmlFor="inputPeriod"
-                        >
-                          名前を入力してください
-                        </label>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div className="text-center">
-                          メールアドレス
-                        </div>
-                      </td>
-                      <td>
-                        <span className={`${style.requiredLabel}`}>必須</span>
-                        <input type="text" id="mail" />
-                        <label
-                          id="mailErr"
-                          className="control-label"
-                          style={{ color: 'red', display: 'none' }}
-                          htmlFor="inputPeriod"
-                        >
-                          メールアドレスを入力してください
-                        </label>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div className="text-center">
-                          郵便番号
-                        </div>
-                      </td>
-                      <td>
-                        <span className={`${style.requiredLabel}`}>必須</span>
-                        <input type="text" id="zip" />
-                        &nbsp;&nbsp;<button>住所検索</button>
-                        <label
-                          id="zipErr"
-                          className="control-label"
-                          style={{ color: 'red', display: 'none' }}
-                          htmlFor="inputPeriod"
-                        >
-                          郵便番号を入力してください
-                        </label>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div className="text-center">住所</div>
-                      </td>
-                      <td>
-                        <span className={`${style.requiredLabel}`}>必須</span>
-                        <input type="text" id="address" />
-                        <label
-                          id="addrErr"
-                          className="control-label"
-                          style={{ color: 'red', display: 'none' }}
-                          htmlFor="inputPeriod"
-                        >
-                          住所を入力してください
-                        </label>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div className="text-center">電話番号</div>
-                      </td>
-                      <td>
-                        <span className={`${style.requiredLabel}`}>必須</span>
-                        <input type="text" id="tel" />
-                        <label
-                          id="telErr"
-                          className="control-label"
-                          style={{ color: 'red', display: 'none' }}
-                          htmlFor="inputPeriod"
-                        >
-                          電話番号を入力してください
-                        </label>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div className="text-center">配達日時</div>
-                      </td>
-                      <td>
-                        <div className="form-group">
-                          <div className="row">
-                            <div className="col-sm-12">
-                            </div>
-                            <div className="col-sm-5">
-                              <span className={`${style.requiredLabel}`}>必須</span>
-                              <input
-                                type="date"
-                                name="name"
-                                id="date"
-                                className="form-control input-sm"
-                                pattern="\d{4},\d{1},\d{1}"
-                              />
-                              <label
-                                id="dateErr"
-                                className="control-label"
-                                style={{
-                                  color: 'red',
-                                  display: 'none',
-                                }}
-                                htmlFor="inputPeriod"
-                              >
-                                配達日時を入力してください
-                              </label>
-                            </div>
-                          </div>
-                          <div className="row">
-                            <div className="col-sm-12">
-                              <label className="radio-inline">
-                                <input
-                                  type="radio"
-                                  name="responsibleCompany"
-                                  defaultChecked={true}
-                                  className="time"
-                                  value={10}
-                                />
-                                10時
-                              </label>
 
-                              {
-                                (() => {
-                                  const radioList = [];
-                                  for (let i = 11; i <= 18; i++) {
-                                    radioList.push(
-                                      <label className="radio-inline" key={i}>
-                                        <input
-                                          type="radio" name="responsibleCompany"
-                                          value={i}
-                                          className="time"
-                                        />
-                                        {i}時
-                                      </label>
-                                    )
-                                  }
-                                  return radioList;
-
-                                })()
-                              }
-
-                              <br />
-                            </div>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </form> */}
           <form action="#">
             {/*table */}
             <div className={`row  ${style.row}`}>
@@ -233,7 +82,7 @@ export const Show = (data:any) => {
                                 value="代金引換"
                               />
                               代金引換
-                            </label>
+                            </label><br />
                           </div>
                         </div>
                       </td>
@@ -256,10 +105,8 @@ export const Show = (data:any) => {
                                 value="クレジットカード"
                               />
                               クレジットカード
-
                             </label
-                            ><br /><br />
-
+                            ><br />
                           </div>
                         </div>
                       </td>
@@ -268,11 +115,12 @@ export const Show = (data:any) => {
                 </table>
               </div>
             </div>
-            <div className="row">
-              <div className="col-xs-offset-4 col-xs-4">
+            <div className={`row ${style.row}`}>
+              <div className="col-sm-4">
                 <div className={`form-group ${style.table}`}>
                   <input
-                    className={`form-control btn btn-warning btn-block ${style.confirmBtn}`}
+                    className={`form-control btn btn-warning btn-block ${style.totalBtn}`}
+                    // className={`${style.totalBtn}`}
                     type="button"
                     value="この内容で注文する"
                     onClick={async() => {
@@ -447,9 +295,7 @@ export const Show = (data:any) => {
                           })
                         }
 
-
                       } else {
-
                         if (getMailId.value) {
                           if (!getMailId.value.includes('@')) {
                             let tag = document.getElementById("mailErr") as HTMLInputElement;
@@ -537,6 +383,11 @@ export const Show = (data:any) => {
       </div>
     </>
   );
+  }else{
+    return (
+      <div>404 Not Found</div>
+    );
+  }
 };
 
 export default Show;
