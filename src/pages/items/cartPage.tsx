@@ -10,7 +10,7 @@ export default function Page() {
     return (
         <>
         <Head>
-          <title>カート</title>
+          <title>ラクスヌードル・ショッピングカート</title>
           <link rel="icon" href="/3506.png" />
         </Head>
         <div className={`${styles.bodyColor}`}>

@@ -161,13 +161,42 @@
       "name": "yasuo",
       "mail": "yasuo@gmail.com",
       "zip": "132-0035",
-      "address": "東京都江戸川区平井6-1-11",
+      "address": "東京都江戸川区平井",
       "tel": "090-0000-0000",
       "pass": "11111111",
       "id": 3
     }
   ],
-  "cartItems": [],
-  "payStatus": []
-
+  "cartItems": [
+    {
+      "img": "/img/10.jpg",
+      "name": "旨辛味噌麺",
+      "price": 800,
+      "quantity": 1,
+      "options": [],
+      "subtotal": 800,
+      "id": 1
+    },
+    {
+      "img": "/img/10.jpg",
+      "name": "旨辛味噌麺",
+      "price": 800,
+      "quantity": 1,
+      "options": [],
+      "subtotal": 800,
+      "id": 2
+    }
+  ],
+  "payStatus": [
+    {
+      "pay": "2:入金済",
+      "zip": "132-0035",
+      "address": "東京都江戸川区平井",
+      "name": "yasuo",
+      "mail": "yasuo@gmail.com",
+      "tel": "090-0000-0000",
+      "date": "2022-09-09-12",
+      "id": 1
+    }
+  ]
 }

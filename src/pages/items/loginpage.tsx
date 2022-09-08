@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { Nav } from '../../compornents/nav_format';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import style from '../../styles/login.module.css';
+import styles from '../../styles/common.module.css';
 
 export default function Login() {
   const router = useRouter();
@@ -52,7 +53,7 @@ export default function Login() {
 
   return (
     <>
-      <div className={`${style.bodyColor}`}>
+      <div className={`${styles.bodyColor}`}>
       <Head>
         <title>ログインページ</title>
         <link rel="icon" href="/3506.png" />
