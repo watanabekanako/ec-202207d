@@ -56,7 +56,7 @@ function CartPage() {
                   // id="total-price"
                   style={{ display: botan }}
                 >
-                  消費税：{tax}円
+                  消費税：{tax.toLocaleString()}円
                 </span>
                 <br />
                 <span
@@ -64,7 +64,7 @@ function CartPage() {
                   style={{ display: botan }}
                   // id="total-price"
                 >
-                  ご注文金額合計：{totalPrice}円 (税込)
+                  ご注文金額合計：{totalPrice.toLocaleString()}円 (税込)
                 </span>
               </div>
             </div>
@@ -91,16 +91,16 @@ function CartPage() {
           <h1 className={`${style.title}`}>ショッピングカート</h1>
           <div className="row">
             <table className="striped">
-              <thead>
+              {/* <thead>
 
     
 <tr key={''}>
-              <th  style={{ display: botan }}className="cart-table-th">商品名</th>
-              <th style={{ display: botan }}>価格(税抜)、数量</th>
-              <th style={{ display: botan }}>トッピング、価格(税抜)</th>
-              <th style={{ display: botan }}>小計</th>
+             <div> <th  style={{ display: botan }}className="cart-table-th">商品名</th></div>
+             <div> <th style={{ display: botan }}className="cart-table-th">価格(税抜)、数量</th></div>
+             <div> <th style={{ display: botan }}className="cart-table-th">トッピング、価格(税抜)</th></div>
+             <div> <th style={{ display: botan }}className="cart-table-th">小計</th></div>
             </tr>
-          </thead>
+          </thead> */}
     
 
               <tbody>
@@ -122,7 +122,7 @@ function CartPage() {
                         <span className="price">
                           {/* &nbsp;{cartitem.size} */}
                         </span>
-                        {cartitem.price}円 {cartitem.quantity}個
+                        {cartitem.price.toLocaleString()}円 {cartitem.quantity}個
                       </td>
 
                       <td>
@@ -132,7 +132,7 @@ function CartPage() {
                             return (
                               // <li key={index}>{option}&nbsp;200円</li>
                               <li key={index}>
-                                {option?.name}: {option?.price}円 ×
+                                {option?.name}: {option?.price.toLocaleString()}円 ×
                                 {option?.quantity}
                               </li>
                             );
@@ -150,7 +150,7 @@ function CartPage() {
 
                       <td>
                         <span className="text-center">
-                          {cartitem.subtotal}円
+                          {cartitem.subtotal.toLocaleString()}円
                         </span>
                       </td>
 
@@ -171,7 +171,7 @@ function CartPage() {
                             });
                           }}
                         >
-                          [削除]
+                          削除
                         </button>
                       </td>
                     </tr>
@@ -209,7 +209,7 @@ function CartPage() {
             </button>
             {/* </Link> */}
           </div>
-          <p id="noneItem" style={{ display: moji }}>
+          <p id="noneItem" style={{ display: moji }} >
             カートに商品がありません
           </p>
         </div>

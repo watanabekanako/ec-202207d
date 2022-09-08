@@ -5,6 +5,7 @@ import React, { useState, useEffect} from 'react';
 import { useRouter } from "next/router";
 import useSWR, { useSWRConfig } from 'swr'
 
+
 export const Nav = (props: { name: string }) => {
   const router = useRouter();
   const pageList = [
@@ -24,51 +25,50 @@ export const Nav = (props: { name: string }) => {
 
   const [cookie, setCookie] = useState('');
   const [cookieuser, setCookieUser] = useState('');
-  const [userID, SetUserID] = useState("");
+  const [userID, SetUserID] = useState('');
 
   const fetcher = (url: any) => fetch(url).then((res) => res.json());
 
   useEffect(() => {
-    let cookie2 = document.cookie
-    if(cookie2.includes('userId') && cookie2.includes('userName')){
-        setCookie(document.cookie);
-        console.log(document.cookie);
+    let cookie2 = document.cookie;
+    if (cookie2.includes('userId') && cookie2.includes('userName')) {
+      setCookie(document.cookie);
+      // console.log(document.cookie);
     } else {
-        // console.log('cookieがありません')
+      // console.log('cookieがありません')
     }
 
-    const splitCookie = document.cookie.split(";");
-    const list = []
+    const splitCookie = document.cookie.split(';');
+    const list = [];
 
-    for(let i = 0; i < splitCookie.length; i++){
-        list.push(splitCookie[i].split("="))
-      }
-      
-    list.map((number)=> {
-      number.map((show)=>{
-        if(show.match(/[0-9].*/)){
-          SetUserID(show)
+    for (let i = 0; i < splitCookie.length; i++) {
+      list.push(splitCookie[i].split('='));
+    }
+
+    list.map((number) => {
+      number.map((show) => {
+        if (show.match(/[0-9].*/)) {
+          SetUserID(show);
         }
-    })})
+      });
+    });
+  }, []);
 
-
-  },[]);
-
-  const { data, error, mutate } = useSWR(`http://localhost:8000/users?id=${userID}`, fetcher);
+  const { data, error, mutate } = useSWR(
+    `http://localhost:8000/users?id=${userID}`,
+    fetcher
+  );
 
   if (error) return <div>Failed to load</div>;
   if (!data) return <div>Loading...</div>;
 
-  let  nameValue = ""
+  let nameValue = '';
 
-  if(userID.length !== 0){
-    nameValue = data[0].name;  
-  }  else {
-    nameValue = 'ゲスト'
+  if (userID.length !== 0) {
+    nameValue = data[0].name;
+  } else {
+    nameValue = 'ゲスト';
   }
-
-
-  
 
   const logoutClick = () => {
     document.cookie = 'userId=; max-age=0';
@@ -79,7 +79,7 @@ export const Nav = (props: { name: string }) => {
     if (cookie.includes('status=shopping')) {
       document.cookie = 'status=shopping; max-age=0';
     }
-    router.push("/items/loginpage");
+    router.push('/items/loginpage');
   };
 
   return (
@@ -111,44 +111,42 @@ export const Nav = (props: { name: string }) => {
         <div className="collapse navbar-collapse" id="Navber">
           <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
 
-
             <li className={styles.show}>こんにちは&nbsp;&nbsp;&nbsp;{nameValue}&nbsp;さん</li>
 
             {pageList.map((page, index) => {
-                if (props.name !== page.name) {
-                  if (
-                    cookie.includes('userId') &&
-                    page.name !== 'ログイン'
-                  ) {                              
-                    return (
-                      <li className="nav-item" key={index}>
-                        <Link href={`${page.url}`}>
-                          <a className="nav-link">{page.name}</a>
-                        </Link>
-                      </li>
-                    );
-                  }
-                  if (cookie === '') {
-                    return (
-                      <li className="nav-item" key={index}>
-                        <Link href={`${page.url}`}>
-                          <a className="nav-link">{page.name}</a>
-                        </Link>
-                      </li>
-                    );
-                  }
+              if (props.name !== page.name) {
+                if (
+                  cookie.includes('userId') &&
+                  page.name !== 'ログイン'
+                ) {
+                  return (
+                    <li className="nav-item" key={index}>
+                      <Link href={`${page.url}`}>
+                        <a className="nav-link">{page.name}</a>
+                      </Link>
+                    </li>
+                  );
                 }
-            } 
-            )
-
-            }
+                if (cookie === '') {
+                  return (
+                    <li className="nav-item" key={index}>
+                      <Link href={`${page.url}`}>
+                        <a className="nav-link">{page.name}</a>
+                      </Link>
+                    </li>
+                  );
+                }
+              }
+            })}
             <li>
+
               <button onClick={logoutClick} className={` nav-link btn btn-link text-decoration-none `} >
               {/* <Link href={'/items/logout'} ><a className={`${styles.navLink}`}> */}
+
                 ログアウト
                 {/* </a></Link> */}
               </button>
-              </li>
+            </li>
           </ul>
         </div>
       </div>
@@ -160,5 +158,4 @@ export const Nav = (props: { name: string }) => {
       ></script>
     </nav>
   );
-
-          }
+};
