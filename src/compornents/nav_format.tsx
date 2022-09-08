@@ -32,7 +32,7 @@ export const Nav = (props: { name: string }) => {
     let cookie2 = document.cookie
     if(cookie2.includes('userId') && cookie2.includes('userName')){
         setCookie(document.cookie);
-        // console.log(document.cookie);
+        console.log(document.cookie);
     } else {
         // console.log('cookieがありません')
     }

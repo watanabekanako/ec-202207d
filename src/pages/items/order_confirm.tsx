@@ -1,4 +1,5 @@
 import { useState } from "react"
+import React, { useEffect } from 'react';
 import { Nav } from "../../compornents/nav_format"
 import { ShoppingCart } from "../../compornents/order_confirm_shoppingCart"
 import { useRouter } from "next/router";
@@ -13,6 +14,8 @@ import styles from '../../styles/common.module.css'
 export const Show = (data:any) => {
   const [times, Settimes] = useState(10)
   const router = useRouter();
+  const [userID, SetUserID] = useState("");
+  
  
   // フラグ
   // const [flagMailFormat, SetFlagMailFormat] = useState("true");
@@ -20,6 +23,26 @@ export const Show = (data:any) => {
   // const [flagTel, SetFlagTel] = useState("true");
   // const [flagDate, SetFlagDate] = useState("true");
 
+  if (typeof document !== "undefined") {
+
+    const cookie = document.cookie;
+    const splitCookie = document.cookie.split(";");
+    const list = []
+
+    for (let i = 0; i < splitCookie.length; i++) {
+      list.push(splitCookie[i].split("="))
+    }
+
+    list.map((number) => {
+      number.map((show) => {
+        if (show.match(/[0-9].*/)) {
+          useEffect(() => { SetUserID(show) })
+        }
+      })
+    })
+  }
+
+  if (userID.length !== 0) { 
   return (
     <>
       <Head>
@@ -360,6 +383,11 @@ export const Show = (data:any) => {
       </div>
     </>
   );
+  }else{
+    return (
+      <div>404 Not Found</div>
+    );
+  }
 };
 
 export default Show;
