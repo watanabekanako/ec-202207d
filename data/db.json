@@ -161,7 +161,7 @@
       "name": "yasuo",
       "mail": "yasuo@gmail.com",
       "zip": "132-0035",
-      "address": "東京都江戸川区平井6-1-11",
+      "address": "東京都江戸川区平井",
       "tel": "090-0000-0000",
       "pass": "11111111",
       "id": 3
@@ -169,31 +169,13 @@
   ],
   "cartItems": [
     {
-      "img": "/img/15.jpg",
-      "name": "追い鰹チャーシュー",
-      "price": 1100,
+      "img": "/img/10.jpg",
+      "name": "旨辛味噌麺",
+      "price": 800,
       "quantity": 1,
       "options": [],
-      "subtotal": 1100,
+      "subtotal": 800,
       "id": 1
-    },
-    {
-      "img": "/img/15.jpg",
-      "name": "追い鰹チャーシュー",
-      "price": 1100,
-      "quantity": 1,
-      "options": [],
-      "subtotal": 1100,
-      "id": 2
-    },
-    {
-      "img": "/img/7.jpg",
-      "name": "台湾まぜそば",
-      "price": 1300,
-      "quantity": 1,
-      "options": [],
-      "subtotal": 1300,
-      "id": 3
     },
     {
       "img": "/img/10.jpg",
@@ -202,8 +184,19 @@
       "quantity": 1,
       "options": [],
       "subtotal": 800,
-      "id": 4
+      "id": 2
     }
   ],
-  "payStatus": []
+  "payStatus": [
+    {
+      "pay": "2:入金済",
+      "zip": "132-0035",
+      "address": "東京都江戸川区平井",
+      "name": "yasuo",
+      "mail": "yasuo@gmail.com",
+      "tel": "090-0000-0000",
+      "date": "2022-09-09-12",
+      "id": 1
+    }
+  ]
 }

@@ -91,16 +91,16 @@ function CartPage() {
           <h1 className={`${style.title}`}>ショッピングカート</h1>
           <div className="row">
             <table className="striped">
-              <thead>
+              {/* <thead>
 
     
 <tr key={''}>
-              <th  style={{ display: botan }}className="cart-table-th">商品名</th>
-              <th style={{ display: botan }}>価格(税抜)、数量</th>
-              <th style={{ display: botan }}>トッピング、価格(税抜)</th>
-              <th style={{ display: botan }}>小計</th>
+             <div> <th  style={{ display: botan }}className="cart-table-th">商品名</th></div>
+             <div> <th style={{ display: botan }}className="cart-table-th">価格(税抜)、数量</th></div>
+             <div> <th style={{ display: botan }}className="cart-table-th">トッピング、価格(税抜)</th></div>
+             <div> <th style={{ display: botan }}className="cart-table-th">小計</th></div>
             </tr>
-          </thead>
+          </thead> */}
     
 
               <tbody>
