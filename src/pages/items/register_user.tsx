@@ -77,7 +77,7 @@ const Show = () => {
 
 
   return (
-    <div className={`${styles.bodyColor}`}>
+    <div className={`${style.bodyColor}`}>
       <div className={`container`}>
         <Head>
           <title>新規登録画面</title>

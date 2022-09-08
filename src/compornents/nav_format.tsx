@@ -2,11 +2,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import styles from '../styles/register_user.module.css';
 import React, { useState, useEffect} from 'react';
-<<<<<<< HEAD
 import { useRouter } from "next/router";
-=======
 import useSWR, { useSWRConfig } from 'swr'
->>>>>>> main
+
 
 export const Nav = (props: { name: string }) => {
   const router = useRouter();
@@ -33,7 +31,7 @@ export const Nav = (props: { name: string }) => {
 
   useEffect(() => {
     let cookie2 = document.cookie
-    if(cookie2.includes('userId') && cookie2.includes('userName')){
+    if(cookie2.includes('userId')){
         setCookie(document.cookie);
         // console.log(document.cookie);
     } else {
@@ -82,7 +80,7 @@ export const Nav = (props: { name: string }) => {
     if (cookie.includes('status=shopping')) {
       document.cookie = 'status=shopping; max-age=0';
     }
-    router.push("/items/loginpage");
+    router.push("/items/itemList");
   };
 
   return (
