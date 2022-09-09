@@ -128,7 +128,7 @@ const Show = () => {
                         if (!getMailId.value.includes('@')) {
                           let tag = document.getElementsByClassName("control-label")[1] as HTMLElement;
                           tag.style.display = "inline-block"
-                          tag.innerHTML = "メールアドレスの形式が不正です"
+                          tag.innerHTML = "メールアドレスは@を含む形式で入力してください"
 
                           // SetFlagMailFormat("")
                           flagMailFormat = "";
@@ -252,7 +252,7 @@ const Show = () => {
                           if (!getMailId.value.includes('@')) {
                             let tag = document.getElementsByClassName("control-label")[1] as HTMLElement;
                             tag.style.display = "inline-block"
-                            tag.innerHTML = "メールアドレスの形式が不正です"
+                            tag.innerHTML = "メールアドレスは@を含む形式で入力してください"
                           } else {
                             fetch(`http://localhost:8000/users?mail=${getMailId.value}`)
                               .then(response => response.json())

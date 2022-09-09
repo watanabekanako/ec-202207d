@@ -260,7 +260,7 @@ export const Show = (data:any) => {
                         if (Number(Specified) - Number(currentDate) < 10800000) {
                           let tag = document.getElementById("dateErr") as HTMLInputElement;
                           tag.style.display = "inline-block"
-                          tag.innerHTML = "今から3時間後の日時をご入力ください"
+                          tag.innerHTML = "今から3時間後以降の日時をご入力ください"
                           flagDate = ""
                         }
 
@@ -368,7 +368,7 @@ export const Show = (data:any) => {
                           if (Number(Specified) - Number(currentDate) < 10800000) {
                             let tag = document.getElementById("dateErr") as HTMLInputElement;
                             tag.style.display = "inline-block"
-                            tag.innerHTML = "今から3時間後の日時をご入力ください"
+                            tag.innerHTML = "今から3時間後以降の日時をご入力ください"
                           }
                         }
 

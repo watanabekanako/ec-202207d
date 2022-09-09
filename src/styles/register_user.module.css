@@ -45,12 +45,14 @@
 .totalBtn {
   width: 300px;
   margin: 0 auto;
-  background-color: #ffc107;
   padding: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 80px;
+  background-color: #d9534f;
+  border-color: #d9534f;
+  border-radius: 10px;
 }
 
 

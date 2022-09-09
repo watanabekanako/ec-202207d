@@ -78,15 +78,6 @@ export default function Login() {
               onSubmit={HandleSubmit}
               className={`${style.form}`}
             >
-              
-              <label htmlFor='email' className={`${style.border}`}>メールアドレス</label>
-
-              <p
-                style={{ display: errorDisplay }}
-                className={`${style.errormessage}`}
-              >
-                メールアドレス、またはパスワードが間違っています
-              </p>
               <label htmlFor="email" className={`${style.border}`}>
                 メールアドレス
               </label>

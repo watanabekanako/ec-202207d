@@ -76,7 +76,7 @@ function CartPage() {
   return (
     <>
       <Head>
-        <title>ラクスヌードル</title>
+        <title>ラクラクヌードル／ショッピングカート</title>
       </Head>
 
 
