@@ -24,8 +24,8 @@ export const Nav = (props: { name: string }) => {
   ];
 
   const [cookie, setCookie] = useState('');
-  const [cookieuser, setCookieUser] = useState('');
   const [userID, SetUserID] = useState('');
+  const [buttonDisplay, setButtonDisplay] = useState('none');
 
   const fetcher = (url: any) => fetch(url).then((res) => res.json());
 
@@ -33,6 +33,7 @@ export const Nav = (props: { name: string }) => {
     let cookie2 = document.cookie
     if(cookie2.includes('userId')){
         setCookie(document.cookie);
+        setButtonDisplay('block');
         // console.log(document.cookie);
     } else {
       // console.log('cookieがありません')
@@ -70,6 +71,7 @@ export const Nav = (props: { name: string }) => {
     nameValue = 'ゲスト';
   }
 
+
   const logoutClick = () => {
     document.cookie = 'userId=; max-age=0';
     document.cookie = 'userName=; max-age=0';
@@ -84,8 +86,8 @@ export const Nav = (props: { name: string }) => {
   };
 
   return (
-    <nav className={`navbar navbar-expand-lg bg-light ${styles.nav}`}>
-      <div className="container-fluid">
+    <nav className={`navbar navbar-expand-lg fixed-top bg-light　w-75 ${styles.nav}`}>
+      <div className="container">
         <Link className="navbar-brand" href="/items/itemList">
           {/* 企業ロゴ   */}
           <a>
@@ -136,12 +138,13 @@ export const Nav = (props: { name: string }) => {
                       </Link>
                     </li>
                   );
+                } else {
+                  // setButtonDisplay('none');
                 }
               }
             })}
             <li>
-
-              <button onClick={logoutClick} className={` nav-link btn btn-link text-decoration-none `} >
+              <button onClick={logoutClick} className={`${styles.clickbtn} `}　style={{ display: buttonDisplay }}>
               {/* <Link href={'/items/logout'} ><a className={`${styles.navLink}`}> */}
 
                 ログアウト
@@ -160,3 +163,5 @@ export const Nav = (props: { name: string }) => {
     </nav>
   );
 };
+
+// className={` nav-link btn btn-link text-decoration-none ${styles.clickbtn} `}
