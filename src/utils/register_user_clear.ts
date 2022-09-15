@@ -1,6 +1,7 @@
 
 export const clear = () => {
-  let getNameId = document.getElementById('inputName') as HTMLInputElement;
+  let getNameId = document.getElementById('inputLastName') as HTMLInputElement;
+  let getFirstNameId = document.getElementById('inputFirstName') as HTMLInputElement;
   let getZipId = document.getElementById('inputZipcode') as HTMLInputElement;
   let getMailId = document.getElementById('inputEmail') as HTMLInputElement;
   let getAddrId = document.getElementById('inputAddress') as HTMLInputElement;
