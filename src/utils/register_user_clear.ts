@@ -10,6 +10,7 @@ export const clear = () => {
   let getPassConfId = document.getElementById('inputConfirmationPassword') as HTMLInputElement;
 
   getNameId.value = ""
+  getFirstNameId.value = ""
   getZipId.value = ""
   getMailId.value = ""
   getAddrId.value = ""

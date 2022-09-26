@@ -2,6 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { Title } from "../../compornents/register_user"
 import { clear } from "../../utils/register_user_clear"
 import { Form } from "../../compornents/register_user_form";
+import { NameForm, nameJudge } from "../../compornents/register_user_form_name";
+import { MailForm, mailJudge } from "../../compornents/register_user_form_mail";
+import { ZipForm, zipJudge } from "../../compornents/register_user_form_zip";
+import { AddrForm, addrJudge } from "../../compornents/register_user_form_addr";
+import { TelForm, telJudge } from "../../compornents/register_user_form_tel";
+import { PassForm, passJudge } from "../../compornents/register_user_form_pass";
+import { ConPassForm, conPassJudge } from "../../compornents/register_user_form_conPass";
 import { Nav } from "../../compornents/nav_format";
 import { useRouter } from "next/router";
 import Head from "next/head";
@@ -11,64 +18,26 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "../../styles/register_user.module.css";
 import style from '../../styles/common.module.css';
 
-
-
-// 入力項目リスト
-const list = [
-  {
-    num: 0,
-    item: "名前",
-    id: "inputLastName",
-    place: "Name"
-  },
-  {
-    num: 1,
-    item: "メールアドレス",
-    id: "inputEmail",
-    place: "例）xxx@example.com"
-  },
-  {
-    num: 2,
-    item: "郵便番号",
-    id: "inputZipcode",
-    place: "例）xxx-xxxx"
-  },
-  {
-    num: 3,
-    item: "住所",
-    id: "inputAddress",
-    place: "住所"
-  },
-  {
-    num: 4,
-    item: "電話番号",
-    id: "inputTel",
-    place: "例）xxx-xxxx-xxxx"
-  },
-  {
-    num: 5,
-    item: "パスワード",
-    id: "inputPassword",
-    place: "８文字以上１６文字以内で設定してください"
-  },
-  {
-    num: 6,
-    item: "確認用パスワード",
-    id: "inputConfirmationPassword",
-    place: "確認用パスワード"
-  },
-]
-
 const Show = () => {
   const router = useRouter();
-  // フラグ
-  // const [flagMailFormat, SetFlagMailFormat] = useState("true");
-  // const [flagMailDup, SetFlagMailDup] = useState("true");
-  // const [flagZip, SetFlagZip] = useState("true");
-  // const [flagTel, SetFlagTel] = useState("true");
-  // const [flagPassLength, SetFlagPassLength] = useState("true");
-  // const [flagPassConf, SetFlagPassConf] = useState("true");
 
+  // 判定 フラグ
+  const [nameFlag, SetNameFlag] = React.useState("init");
+  const [mailFlag, SetMailFlag] = React.useState("init");
+  const [zipFlag, SetZipFlag] = React.useState("init");
+  const [addrFlag, SetAddrFlag] = React.useState("init");
+  const [telFlag, SetTelFlag] = React.useState("init");
+  const [passFlag, SetPassFlag] = React.useState("init");
+  const [conPassFlag, SetConPassFlag] = React.useState("init");
+
+  const [firstNameValue, SetFirstNameValue] = React.useState("");
+  const [lastNameValue, SetLastNameValue] = React.useState("");
+  const [mailValue, SetMailValue] = React.useState("");
+  const [zipValue, SetZipValue] = React.useState("");
+  const [addrValue, SetAddrValue] = React.useState("");
+  const [telValue, SetTelValue] = React.useState("");
+  const [passValue, SetPassValue] = React.useState("");
+  const [conPassValue, SetConPassValue] = React.useState("");
 
   return (
     <div className={`${style.bodyColor} ${styles.height}`}>
@@ -90,293 +59,133 @@ const Show = () => {
               <form method="post" action="#">
                 <fieldset>
                   <Title title="ユーザー登録" />
-                  <Form list={list} />
+
+                  <NameForm
+                    SetFirstNameValue={SetFirstNameValue}
+                    SetNameFlag={SetNameFlag}
+                    SetLastNameValue={SetLastNameValue}
+                    firstNameValue={firstNameValue}
+                    lastNameValue={lastNameValue}
+                  />
+                  <MailForm
+                    SetMailValue={SetMailValue}
+                    SetMailFlag={SetMailFlag}
+                    mailValue={mailValue}
+                  />
+                  <ZipForm
+                    SetZipFlag={SetZipFlag}
+                    SetZipValue={SetZipValue}
+                    zipValue={zipValue}
+                    zipFlag={zipFlag}
+                  />
+                  <AddrForm
+                    SetAddrFlag={SetAddrFlag}
+                    SetAddrValue={SetAddrValue}
+                    addrValue={addrValue}
+                  />
+                  <TelForm
+                    SetTelValue={SetTelValue}
+                    SetTelFlag={SetTelFlag}
+                    telValue={telValue}
+                  />
+                  <PassForm
+                    SetPassFlag={SetPassFlag}
+                    SetPassValue={SetPassValue}
+                    passValue={passValue}
+                  />
+                  <ConPassForm
+                    SetConPassFlag={SetConPassFlag}
+                    SetConPassValue={SetConPassValue}
+                    conPassValue={conPassValue}
+                  />
+
                   <div className="form-group   ">
                     <button type="button" className={` ${styles.btn}`} onClick={() => {
 
-                      // 要素取得
-                      let getNameId = document.getElementById('inputLastName') as HTMLInputElement;
-                      let getFirstNameId = document.getElementById('inputFirstName') as HTMLInputElement;
-                      let getZipId = document.getElementById('inputZipcode') as HTMLInputElement;
-                      let getMailId = document.getElementById('inputEmail') as HTMLInputElement;
-                      let getAddrId = document.getElementById('inputAddress') as HTMLInputElement;
-                      let getTelId = document.getElementById('inputTel') as HTMLInputElement;
-                      let getPassId = document.getElementById('inputPassword') as HTMLInputElement;
-                      let getPassConfId = document.getElementById('inputConfirmationPassword') as HTMLInputElement;
-
-                      let flagMailFormat = "true";
-                      let flagMailDup = "true";
-                      let flagZip = "true";
-                      let flagTel = "true";
-                      let flagPassLength = "true";
-                      let flagPassConf = "true";
+                      SetNameFlag("init");
+                      SetMailFlag("init");
+                      SetZipFlag("init");
+                      SetAddrFlag("init");
+                      SetTelFlag("init");
+                      SetPassFlag("init");
+                      SetConPassFlag("init");
 
                       // エラー非表示
-                      list.map((list) => {
-                        let tag = document.getElementsByClassName("control-label")[list.num] as HTMLElement;
+                      for (let i = 0; i < 7; i++) {
+                        let tag = document.getElementsByClassName("control-label")[i] as HTMLElement;
                         tag.style.display = "none"
-                      })
+                      }
 
                       if (
-                        getNameId.value &&
-                        getFirstNameId.value &&
-                        getMailId.value &&
-                        getZipId.value &&
-                        getAddrId.value &&
-                        getTelId.value &&
-                        getPassId.value &&
-                        getPassConfId.value
+                        nameFlag === "ok" &&
+                        mailFlag === "ok" &&
+                        zipFlag === "ok" &&
+                        telFlag === "ok" &&
+                        passFlag === "ok" &&
+                        conPassFlag === "ok"
                       ) {
 
-                        if (!getMailId.value.includes('@')) {
-                          let tag = document.getElementsByClassName("control-label")[1] as HTMLElement;
-                          tag.style.display = "inline-block"
-                          tag.innerHTML = "メールアドレスは@を含む形式で入力してください"
+                          const data = {
+                            name: `${firstNameValue} ${lastNameValue}`,
+                            mail: mailValue,
+                            zip: zipValue,
+                            address: addrValue,
+                            tel: telValue,
+                            pass: passValue
+                          };
 
-                          // useEffect(() =>{
-                          //   SetFlagMailFormat("");
-                          // }, [])
-                          flagMailFormat = "";
-                        }
-
-                        if (!(getZipId.value.match(/^\d{3}-\d{4}$/))) {
-                          let tag = document.getElementsByClassName("control-label")[2] as HTMLElement;
-                          tag.style.display = "inline-block"
-                          tag.innerHTML = "郵便番号はXXX-XXXXの形式で入力してください"
-
-                          // SetFlagZip("")
-                          flagZip = "";
-                        } else {
-                          fetch(`https://zipcloud.ibsnet.co.jp/api/search?zipcode=${getZipId?.value}`)
-                            .then(response => response.json())
-                            .then(json => console.log(json.results[0].address1))
-                            .catch((error) => {
-                              let tag = document.getElementsByClassName("control-label")[2] as HTMLElement;;
-                              tag.style.display = "inline-block"
-                              tag.innerHTML = "この郵便番号は存在しません"
-                              flagZip = "";
-                            });
-                        }
-
-                        if (!(getTelId.value.match(/^[0-9]*-[0-9]*-[0-9]*$/))) {
-                          let tag = document.getElementsByClassName("control-label")[4] as HTMLElement;
-                          tag.style.display = "inline-block"
-                          tag.innerHTML = "電話番号はXXXX-XXXX-XXXXの形式で入力してください"
-
-                          // SetFlagTel("")
-                          flagTel = "";
-                        }
-
-                        if (!(getPassId.value.length <= 16 && getPassId.value.length >= 8)) {
-                          let tag = document.getElementsByClassName("control-label")[5] as HTMLElement;
-                          tag.style.display = "inline-block"
-                          tag.innerHTML = "パスワードは８文字以上１６文字以内で設定してください"
-
-                          // SetFlagPassLength("")
-                          flagPassLength = "";
-                        }
-
-                        if (!(getPassId.value === getPassConfId.value)) {
-                          let tag = document.getElementsByClassName("control-label")[6] as HTMLElement;
-                          tag.style.display = "inline-block"
-                          tag.innerHTML = "パスワードと確認用パスワードが不一致です"
-
-                          // SetFlagPassConf("")
-                          flagPassConf = "";
-                        }
-                        console.log(`mail:${flagMailFormat} zip:${flagZip} tel:${flagTel} passle:${flagPassLength} passco:${flagPassConf}`);
-
-                        // 全てのフラグに値が入っている場合
-                        if (
-                          flagMailFormat &&
-                          flagZip &&
-                          flagTel &&
-                          flagPassLength &&
-                          flagPassConf
-                        ) {
-                          const post = async () => {
-                            await fetch(`http://localhost:8000/users?mail=${getMailId.value}`)
-                              .then(response => response.json())
-                              .then((data) => {
-                                if (data.length !== 0) {
-                                  let tag = document.getElementsByClassName("control-label")[1] as HTMLElement;
-                                  tag.style.display = "inline-block"
-                                  tag.innerHTML = "そのメールアドレスはすでに使われています"
-                                  // SetFlagMailDup("")
-                                  flagMailDup = "";
-                                }
-                              })
-                              .catch(error => {
-                                console.log('error');
-                              });
-
-                            if (!(getZipId.value.match(/^\d{3}-\d{4}$/))) {
-                              let tag = document.getElementsByClassName("control-label")[2] as HTMLElement;
-                              tag.style.display = "inline-block"
-                              tag.innerHTML = "郵便番号はXXX-XXXXの形式で入力してください"
-
-                              flagZip = "";
-                            } else {
-                              await fetch(`https://zipcloud.ibsnet.co.jp/api/search?zipcode=${getZipId?.value}`)
-                                .then(response => response.json())
-                                .then(json => console.log(json.results[0].address1))
-                                .catch((error) => {
-                                  let tag = document.getElementsByClassName("control-label")[2] as HTMLElement;;
-                                  tag.style.display = "inline-block"
-                                  tag.innerHTML = "この郵便番号は存在しません"
-                                  flagZip = "";
-                                });
-                            }
-
-                            const data = {
-                              name: getNameId.value,
-                              mail: getMailId.value,
-                              zip: getZipId.value,
-                              address: getAddrId.value,
-                              tel: getTelId.value,
-                              pass: getPassId.value,
-                            };
-
-                            if (flagMailDup && flagZip) {
-                              await fetch(`http://localhost:8000/users`, {
-                                method: "POST",
-                                headers: {
-                                  'Content-Type': 'application/json'
-                                },
-                                body: JSON.stringify(data)
-                              }).then((response) => {
-                                return response.json();
-                              }).then((data) => {
-                                alert("登録が完了いたしました。");
-                              }).then((test) => {
-                                router.push("/items/loginpage");
-                              })
-
-                              list.map((list) => {
-                                let tag = document.getElementsByClassName("control-label")[list.num] as HTMLElement;
-                                let none = tag.style.display = "none"
-                              })
-                            }
+                          fetch(`http://localhost:8000/users`, {
+                            method: "POST",
+                            headers: {
+                              'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(data)
+                          }).then((response) => {
+                            return response.json();
+                          }).then((data) => {
+                            alert("登録が完了いたしました。");
+                            router.push("/items/loginpage");
+                          })
+                          // エラー非表示
+                          for (let i = 0; i < 7; i++) {
+                            let tag = document.getElementsByClassName("control-label")[i] as HTMLElement;
+                            tag.style.display = "none"
                           }
-                          post();
-                        }
 
                         // その他
                       } else {
-                        if (!getNameId.value || !getFirstNameId.value) {
-                          let tag = document.getElementsByClassName("control-label")[0] as HTMLElement;
-                          tag.style.display = "inline-block"
-                          tag.innerHTML = "名前を入力してください"
-                        }
+                        console.log(`name:${nameFlag} mail:${mailFlag}
+                        zip:${zipFlag}  addr:${addrFlag} tel:${telFlag} pass:${passFlag} conPass:${conPassFlag}`)
 
-                        if (!getMailId.value) {
-                          let tag = document.getElementsByClassName("control-label")[1] as HTMLElement;
-                          tag.style.display = "inline-block"
-                          tag.innerHTML = "メールアドレスを入力してください"
+                        nameJudge(nameFlag);
+                        mailJudge(mailFlag);
+                        zipJudge(zipFlag);
+                        addrJudge(addrFlag);
+                        telJudge(telFlag);
+                        passJudge(passFlag);
+                        conPassJudge(conPassFlag, passValue, conPassValue)
 
-                        } else {
-                          if (!getMailId.value.includes('@')) {
-                            let tag = document.getElementsByClassName("control-label")[1] as HTMLElement;
-                            tag.style.display = "inline-block"
-                            tag.innerHTML = "メールアドレスは@を含む形式で入力してください"
-                          } else {
-                            fetch(`http://localhost:8000/users?mail=${getMailId.value}`)
-                              .then(response => response.json())
-                              .then((data) => {
-                                if (data.length !== 0) {
-                                  let tag = document.getElementsByClassName("control-label")[1] as HTMLElement;
-                                  tag.style.display = "inline-block"
-                                  tag.innerHTML = "そのメールアドレスはすでに使われています"
-                                }
-                              })
-                              .catch(error => {
-                                console.log('error');
-                              });
-                          }
-                        }
-
-                        if (!getZipId.value) {
-                          let tag = document.getElementsByClassName("control-label")[2] as HTMLElement;
-                          tag.style.display = "inline-block"
-                          document.getElementsByClassName("control-label")[2].innerHTML = "郵便番号を入力してください"
-                        } else {
-                          if (!(getZipId.value.match(/^\d{3}-\d{4}$/))) {
-                            // if(getZipId.value.includes("-")){
-                            // if(getZipId.value.length !== 8){
-                            let tag = document.getElementsByClassName("control-label")[2] as HTMLElement;
-                            tag.style.display = "inline-block"
-                            tag.innerHTML = "郵便番号はXXX-XXXXの形式で入力してください"
-                          } else {
-                            fetch(`https://zipcloud.ibsnet.co.jp/api/search?zipcode=${getZipId?.value}`)
-                              .then(response => response.json())
-                              .then(json => console.log(json.results[0].address1))
-                              .catch((error) => {
-                                let tag = document.getElementsByClassName("control-label")[2] as HTMLElement;;
-                                tag.style.display = "inline-block"
-                                tag.innerHTML = "この郵便番号は存在しません"
-                              });
-                          }
-                          // }else{
-                          //   if(getZipId.value.length !== 7){
-                          //     let tag = document.getElementsByClassName("control-label")[2] as HTMLElement;
-                          //     tag.style.display = "inline-block"
-                          //     tag.innerHTML = "郵便番号は7桁の数字で入力してください"
-                          //   }
-                          // }
-                          // }
-                        }
-
-                        if (!getAddrId.value) {
-                          let tag = document.getElementsByClassName("control-label")[3] as HTMLElement;
-                          tag.style.display = "inline-block"
-                          tag.innerHTML = "住所を入力してください"
-                        }
-
-                        if (!getTelId.value) {
-                          let tag = document.getElementsByClassName("control-label")[4] as HTMLElement;
-                          tag.style.display = "inline-block"
-                          tag.innerHTML = "電話番号を入力してください"
-                        } else {
-                          if (!(getTelId.value.match(/^[0-9]*-[0-9]*-[0-9]*$/))) {
-                            let tag = document.getElementsByClassName("control-label")[4] as HTMLElement;
-                            tag.style.display = "inline-block"
-                            tag.innerHTML = "電話番号はXXXX-XXXX-XXXXの形式で入力してください"
-                          }
-                        }
-
-                        if (!getPassId.value) {
-                          let tag = document.getElementsByClassName("control-label")[5] as HTMLElement;
-                          tag.style.display = "inline-block"
-                          tag.innerHTML = "パスワードを入力してください"
-                        } else {
-                          if (!(getPassId.value.length <= 16 && getPassId.value.length >= 8)) {
-                            let tag = document.getElementsByClassName("control-label")[5] as HTMLElement;
-                            tag.style.display = "inline-block"
-                            tag.innerHTML = "パスワードは８文字以上１６文字以内で設定してください"
-                          }
-                        }
-
-                        if (!getPassConfId.value) {
-                          let tag = document.getElementsByClassName("control-label")[6] as HTMLElement;
-                          tag.style.display = " inline-block"
-                          tag.innerHTML = "確認用パスワードを入力してください"
-                        } else {
-                          if (!(getPassId.value === getPassConfId.value)) {
-                            let tag = document.getElementsByClassName("control-label")[6] as HTMLElement;
-                            tag.style.display = "inline-block"
-                            tag.innerHTML = "パスワードと確認用パスワードが不一致です"
-                          }
-                        }
                       }
+                    }
 
-                    }}>登録</button>
+                    }>登録</button>
 
                     <button type="reset" className={`${styles.btnClear}`} onClick={() => {
+                      SetNameFlag("init");
+                      SetMailFlag("init");
+                      SetZipFlag("init");
+                      SetAddrFlag("init");
+                      SetTelFlag("init");
+                      SetPassFlag("init");
+                      SetConPassFlag("init");
+
                       clear();
-                      list.map((list) => {
-                        let tag = document.getElementsByClassName("control-label")[list.num] as HTMLElement;
-                        let none = tag.style.display = "none"
-                      })
+
+                      // エラー非表示
+                      for (let i = 0; i < 7; i++) {
+                        let tag = document.getElementsByClassName("control-label")[i] as HTMLElement;
+                        tag.style.display = "none"
+                      }
 
                     }}>クリア</button>
                   </div>
@@ -386,15 +195,16 @@ const Show = () => {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 }
 
 {/* 
+  問題なしの場合、ok
   空欄の場合、empty
   形式が不正の場合、format-incorrect
-  問題なしの場合、ture
   登録済みの場合、registered
+  郵便番号が存在しない場合、unexist
   8文字以上16文字以内でなかった場合、pass-incorrect
   パスワードと不一致の場合、pass-mismatch
 */}
