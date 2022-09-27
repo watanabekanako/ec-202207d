@@ -25,39 +25,42 @@ export const zipJudge = (zipFlag: any) => {
 
 export const ZipForm = (props: any) => {
 
-  useEffect(() => {
+  if (props.test === "true") {
+    useEffect(() => {
 
-    if (!props.zipValue) {
-      props.SetZipFlag("empty")
-    } else if (!props.zipValue.match(/^\d{3}-\d{4}$/)) {
-      props.SetZipFlag("format-incorrect")
-    } else {
-      fetch(`https://zipcloud.ibsnet.co.jp/api/search?zipcode=${props.zipValue}`)
-        .then(res => res.json())
-        .then((json) => {
-          if (json.results === null) {
+      if (!props.zipValue) {
+        props.SetZipFlag("empty")
+      } else if (!props.zipValue.match(/^\d{3}-\d{4}$/)) {
+        props.SetZipFlag("format-incorrect")
+      } else {
+        fetch(`https://zipcloud.ibsnet.co.jp/api/search?zipcode=${props.zipValue}`)
+          .then(res => res.json())
+          .then((json) => {
+            if (json.results === null) {
+              props.SetZipFlag("unexist")
+            } else {
+              props.SetZipFlag("ok")
+            }
+          })
+          .catch((error) => {
             props.SetZipFlag("unexist")
-          } else {
-            props.SetZipFlag("ok")
-          }
-        })
-        .catch((error) => {
-          props.SetZipFlag("unexist")
-          console.log(error)
-        });
-    }
-  })
+            console.log(error)
+          });
+      }
+    })
+  }
 
   return (
     <>
       <div className={`form-group ${styles.formGroup}`} key="zipForm" >
         <label htmlFor="inputZipcode" className={styles.title}>郵便番号</label>
-        
-        <Btn 
-          zipFlag = {props.zipFlag} 
-          zipValue = {props.zipValue} 
+
+        <Btn
+          zipFlag={props.zipFlag}
+          zipValue={props.zipValue}
+          SetAddrValue={props.SetAddrValue}
         />
-        
+
         <label
           id="ErrorInputZipcode"
           className="control-label"
@@ -74,7 +77,9 @@ export const ZipForm = (props: any) => {
           placeholder="例）xxx-xxxx"
           value={props.zipValue}
           onChange={(ev) => {
-            props.SetZipValue(ev.target.value);
+            if (props.test === "true") {
+              props.SetZipValue(ev.target.value);
+            }
           }}
         />
       </div>
@@ -82,4 +87,4 @@ export const ZipForm = (props: any) => {
   );
 }
 
-export default ZipForm ;
+export default ZipForm;

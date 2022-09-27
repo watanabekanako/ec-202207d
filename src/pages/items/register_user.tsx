@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Title } from "../../compornents/register_user"
 import { clear } from "../../utils/register_user_clear"
-import { Form } from "../../compornents/register_user_form";
 import { NameForm, nameJudge } from "../../compornents/register_user_form_name";
 import { MailForm, mailJudge } from "../../compornents/register_user_form_mail";
 import { ZipForm, zipJudge } from "../../compornents/register_user_form_zip";
@@ -12,8 +11,6 @@ import { ConPassForm, conPassJudge } from "../../compornents/register_user_form_
 import { Nav } from "../../compornents/nav_format";
 import { useRouter } from "next/router";
 import Head from "next/head";
-import Image from 'next/image';
-import Link from "next/link";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "../../styles/register_user.module.css";
 import style from '../../styles/common.module.css';
@@ -50,7 +47,6 @@ const Show = () => {
 
         <Nav name="新規登録画面" />
 
-        {/* <!-- login form --> */}
         <div className={`row ${styles.row}`}>
           <div
             className="col-lg-offset-3 col-lg-5 col-md-offset-2 col-md-8 col-sm-10 col-xs-12"
@@ -66,37 +62,45 @@ const Show = () => {
                     SetLastNameValue={SetLastNameValue}
                     firstNameValue={firstNameValue}
                     lastNameValue={lastNameValue}
+                    test="true"
                   />
                   <MailForm
                     SetMailValue={SetMailValue}
                     SetMailFlag={SetMailFlag}
                     mailValue={mailValue}
+                    test="true"
                   />
                   <ZipForm
                     SetZipFlag={SetZipFlag}
                     SetZipValue={SetZipValue}
+                    SetAddrValue={SetAddrValue}
                     zipValue={zipValue}
                     zipFlag={zipFlag}
+                    test="true"
                   />
                   <AddrForm
                     SetAddrFlag={SetAddrFlag}
                     SetAddrValue={SetAddrValue}
                     addrValue={addrValue}
+                    test="true"
                   />
                   <TelForm
                     SetTelValue={SetTelValue}
                     SetTelFlag={SetTelFlag}
                     telValue={telValue}
+                    test="true"
                   />
                   <PassForm
                     SetPassFlag={SetPassFlag}
                     SetPassValue={SetPassValue}
                     passValue={passValue}
+                    test="true"
                   />
                   <ConPassForm
                     SetConPassFlag={SetConPassFlag}
                     SetConPassValue={SetConPassValue}
                     conPassValue={conPassValue}
+                    test="true"
                   />
 
                   <div className="form-group   ">
@@ -125,32 +129,32 @@ const Show = () => {
                         conPassFlag === "ok"
                       ) {
 
-                          const data = {
-                            name: `${firstNameValue} ${lastNameValue}`,
-                            mail: mailValue,
-                            zip: zipValue,
-                            address: addrValue,
-                            tel: telValue,
-                            pass: passValue
-                          };
+                        const data = {
+                          name: `${lastNameValue} ${firstNameValue}`,
+                          mail: mailValue,
+                          zip: zipValue,
+                          address: addrValue,
+                          tel: telValue,
+                          pass: passValue
+                        };
 
-                          fetch(`http://localhost:8000/users`, {
-                            method: "POST",
-                            headers: {
-                              'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify(data)
-                          }).then((response) => {
-                            return response.json();
-                          }).then((data) => {
-                            alert("登録が完了いたしました。");
-                            router.push("/items/loginpage");
-                          })
-                          // エラー非表示
-                          for (let i = 0; i < 7; i++) {
-                            let tag = document.getElementsByClassName("control-label")[i] as HTMLElement;
-                            tag.style.display = "none"
-                          }
+                        fetch(`http://localhost:8000/users`, {
+                          method: "POST",
+                          headers: {
+                            'Content-Type': 'application/json'
+                          },
+                          body: JSON.stringify(data)
+                        }).then((response) => {
+                          return response.json();
+                        }).then((data) => {
+                          alert("登録が完了いたしました。");
+                          router.push("/items/loginpage");
+                        })
+                        // エラー非表示
+                        for (let i = 0; i < 7; i++) {
+                          let tag = document.getElementsByClassName("control-label")[i] as HTMLElement;
+                          tag.style.display = "none"
+                        }
 
                         // その他
                       } else {
@@ -199,6 +203,8 @@ const Show = () => {
   );
 }
 
+export default Show;
+
 {/* 
   問題なしの場合、ok
   空欄の場合、empty
@@ -208,5 +214,3 @@ const Show = () => {
   8文字以上16文字以内でなかった場合、pass-incorrect
   パスワードと不一致の場合、pass-mismatch
 */}
-
-export default Show;

@@ -16,17 +16,19 @@ export const conPassJudge = (conPassFlag: any, passValue: any, conPassValue: any
       tag.innerHTML = "パスワードと確認用パスワードが不一致です"
     }
   }
-  
+
 }
 
 export const ConPassForm = (props: any) => {
 
-  useEffect(() => {
-    props.SetConPassFlag("ok")
-    if (!props.conPassValue) {
-      props.SetConPassFlag("empty")
-    }
-  })
+  if (props.test === "true") {
+    useEffect(() => {
+      props.SetConPassFlag("ok")
+      if (!props.conPassValue) {
+        props.SetConPassFlag("empty")
+      }
+    })
+  }
 
   return (
     <>
@@ -42,12 +44,15 @@ export const ConPassForm = (props: any) => {
           htmlFor="inputError"
         >確認用パスワードを入力してください</label>
         <input
-          type="text"
+          type="password"
+          autoComplete="new-password"
           id="inputConfirmationPassword"
           className="form-control form-control-lg "
           placeholder="確認用パスワード"
           onChange={(ev) => {
-            props.SetConPassValue(ev.target.value);
+            if (props.test === "true") {
+              props.SetConPassValue(ev.target.value);
+            }
           }}
         />
       </div>

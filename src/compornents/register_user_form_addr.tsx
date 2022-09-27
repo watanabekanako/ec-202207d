@@ -2,24 +2,25 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import styles from '../styles/register_user.module.css'
 import React, { useEffect } from "react";
 
-export const addrJudge = (addrFlag : any) => {
+export const addrJudge = (addrFlag: any) => {
   if (addrFlag === "empty") {
     let tag = document.getElementsByClassName("control-label")[3] as HTMLElement;
     tag.style.display = "inline-block"
     tag.innerHTML = "住所を入力してください"
-  }  
+  }
 }
 
 export const AddrForm = (props: any) => {
 
-  useEffect(() => {
+  if (props.test === "true") {
+    useEffect(() => {
+      props.SetAddrFlag("ok")
 
-    props.SetAddrFlag("ok")
-
-    if (!props.addrValue) {
-      props.SetAddrFlag("empty")
-    }
-  })
+      if (!props.addrValue) {
+        props.SetAddrFlag("empty")
+      }
+    })
+  }
 
   return (
     <>
@@ -38,9 +39,11 @@ export const AddrForm = (props: any) => {
           type="text"
           id="inputAddress"
           className="form-control form-control-lg "
-          placeholder="例）xxx-xxxx"
+          placeholder="住所"
           onChange={(ev) => {
-            props.SetAddrValue(ev.target.value);
+            if (props.test === "true") {
+              props.SetAddrValue(ev.target.value);
+            }
           }}
         />
       </div>

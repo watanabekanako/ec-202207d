@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import styles from '../styles/register_user.module.css'
 import React, { useEffect } from "react";
 
-export const mailJudge = (mailFlag : any) => {
+export const mailJudge = (mailFlag: any) => {
   if (mailFlag === "empty") {
     let tag = document.getElementsByClassName("control-label")[1] as HTMLElement;
     tag.style.display = "inline-block"
@@ -25,26 +25,28 @@ export const mailJudge = (mailFlag : any) => {
 
 export const MailForm = (props: any) => {
 
-  useEffect(() => {
-    props.SetMailFlag("ok")
+  if (props.test === "true") {
+    useEffect(() => {
+      props.SetMailFlag("ok")
 
-    if (!props.mailValue) {
-      props.SetMailFlag("empty")
-    } else if (!props.mailValue.includes('@')) {
-      props.SetMailFlag("format-incorrect")
-    } else {
-      fetch(`http://localhost:8000/users?mail=${props.mailValue}`)
-        .then(response => response.json())
-        .then((data) => {
-          if (data.length !== 0) {
-            props.SetMailFlag("registered")
-          }
-        })
-        .catch(error => {
-          console.log('error');
-        });
-    }
-  })
+      if (!props.mailValue) {
+        props.SetMailFlag("empty")
+      } else if (!props.mailValue.includes('@')) {
+        props.SetMailFlag("format-incorrect")
+      } else {
+        fetch(`http://localhost:8000/users?mail=${props.mailValue}`)
+          .then(response => response.json())
+          .then((data) => {
+            if (data.length !== 0) {
+              props.SetMailFlag("registered")
+            }
+          })
+          .catch(error => {
+            console.log('error');
+          });
+      }
+    })
+  }
 
   return (
     <>
@@ -65,7 +67,9 @@ export const MailForm = (props: any) => {
           className="form-control form-control-lg "
           placeholder="例）xxx@example.com"
           onChange={(ev) => {
-            props.SetMailValue(ev.target.value);
+            if (props.test === "true") {
+              props.SetMailValue(ev.target.value);
+            }
           }}
         />
       </div>

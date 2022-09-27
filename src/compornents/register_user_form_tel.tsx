@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import styles from '../styles/register_user.module.css'
 import React, { useEffect } from "react";
 
-export const telJudge = (telFlag : any) => {
+export const telJudge = (telFlag: any) => {
   if (telFlag === "empty") {
     let tag = document.getElementsByClassName("control-label")[4] as HTMLElement;
     tag.style.display = "inline-block"
@@ -13,19 +13,20 @@ export const telJudge = (telFlag : any) => {
     let tag = document.getElementsByClassName("control-label")[4] as HTMLElement;
     tag.style.display = "inline-block"
     tag.innerHTML = "電話番号はXXXX-XXXX-XXXXの形式で入力してください"
-  }  
+  }
 }
 
 export const TelForm = (props: any) => {
-
-  useEffect(() => {
-    props.SetTelFlag("ok")
-    if (!props.telValue) {
-      props.SetTelFlag("empty")
-    } else if (!props.telValue.match(/^[0-9]*-[0-9]*-[0-9]*$/)) {
-      props.SetTelFlag("format-incorrect")
-    }
-  })
+  if (props.test === "true") {
+    useEffect(() => {
+      props.SetTelFlag("ok")
+      if (!props.telValue) {
+        props.SetTelFlag("empty")
+      } else if (!props.telValue.match(/^[0-9]*-[0-9]*-[0-9]*$/)) {
+        props.SetTelFlag("format-incorrect")
+      }
+    })
+  }
 
   return (
     <>
@@ -43,10 +44,13 @@ export const TelForm = (props: any) => {
         <input
           type="text"
           id="inputTel"
+          autoComplete="username"
           className="form-control form-control-lg "
           placeholder="例）xxx-xxxx-xxxx"
           onChange={(ev) => {
-            props.SetTelValue(ev.target.value);
+            if (props.test === "true") {
+              props.SetTelValue(ev.target.value);
+            }
           }}
         />
       </div>

@@ -1,12 +1,9 @@
-import React, { useEffect } from 'react';
-import { useRouter } from "next/router";
+import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import useSWR, { useSWRConfig } from 'swr'
-import { useState } from "react"
 import style from "../styles/register_user.module.css";
 
 
-export const Btn = (props: { zipFlag: string, zipValue: string }) => {
+export const Btn = (props: { zipFlag: string, zipValue: string , SetAddrValue: any }) => {
     return (
     <input 
     type="button" 
@@ -26,12 +23,19 @@ export const Btn = (props: { zipFlag: string, zipValue: string }) => {
           getAddrId.value = `${json.results[0].address1}${json.results[0].address2}${json.results[0].address3}`;
           let tag = document.getElementsByClassName("control-label")[3] as HTMLElement;
           tag.style.display = "none"
+          props.SetAddrValue(getAddrId.value)
         })
         .catch((error) => {
           let tag = document.getElementsByClassName("control-label")[2] as HTMLElement;;
           tag.style.display = "inline-block"
           tag.innerHTML = "この郵便番号は存在しません"
         });
+      }
+
+      if(props.zipFlag === "unexist"){
+        let tag = document.getElementsByClassName("control-label")[2] as HTMLElement;;
+        tag.style.display = "inline-block"
+        tag.innerHTML = "この郵便番号は存在しません"        
       }
 
       if(props.zipFlag === "empty" || props.zipFlag === "init"){

@@ -2,8 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import styles from '../styles/register_user.module.css'
 import React, { useEffect } from "react";
 
-
-export const nameJudge = (nameFlag : any) => {
+export const nameJudge = (nameFlag: any) => {
   if (nameFlag === "empty") {
     let tag = document.getElementsByClassName("control-label")[0] as HTMLElement;
     tag.style.display = "inline-block"
@@ -13,13 +12,14 @@ export const nameJudge = (nameFlag : any) => {
 
 export const NameForm = (props: any) => {
 
-  useEffect(() => {
-    props.SetNameFlag("ok")
-    if (!props.firstNameValue || !props.lastNameValue) {
-      // console.log(props.firstNameValue)
-      props.SetNameFlag("empty")
-    }
-  })
+  if (props.test === "true") {
+    useEffect(() => {
+      props.SetNameFlag("ok")
+      if (!props.firstNameValue || !props.lastNameValue) {
+        props.SetNameFlag("empty")
+      }
+    })
+  }
 
   return (
     <>
@@ -42,7 +42,9 @@ export const NameForm = (props: any) => {
               className="form-control form-control-lg "
               placeholder="姓"
               onChange={(ev) => {
-                props.SetFirstNameValue(ev.target.value)
+                if (props.test === "true") {
+                  props.SetLastNameValue(ev.target.value)
+                }
               }}
             />
           </div>
@@ -53,7 +55,9 @@ export const NameForm = (props: any) => {
               className="form-control form-control-lg "
               placeholder="名"
               onChange={(ev) => {
-                props.SetLastNameValue(ev.target.value);
+                if (props.test === "true") {
+                  props.SetFirstNameValue(ev.target.value);
+                }
               }}
             />
           </div>
