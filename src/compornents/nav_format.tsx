@@ -34,7 +34,6 @@ export const Nav = (props: { name: string }) => {
     if(cookie2.includes('userId')){
         setCookie(document.cookie);
         setButtonDisplay('block');
-        // console.log(document.cookie);
     } else {
       // console.log('cookieがありません')
     }
@@ -82,7 +81,6 @@ export const Nav = (props: { name: string }) => {
       document.cookie = 'status=shopping; max-age=0';
     }
     router.push("/items/itemList");
-
   };
 
   return (
@@ -145,10 +143,7 @@ export const Nav = (props: { name: string }) => {
             })}
             <li>
               <button onClick={logoutClick} className={`${styles.clickbtn} `}　style={{ display: buttonDisplay }}>
-              {/* <Link href={'/items/logout'} ><a className={`${styles.navLink}`}> */}
-
                 ログアウト
-                {/* </a></Link> */}
               </button>
             </li>
           </ul>

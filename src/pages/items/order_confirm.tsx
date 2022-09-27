@@ -9,6 +9,7 @@ import style from "../../styles/register_user.module.css";
 import Head from "next/head";
 import { UserInfo, cartLogin } from "../../compornents/register_user";
 import styles from '../../styles/common.module.css'
+import { Breadcrumb } from "compornents/breadcrumb";
 
 
 export const Show = (data:any) => {
@@ -52,6 +53,24 @@ export const Show = (data:any) => {
       <div className={`${styles.bodyColor}`}>
         <div className={`container`}>
           <Nav name="ログイン" />
+          {/* <Breadcrumb lists={[
+            {
+              name: "商品一覧",
+              path: "/items/itemList"
+            },
+            {
+              name: "商品詳細",
+              path: "#"
+            },
+            {
+              name: "ショッピングカート",
+              path: "/items/cartPage"
+            },
+            {
+              name: "注文内容確認",
+              path: "/items/order_confirm"
+            }
+          ]} /> */}
           {/*table */}
           <ShoppingCart />
           {/* <Total /> */}

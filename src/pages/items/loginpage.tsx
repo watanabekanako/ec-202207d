@@ -9,6 +9,7 @@ import styles from '../../styles/common.module.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import  {Breadcrumb} from '../../compornents/breadcrumb';
 
 
 export default function Login() {
@@ -36,9 +37,7 @@ export default function Login() {
     fetch('/api/login', request)
       .then((response) => response.json())
       .then((data) => {
-        // console.log(data);
         if (data === 'OK') {
-          // router.push('/items/itemList');
           setErrorDisplay('none');
 
           let cookie = document.cookie;
@@ -59,7 +58,6 @@ export default function Login() {
   const togglePassword = () => {
     setIsRevealPassword((prevState) => !prevState);
   }
-
   return (
     <>
       <div className={`${styles.bodyColor}`}>
@@ -70,6 +68,13 @@ export default function Login() {
 
         <div className={`container`}>
           <Nav name="ログイン" />
+          <Breadcrumb lists={[
+            {
+              name: "ログイン",
+              path: "/items/loginpage"
+            },
+          ]
+          }/>
           <div className={`${style.box}`}>
             <h1 className={`${style.title}`}>ログイン</h1>
             

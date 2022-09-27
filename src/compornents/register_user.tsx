@@ -7,6 +7,7 @@ import style from "../styles/register_user.module.css";
 
 
 
+
 export const Title = (props: { title: string }) => {
   return (
     <h1 className={style.titleA}>{props.title}</h1>
