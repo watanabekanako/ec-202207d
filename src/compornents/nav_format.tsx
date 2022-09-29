@@ -10,6 +10,10 @@ export const Nav = (props: { name: string }) => {
   const router = useRouter();
   const pageList = [
     {
+      name: '商品一覧',
+      url: '/items/itemList',
+    },
+    {
       name: 'ショッピングカート',
       url: '/items/cartPage',
     },
@@ -18,9 +22,13 @@ export const Nav = (props: { name: string }) => {
       url: '/items/register_user',
     },
     {
+      name: 'アカウント',
+      url: '#',
+    },
+    {
       name: 'ログイン',
       url: '/items/loginpage',
-    },
+    }
   ];
 
   const [cookie, setCookie] = useState('');
@@ -72,21 +80,21 @@ export const Nav = (props: { name: string }) => {
 
 
   const logoutClick = () => {
-    document.cookie = 'userId=; max-age=0';
-    document.cookie = 'userName=; max-age=0';
-
+    document.cookie = 'userId=; max-age=0; path=/';
+    
     let cookie = document.cookie;
 
     if (cookie.includes('status=shopping')) {
-      document.cookie = 'status=shopping; max-age=0';
+      document.cookie = 'status=shopping; max-age=0; path=/';
     }
     router.push("/items/itemList");
+    
   };
 
   return (
     <nav className={`navbar navbar-expand-lg fixed-top bg-light　w-75 ${styles.nav}`}>
       <div className="container">
-        <Link className="navbar-brand" href="/items/itemList">
+        <Link className="navbar-brand" href="/toppage">
           {/* 企業ロゴ   */}
           <a>
             <Image
@@ -112,7 +120,9 @@ export const Nav = (props: { name: string }) => {
         <div className="collapse navbar-collapse" id="Navber">
           <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
 
-            <li className={styles.show}>こんにちは&nbsp;&nbsp;&nbsp;{nameValue}&nbsp;さん</li>
+            <li className={styles.show}>
+              こんにちは&nbsp;&nbsp;&nbsp;{nameValue}&nbsp;さん
+              </li>
 
             {pageList.map((page, index) => {
               if (props.name !== page.name) {

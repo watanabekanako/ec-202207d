@@ -9,7 +9,7 @@ import styles from '../../styles/common.module.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-import  {Breadcrumb} from '../../compornents/breadcrumb';
+// import  {Breadcrumb} from '../../compornents/breadcrumb';
 
 
 export default function Login() {
@@ -68,13 +68,13 @@ export default function Login() {
 
         <div className={`container`}>
           <Nav name="ログイン" />
-          <Breadcrumb lists={[
+          {/* <Breadcrumb lists={[
             {
               name: "ログイン",
               path: "/items/loginpage"
             },
           ]
-          }/>
+          }/> */}
           <div className={`${style.box}`}>
             <h1 className={`${style.title}`}>ログイン</h1>
             

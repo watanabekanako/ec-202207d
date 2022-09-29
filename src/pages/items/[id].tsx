@@ -172,6 +172,10 @@ export default function ItemDetail({ items, options }: any) {
         <Nav name="" />
         <Breadcrumb lists={[
           {
+            name: "TOP",
+            path: "/toppage"
+          },
+          {
             name: "商品一覧",
             path: "/items/itemList"
           },

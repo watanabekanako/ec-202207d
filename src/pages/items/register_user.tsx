@@ -10,7 +10,7 @@ import Link from "next/link";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "../../styles/register_user.module.css";
 import style from '../../styles/common.module.css';
-import { Breadcrumb } from 'compornents/breadcrumb';
+// import { Breadcrumb } from 'compornents/breadcrumb';
 
 
 
@@ -87,12 +87,12 @@ const Show = () => {
         </Head>
 
         <Nav  name="新規登録画面"/>
-        <Breadcrumb lists={[
+        {/* <Breadcrumb lists={[
           {
             name: "ユーザー登録",
             path: "/items/register_user"
           }
-        ]} />
+        ]} /> */}
 
         {/* <!-- login form --> */}
         <div className={`row ${styles.row}`}>
