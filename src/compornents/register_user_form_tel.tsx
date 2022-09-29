@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import styles from '../styles/register_user.module.css'
-import React, { useEffect } from "react";
+import React, { ChangeEvent, useEffect } from "react";
 
 export const telJudge = (telFlag: any) => {
   if (telFlag === "empty") {
@@ -17,16 +17,20 @@ export const telJudge = (telFlag: any) => {
 }
 
 export const TelForm = (props: any) => {
-  if (props.test === "true") {
-    useEffect(() => {
+  // useEffect(() => {
+  const onChangeHandler = (ev: ChangeEvent<HTMLInputElement>) => {
+
+      let telValue = ev.target.value
+      props.SetTelValue(telValue);
       props.SetTelFlag("ok")
-      if (!props.telValue) {
+      if (!telValue) {
         props.SetTelFlag("empty")
-      } else if (!props.telValue.match(/^[0-9]*-[0-9]*-[0-9]*$/)) {
+      } else if (!telValue.match(/^[0-9]*-[0-9]*-[0-9]*$/)) {
         props.SetTelFlag("format-incorrect")
       }
-    })
+
   }
+  // })
 
   return (
     <>
@@ -37,7 +41,7 @@ export const TelForm = (props: any) => {
           className="control-label"
           style={{
             color: "red",
-            display: "none"
+            // display: "none"
           }}
           htmlFor="inputError"
         >電話番号を入力してください</label>
@@ -47,11 +51,7 @@ export const TelForm = (props: any) => {
           autoComplete="username"
           className="form-control form-control-lg "
           placeholder="例）xxx-xxxx-xxxx"
-          onChange={(ev) => {
-            if (props.test === "true") {
-              props.SetTelValue(ev.target.value);
-            }
-          }}
+          onChange={onChangeHandler}
         />
       </div>
     </>

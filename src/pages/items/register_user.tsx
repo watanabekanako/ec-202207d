@@ -62,13 +62,11 @@ const Show = () => {
                     SetLastNameValue={SetLastNameValue}
                     firstNameValue={firstNameValue}
                     lastNameValue={lastNameValue}
-                    test="true"
                   />
                   <MailForm
                     SetMailValue={SetMailValue}
                     SetMailFlag={SetMailFlag}
                     mailValue={mailValue}
-                    test="true"
                   />
                   <ZipForm
                     SetZipFlag={SetZipFlag}
@@ -76,31 +74,26 @@ const Show = () => {
                     SetAddrValue={SetAddrValue}
                     zipValue={zipValue}
                     zipFlag={zipFlag}
-                    test="true"
                   />
                   <AddrForm
                     SetAddrFlag={SetAddrFlag}
                     SetAddrValue={SetAddrValue}
                     addrValue={addrValue}
-                    test="true"
                   />
                   <TelForm
                     SetTelValue={SetTelValue}
                     SetTelFlag={SetTelFlag}
                     telValue={telValue}
-                    test="true"
                   />
                   <PassForm
                     SetPassFlag={SetPassFlag}
                     SetPassValue={SetPassValue}
                     passValue={passValue}
-                    test="true"
                   />
                   <ConPassForm
                     SetConPassFlag={SetConPassFlag}
                     SetConPassValue={SetConPassValue}
                     conPassValue={conPassValue}
-                    test="true"
                   />
 
                   <div className="form-group   ">
