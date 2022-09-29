@@ -3,20 +3,20 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import styles from '../styles/register_user.module.css'
 import React, { useEffect } from "react";
 
-export const zipJudge = (zipFlag: any) => {
-  if (zipFlag === "empty") {
+export const zipJudge = (zipStatus: any) => {
+  if (zipStatus === "empty") {
     let tag = document.getElementsByClassName("control-label")[2] as HTMLElement;
     tag.style.display = "inline-block"
     document.getElementsByClassName("control-label")[2].innerHTML = "郵便番号を入力してください"
   }
 
-  if (zipFlag === "format-incorrect") {
+  if (zipStatus === "format-incorrect") {
     let tag = document.getElementsByClassName("control-label")[2] as HTMLElement;
     tag.style.display = "inline-block"
     tag.innerHTML = "郵便番号はXXX-XXXXの形式で入力してください"
   }
 
-  if (zipFlag === "unexist") {
+  if (zipStatus === "unexist") {
     let tag = document.getElementsByClassName("control-label")[2] as HTMLElement;;
     tag.style.display = "inline-block"
     tag.innerHTML = "この郵便番号は存在しません"
@@ -25,30 +25,29 @@ export const zipJudge = (zipFlag: any) => {
 
 export const ZipForm = (props: any) => {
 
-  if (props.test === "true") {
     useEffect(() => {
 
       if (!props.zipValue) {
-        props.SetZipFlag("empty")
+        props.SetZipStatus("empty")
       } else if (!props.zipValue.match(/^\d{3}-\d{4}$/)) {
-        props.SetZipFlag("format-incorrect")
+        props.SetZipStatus("format-incorrect")
       } else {
         fetch(`https://zipcloud.ibsnet.co.jp/api/search?zipcode=${props.zipValue}`)
           .then(res => res.json())
           .then((json) => {
             if (json.results === null) {
-              props.SetZipFlag("unexist")
+              props.SetZipStatus("unexist")
             } else {
-              props.SetZipFlag("ok")
+              props.SetZipStatus("ok")
             }
           })
           .catch((error) => {
-            props.SetZipFlag("unexist")
+            props.SetZipStatus("unexist")
             console.log(error)
           });
       }
     })
-  }
+ 
 
   return (
     <>
@@ -56,7 +55,7 @@ export const ZipForm = (props: any) => {
         <label htmlFor="inputZipcode" className={styles.title}>郵便番号</label>
 
         <Btn
-          zipFlag={props.zipFlag}
+          zipStatus={props.zipStatus}
           zipValue={props.zipValue}
           SetAddrValue={props.SetAddrValue}
         />
@@ -77,9 +76,7 @@ export const ZipForm = (props: any) => {
           placeholder="例）xxx-xxxx"
           value={props.zipValue}
           onChange={(ev) => {
-            if (props.test === "true") {
               props.SetZipValue(ev.target.value);
-            }
           }}
         />
       </div>

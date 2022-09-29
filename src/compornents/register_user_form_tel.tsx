@@ -2,49 +2,62 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import styles from '../styles/register_user.module.css'
 import React, { ChangeEvent, useEffect } from "react";
 
-export const telJudge = (telFlag: any) => {
-  if (telFlag === "empty") {
+export const telJudge = (telStatus: any) => {
+  
+  if (telStatus === "empty" || telStatus === "init") {
     let tag = document.getElementsByClassName("control-label")[4] as HTMLElement;
     tag.style.display = "inline-block"
     tag.innerHTML = "電話番号を入力してください"
   }
-
-  if (telFlag === "format-incorrect") {
+  
+  if (telStatus === "format-incorrect") {
     let tag = document.getElementsByClassName("control-label")[4] as HTMLElement;
     tag.style.display = "inline-block"
     tag.innerHTML = "電話番号はXXXX-XXXX-XXXXの形式で入力してください"
   }
+  
 }
 
 export const TelForm = (props: any) => {
-  // useEffect(() => {
+  const [errorMessage, SetErrorMessage] = React.useState("") 
+
   const onChangeHandler = (ev: ChangeEvent<HTMLInputElement>) => {
 
       let telValue = ev.target.value
       props.SetTelValue(telValue);
-      props.SetTelFlag("ok")
+      props.SetTelStatus("ok")
       if (!telValue) {
-        props.SetTelFlag("empty")
+        props.SetTelStatus("empty")
+        SetErrorMessage( "電話番号を入力してください")
       } else if (!telValue.match(/^[0-9]*-[0-9]*-[0-9]*$/)) {
-        props.SetTelFlag("format-incorrect")
+        props.SetTelStatus("format-incorrect")
+        SetErrorMessage("電話番号はXXXX-XXXX-XXXXの形式で入力してください")
       }
 
+      console.log("hello")
   }
-  // })
+
 
   return (
     <>
       <div className={`form-group ${styles.formGroup}`} key="telForm" >
         <label htmlFor="inputTel" className={styles.title}>電話番号</label>
-        <label
-          id="ErrorInputTel"
-          className="control-label"
-          style={{
-            color: "red",
-            // display: "none"
-          }}
-          htmlFor="inputError"
-        >電話番号を入力してください</label>
+        {/* {(() => {
+          // if(props.telStatus === "empty" || props.telStatus === "format-incorrect"){
+            // return (
+              // )
+              // }
+              // })()} */}
+              
+              <label
+              id="ErrorInputTel"
+              className="control-label"
+              style={{
+                color: "red",
+                display: "none"
+              }}
+              htmlFor="inputError"
+              >電話番号を入力してください</label>
         <input
           type="text"
           id="inputTel"

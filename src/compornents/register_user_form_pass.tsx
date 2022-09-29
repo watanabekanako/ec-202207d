@@ -2,14 +2,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import styles from '../styles/register_user.module.css'
 import React, { useEffect } from "react";
 
-export const passJudge = (passFlag: any) => {
-  if (passFlag === "empty") {
+export const passJudge = (passStatus: any) => {
+  if (passStatus === "empty") {
     let tag = document.getElementsByClassName("control-label")[5] as HTMLElement;
     tag.style.display = "inline-block"
     tag.innerHTML = "パスワードを入力してください"
   }
 
-  if (passFlag === "pass-incorrect") {
+  if (passStatus === "pass-incorrect") {
     let tag = document.getElementsByClassName("control-label")[5] as HTMLElement;
     tag.style.display = "inline-block"
     tag.innerHTML = "パスワードは８文字以上１６文字以内で設定してください"
@@ -18,18 +18,17 @@ export const passJudge = (passFlag: any) => {
 
 export const PassForm = (props: any) => {
 
-  if (props.test === "true") {
     useEffect(() => {
-      props.SetPassFlag("ok")
+      props.SetPassStatus("ok")
       if (!props.passValue) {
-        props.SetPassFlag("empty")
+        props.SetPassStatus("empty")
       } else {
         if (!(props.passValue.length <= 16 && props.passValue.length >= 8)) {
-          props.SetPassFlag("pass-incorrect")
+          props.SetPassStatus("pass-incorrect")
         }
       }
     })
-  }
+
   return (
     <>
       <div className={`form-group ${styles.formGroup}`} key="passForm"  >
@@ -50,9 +49,7 @@ export const PassForm = (props: any) => {
           className="form-control form-control-lg "
           placeholder="８文字以上１６文字以内で設定してください"
           onChange={(ev) => {
-            if (props.test === "true") {
               props.SetPassValue(ev.target.value);
-            }
           }}
         />
       </div>

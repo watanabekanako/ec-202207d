@@ -2,20 +2,20 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import styles from '../styles/register_user.module.css'
 import React, { useEffect } from "react";
 
-export const mailJudge = (mailFlag: any) => {
-  if (mailFlag === "empty") {
+export const mailJudge = (mailStatus: any) => {
+  if (mailStatus === "empty") {
     let tag = document.getElementsByClassName("control-label")[1] as HTMLElement;
     tag.style.display = "inline-block"
     tag.innerHTML = "メールアドレスを入力してください"
   }
 
-  if (mailFlag === "format-incorrect") {
+  if (mailStatus === "format-incorrect") {
     let tag = document.getElementsByClassName("control-label")[1] as HTMLElement;
     tag.style.display = "inline-block"
     tag.innerHTML = "メールアドレスは@を含む形式で入力してください"
   }
 
-  if (mailFlag === "registered") {
+  if (mailStatus === "registered") {
     let tag = document.getElementsByClassName("control-label")[1] as HTMLElement;
     tag.style.display = "inline-block"
     tag.innerHTML = "そのメールアドレスはすでに使われています"
@@ -25,20 +25,19 @@ export const mailJudge = (mailFlag: any) => {
 
 export const MailForm = (props: any) => {
 
-  if (props.test === "true") {
     useEffect(() => {
-      props.SetMailFlag("ok")
+      props.SetMailStatus("ok")
 
       if (!props.mailValue) {
-        props.SetMailFlag("empty")
+        props.SetMailStatus("empty")
       } else if (!props.mailValue.includes('@')) {
-        props.SetMailFlag("format-incorrect")
+        props.SetMailStatus("format-incorrect")
       } else {
         fetch(`http://localhost:8000/users?mail=${props.mailValue}`)
           .then(response => response.json())
           .then((data) => {
             if (data.length !== 0) {
-              props.SetMailFlag("registered")
+              props.SetMailStatus("registered")
             }
           })
           .catch(error => {
@@ -46,7 +45,7 @@ export const MailForm = (props: any) => {
           });
       }
     })
-  }
+
 
   return (
     <>
@@ -67,9 +66,7 @@ export const MailForm = (props: any) => {
           className="form-control form-control-lg "
           placeholder="例）xxx@example.com"
           onChange={(ev) => {
-            if (props.test === "true") {
               props.SetMailValue(ev.target.value);
-            }
           }}
         />
       </div>

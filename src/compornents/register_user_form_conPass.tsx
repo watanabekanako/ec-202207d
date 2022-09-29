@@ -3,9 +3,9 @@ import styles from '../styles/register_user.module.css'
 import React, { useEffect } from "react";
 import PassForm from "./register_user_form_pass";
 
-export const conPassJudge = (conPassFlag: any, passValue: any, conPassValue: any) => {
+export const conPassJudge = (conPassStatus: any, passValue: any, conPassValue: any) => {
 
-  if (conPassFlag === "empty") {
+  if (conPassStatus === "empty") {
     let tag = document.getElementsByClassName("control-label")[6] as HTMLElement;
     tag.style.display = " inline-block"
     tag.innerHTML = "確認用パスワードを入力してください"
@@ -21,14 +21,13 @@ export const conPassJudge = (conPassFlag: any, passValue: any, conPassValue: any
 
 export const ConPassForm = (props: any) => {
 
-  if (props.test === "true") {
     useEffect(() => {
-      props.SetConPassFlag("ok")
+      props.SetConPassStatus("ok")
       if (!props.conPassValue) {
-        props.SetConPassFlag("empty")
+        props.SetConPassStatus("empty")
       }
     })
-  }
+
 
   return (
     <>
@@ -50,9 +49,7 @@ export const ConPassForm = (props: any) => {
           className="form-control form-control-lg "
           placeholder="確認用パスワード"
           onChange={(ev) => {
-            if (props.test === "true") {
               props.SetConPassValue(ev.target.value);
-            }
           }}
         />
       </div>

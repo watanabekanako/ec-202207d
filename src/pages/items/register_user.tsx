@@ -19,13 +19,13 @@ const Show = () => {
   const router = useRouter();
 
   // 判定 フラグ
-  const [nameFlag, SetNameFlag] = React.useState("init");
-  const [mailFlag, SetMailFlag] = React.useState("init");
-  const [zipFlag, SetZipFlag] = React.useState("init");
-  const [addrFlag, SetAddrFlag] = React.useState("init");
-  const [telFlag, SetTelFlag] = React.useState("init");
-  const [passFlag, SetPassFlag] = React.useState("init");
-  const [conPassFlag, SetConPassFlag] = React.useState("init");
+  const [nameStatus, SetNameStatus] = React.useState("init");
+  const [mailStatus, SetMailStatus] = React.useState("init");
+  const [zipStatus, SetZipStatus] = React.useState("init");
+  const [addrStatus, SetAddrStatus] = React.useState("init");
+  const [telStatus, SetTelStatus] = React.useState("init");
+  const [passStatus, SetPassStatus] = React.useState("init");
+  const [conPassStatus, SetConPassStatus] = React.useState("init");
 
   const [firstNameValue, SetFirstNameValue] = React.useState("");
   const [lastNameValue, SetLastNameValue] = React.useState("");
@@ -58,40 +58,41 @@ const Show = () => {
 
                   <NameForm
                     SetFirstNameValue={SetFirstNameValue}
-                    SetNameFlag={SetNameFlag}
+                    SetNameStatus={SetNameStatus}
                     SetLastNameValue={SetLastNameValue}
                     firstNameValue={firstNameValue}
                     lastNameValue={lastNameValue}
                   />
                   <MailForm
                     SetMailValue={SetMailValue}
-                    SetMailFlag={SetMailFlag}
+                    SetMailStatus={SetMailStatus}
                     mailValue={mailValue}
                   />
                   <ZipForm
-                    SetZipFlag={SetZipFlag}
+                    SetZipStatus={SetZipStatus}
                     SetZipValue={SetZipValue}
                     SetAddrValue={SetAddrValue}
                     zipValue={zipValue}
-                    zipFlag={zipFlag}
+                    zipStatus={zipStatus}
                   />
                   <AddrForm
-                    SetAddrFlag={SetAddrFlag}
+                    SetAddrStatus={SetAddrStatus}
                     SetAddrValue={SetAddrValue}
                     addrValue={addrValue}
                   />
                   <TelForm
                     SetTelValue={SetTelValue}
-                    SetTelFlag={SetTelFlag}
+                    SetTelStatus={SetTelStatus}
+                    telStatus={telStatus}
                     telValue={telValue}
                   />
                   <PassForm
-                    SetPassFlag={SetPassFlag}
+                    SetPassStatus={SetPassStatus}
                     SetPassValue={SetPassValue}
                     passValue={passValue}
                   />
                   <ConPassForm
-                    SetConPassFlag={SetConPassFlag}
+                    SetConPassStatus={SetConPassStatus}
                     SetConPassValue={SetConPassValue}
                     conPassValue={conPassValue}
                   />
@@ -99,13 +100,13 @@ const Show = () => {
                   <div className="form-group   ">
                     <button type="button" className={` ${styles.btn}`} onClick={() => {
 
-                      SetNameFlag("init");
-                      SetMailFlag("init");
-                      SetZipFlag("init");
-                      SetAddrFlag("init");
-                      SetTelFlag("init");
-                      SetPassFlag("init");
-                      SetConPassFlag("init");
+                      SetNameStatus("init");
+                      SetMailStatus("init");
+                      SetZipStatus("init");
+                      SetAddrStatus("init");
+                      SetTelStatus("init");
+                      SetPassStatus("init");
+                      SetConPassStatus("init");
 
                       // エラー非表示
                       for (let i = 0; i < 7; i++) {
@@ -114,12 +115,12 @@ const Show = () => {
                       }
 
                       if (
-                        nameFlag === "ok" &&
-                        mailFlag === "ok" &&
-                        zipFlag === "ok" &&
-                        telFlag === "ok" &&
-                        passFlag === "ok" &&
-                        conPassFlag === "ok"
+                        nameStatus === "ok" &&
+                        mailStatus === "ok" &&
+                        zipStatus === "ok" &&
+                        telStatus === "ok" &&
+                        passStatus === "ok" &&
+                        conPassStatus === "ok"
                       ) {
 
                         const data = {
@@ -151,16 +152,16 @@ const Show = () => {
 
                         // その他
                       } else {
-                        console.log(`name:${nameFlag} mail:${mailFlag}
-                        zip:${zipFlag}  addr:${addrFlag} tel:${telFlag} pass:${passFlag} conPass:${conPassFlag}`)
+                        console.log(`name:${nameStatus} mail:${mailStatus}
+                        zip:${zipStatus}  addr:${addrStatus} tel:${telStatus} pass:${passStatus} conPass:${conPassStatus}`)
 
-                        nameJudge(nameFlag);
-                        mailJudge(mailFlag);
-                        zipJudge(zipFlag);
-                        addrJudge(addrFlag);
-                        telJudge(telFlag);
-                        passJudge(passFlag);
-                        conPassJudge(conPassFlag, passValue, conPassValue)
+                        nameJudge(nameStatus);
+                        mailJudge(mailStatus);
+                        zipJudge(zipStatus);
+                        addrJudge(addrStatus);
+                        telJudge(telStatus);
+                        passJudge(passStatus);
+                        conPassJudge(conPassStatus, passValue, conPassValue)
 
                       }
                     }
@@ -168,13 +169,14 @@ const Show = () => {
                     }>登録</button>
 
                     <button type="reset" className={`${styles.btnClear}`} onClick={() => {
-                      SetNameFlag("init");
-                      SetMailFlag("init");
-                      SetZipFlag("init");
-                      SetAddrFlag("init");
-                      SetTelFlag("init");
-                      SetPassFlag("init");
-                      SetConPassFlag("init");
+                      SetNameStatus("init");
+                      SetMailStatus("init");
+                      SetZipStatus("init");
+                      SetAddrStatus("init");
+                      SetTelStatus("init");
+                      SetPassStatus("init");
+                      SetConPassStatus("init");
+                      SetZipValue("");
 
                       clear();
 
