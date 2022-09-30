@@ -5,12 +5,11 @@ import { useRouter } from 'next/router';
 import { Nav } from '../../compornents/nav_format';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import style from '../../styles/login.module.css';
-import styles from '../../styles/common.module.css'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye } from "@fortawesome/free-solid-svg-icons";
-import { faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import styles from '../../styles/common.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye } from '@fortawesome/free-solid-svg-icons';
+import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 // import  {Breadcrumb} from '../../compornents/breadcrumb';
-
 
 export default function Login() {
   const router = useRouter();
@@ -42,9 +41,9 @@ export default function Login() {
 
           let cookie = document.cookie;
           if (cookie.includes('status=shopping')) {
-            router.push('/items/order_confirm');
+            router.push('/carts/order_confirm');
           } else {
-            router.push('/items/itemList');
+            router.push('/items/');
           }
         } else if (data === 'NG') {
           setErrorDisplay('block');
@@ -57,14 +56,14 @@ export default function Login() {
 
   const togglePassword = () => {
     setIsRevealPassword((prevState) => !prevState);
-  }
+  };
   return (
     <>
       <div className={`${styles.bodyColor}`}>
-      <Head>
-        <title>ラクラクヌードル／ログインページ</title>
-        <link rel="icon" href="/3506.png" />
-      </Head>
+        <Head>
+          <title>ラクラクヌードル／ログインページ</title>
+          <link rel="icon" href="/3506.png" />
+        </Head>
 
         <div className={`container`}>
           <Nav name="ログイン" />
@@ -77,7 +76,7 @@ export default function Login() {
           }/> */}
           <div className={`${style.box}`}>
             <h1 className={`${style.title}`}>ログイン</h1>
-            
+
             <form
               method="POST"
               onSubmit={HandleSubmit}
@@ -116,16 +115,22 @@ export default function Login() {
                 }}
               />
               <span
-	onClick={togglePassword}
-        role="presentation"
-        className={`${style.PasswordReveal}`}
-    >
-      {isRevealPassword ? (
-	 <FontAwesomeIcon icon={faEye} className={`${style.passicon}`}/>
-      ) : (
-        <FontAwesomeIcon icon={faEyeSlash} className={`${style.passicon}`}/>
-      )}
-     </span>
+                onClick={togglePassword}
+                role="presentation"
+                className={`${style.PasswordReveal}`}
+              >
+                {isRevealPassword ? (
+                  <FontAwesomeIcon
+                    icon={faEye}
+                    className={`${style.passicon}`}
+                  />
+                ) : (
+                  <FontAwesomeIcon
+                    icon={faEyeSlash}
+                    className={`${style.passicon}`}
+                  />
+                )}
+              </span>
               <br />
               <p
                 style={{ display: errorDisplay }}
@@ -137,7 +142,7 @@ export default function Login() {
                 ログイン
               </button>
             </form>
-            <Link href={'/items/register_user'}>
+            <Link href={'/users/register_user'}>
               <a className={`${style.link}`}>ユーザー登録はこちら</a>
             </Link>
           </div>

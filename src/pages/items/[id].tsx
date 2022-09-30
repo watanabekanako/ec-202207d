@@ -160,7 +160,7 @@ export default function ItemDetail({ items, options }: any) {
       });
   };
 
- console.log(datas);
+  console.log(datas);
 
   return (
     <div className={`${styles.bodyColor}`}>
@@ -170,20 +170,22 @@ export default function ItemDetail({ items, options }: any) {
           <link rel="icon" href="/3506.png" />
         </Head>
         <Nav name="" />
-        <Breadcrumb lists={[
-          {
-            name: "TOP",
-            path: "/toppage"
-          },
-          {
-            name: "商品一覧",
-            path: "/items/itemList"
-          },
-          {
-            name: items.name,
-            path: "/"
-          }
-        ]} />
+        <Breadcrumb
+          lists={[
+            {
+              name: 'TOP',
+              path: '/toppage',
+            },
+            {
+              name: '商品一覧',
+              path: '/items/itemList',
+            },
+            {
+              name: items.name,
+              path: '/',
+            },
+          ]}
+        />
         <form action="cart_list.html">
           <div className={`${style.wrapper}`}>
             <div className="row">
@@ -351,7 +353,7 @@ export default function ItemDetail({ items, options }: any) {
                 <div className="col-xs-offset-2 col-xs-3">
                   <div className="form-group">
                     <p className={`${style.btnCenter}`}>
-                      <Link href="http://localhost:3000/items/cartPage">
+                      <Link href="http://localhost:3000/carts/cartPage">
                         <button
                           className={`${style.btnDatail}`}
                           onClick={() => onClickCreate()}
