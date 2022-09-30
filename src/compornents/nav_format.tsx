@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import styles from '../styles/register_user.module.css';
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from "next/router";
 import useSWR, { useSWRConfig } from 'swr'
 
@@ -92,6 +92,7 @@ export const Nav = (props: { name: string }) => {
   };
 
   return (
+    <>
     <nav className={`navbar navbar-expand-lg fixed-top bg-light　w-75 ${styles.nav}`}>
       <div className="container">
         <Link className="navbar-brand" href="/toppage">
@@ -158,14 +159,10 @@ export const Nav = (props: { name: string }) => {
             </li>
           </ul>
         </div>
-      </div>
+        </div>
 
-      {/* <script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
-        crossOrigin="anonymous"
-      ></script> */}
-    </nav>
+      </nav>
+    </>
   );
 };
 
