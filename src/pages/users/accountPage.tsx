@@ -1,64 +1,101 @@
-import Head from "next/head";
-import { Nav } from "../../compornents/nav_format";
-import { Title } from "../../compornents/register_user"
+import Head from 'next/head';
+import { Nav } from '../../compornents/nav_format';
+import { Title } from '../../compornents/register_user';
 import styles from '../../styles/common.module.css';
-import "bootstrap/dist/css/bootstrap.min.css";
-import { NameForm, nameJudge } from "../../compornents/register_user_form_name";
-import { MailForm, mailJudge } from "../../compornents/register_user_form_mail";
-import { ZipForm, zipJudge } from "../../compornents/register_user_form_zip";
-import { AddrForm, addrJudge } from "../../compornents/register_user_form_addr";
-import { TelForm, telJudge } from "../../compornents/register_user_form_tel";
-import { PassForm, passJudge } from "../../compornents/register_user_form_pass";
-import { ConPassForm, conPassJudge } from "../../compornents/register_user_form_conPass";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {
+  NameForm,
+  nameJudge,
+} from '../../compornents/register_user_form_name';
+import {
+  MailForm,
+  mailJudge,
+} from '../../compornents/register_user_form_mail';
+import {
+  ZipForm,
+  zipJudge,
+} from '../../compornents/register_user_form_zip';
+import {
+  AddrForm,
+  addrJudge,
+} from '../../compornents/register_user_form_addr';
+import {
+  TelForm,
+  telJudge,
+} from '../../compornents/register_user_form_tel';
+import {
+  PassForm,
+  passJudge,
+} from '../../compornents/register_user_form_pass';
+import {
+  ConPassForm,
+  conPassJudge,
+} from '../../compornents/register_user_form_conPass';
 
 export const Show = () => {
-
   return (
     <>
+      <nav className="navbar navbar-expand-lg bg-light">
+        <div className="container-fluid">
+          <a className="navbar-brand" href="#">
+            ブランド
+          </a>
+          <button
+            type="button"
+            className="navbar-toggler"
+            data-bs-toggle="collapse"
+            data-bs-target="#Navber"
+            aria-controls="Navber"
+            aria-expanded="false"
+            aria-label="ナビゲーションの切替"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
 
-<nav className="navbar navbar-expand-lg bg-light">
-  <div className="container-fluid">
-    <a className="navbar-brand" href="#">ブランド</a>
-    <button type="button" className="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#Navber" aria-controls="Navber" aria-expanded="false" aria-label="ナビゲーションの切替">
-      <span className="navbar-toggler-icon"></span>
-    </button>
-
-    <div className="collapse navbar-collapse" id="Navber">
-      <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-        <li className="nav-item">
-          <a className="nav-link active" aria-current="page" href="#">ホーム</a>
-        </li>
-        <li className="nav-item">
-          <a className="nav-link" href="#">リンク</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
-      <div className="container bg-primary" >
-        <h1>Hello World!</h1>
-      </div>
-      <div className="container-md bg-secondary" >
-        <h1>Hello World!</h1>
-      </div>
-      <div className="container-fluid bg-success" >
-        <h1>Hello World!</h1>
-      </div>
-
-    <div className="container">
-      <div className="row bg-secondary">
-        <p>a</p>
-        <div className="col ">
-          <input type="text" className="col bg-primary"/>
+          <div className="collapse navbar-collapse" id="Navber">
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+              <li className="nav-item">
+                <a
+                  className="nav-link active"
+                  aria-current="page"
+                  href="#"
+                >
+                  ホーム
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="#">
+                  リンク
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
-        <div className="col ">
-        <input type="text" />
+      </nav>
+
+      <div className="container bg-primary">
+        <h1>Hello World!</h1>
+      </div>
+      <div className="container-md bg-secondary">
+        <h1>Hello World!</h1>
+      </div>
+      <div className="container-fluid bg-success">
+        <h1>Hello World!</h1>
+      </div>
+
+      <div className="container">
+        <div className="row bg-secondary">
+          <p>a</p>
+          <div className="col ">
+            <input type="text" className="col bg-primary" />
+          </div>
+          <div className="col ">
+            <input type="text" />
+          </div>
         </div>
       </div>
-    </div>
 
-{/* <nav className="navbar navbar-expand-lg bg-light">
+      {/* <nav className="navbar navbar-expand-lg bg-light">
   <div className="container-fluid">
     <a className="navbar-brand" href="#">Navbar</a>
     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -185,13 +222,10 @@ export const Show = () => {
           </div>
       </div> */}
 
-
-
       {/* 
           </div> */}
     </>
   );
-}
-
+};
 
 export default Show;

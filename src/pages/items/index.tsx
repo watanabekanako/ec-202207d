@@ -59,16 +59,18 @@ function Page() {
       <div className={`${styles.bodyColor}`}>
         <div className="container">
           <Nav name="商品一覧" />
-          <Breadcrumb lists={[
-            {
-              name: "TOP",
-              path: "/toppage"
-            },
-            {
-              name: "商品一覧",
-              path: "/items/itemList"
-            }
-          ]} />
+          <Breadcrumb
+            lists={[
+              {
+                name: 'TOP',
+                path: '/toppage',
+              },
+              {
+                name: '商品一覧',
+                path: '/items/itemList',
+              },
+            ]}
+          />
 
           <div className={`${style.row}`}>
             <div
