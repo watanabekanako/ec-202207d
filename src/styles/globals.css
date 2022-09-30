@@ -22,6 +22,9 @@ link a {
 * {
   box-sizing: border-box;
 }
+body {
+  padding-top: 60px;
+}
 
 @media (prefers-color-scheme: dark) {
   html {

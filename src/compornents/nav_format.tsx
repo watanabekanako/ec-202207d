@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import styles from '../styles/register_user.module.css';
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from "next/router";
 import useSWR, { useSWRConfig } from 'swr'
 
@@ -9,6 +9,10 @@ import useSWR, { useSWRConfig } from 'swr'
 export const Nav = (props: { name: string }) => {
   const router = useRouter();
   const pageList = [
+    {
+      name: '商品一覧',
+      url: '/items/itemList',
+    },
     {
       name: 'ショッピングカート',
       url: '/items/cartPage',
@@ -18,14 +22,18 @@ export const Nav = (props: { name: string }) => {
       url: '/items/register_user',
     },
     {
+      name: 'アカウント',
+      url: '#',
+    },
+    {
       name: 'ログイン',
       url: '/items/loginpage',
-    },
+    }
   ];
 
   const [cookie, setCookie] = useState('');
-  const [cookieuser, setCookieUser] = useState('');
   const [userID, SetUserID] = useState('');
+  const [buttonDisplay, setButtonDisplay] = useState('none');
 
   const fetcher = (url: any) => fetch(url).then((res) => res.json());
 
@@ -33,7 +41,7 @@ export const Nav = (props: { name: string }) => {
     let cookie2 = document.cookie
     if(cookie2.includes('userId')){
         setCookie(document.cookie);
-        // console.log(document.cookie);
+        setButtonDisplay('block');
     } else {
       // console.log('cookieがありません')
     }
@@ -70,23 +78,24 @@ export const Nav = (props: { name: string }) => {
     nameValue = 'ゲスト';
   }
 
-  const logoutClick = () => {
-    document.cookie = 'userId=; max-age=0';
-    document.cookie = 'userName=; max-age=0';
 
+  const logoutClick = () => {
+    document.cookie = 'userId=; max-age=0; path=/';
+    
     let cookie = document.cookie;
 
     if (cookie.includes('status=shopping')) {
-      document.cookie = 'status=shopping; max-age=0';
+      document.cookie = 'status=shopping; max-age=0; path=/';
     }
     router.push("/items/itemList");
-
+    
   };
 
   return (
-    <nav className={`navbar navbar-expand-lg bg-light ${styles.nav}`}>
-      <div className="container-fluid">
-        <Link className="navbar-brand" href="/items/itemList">
+    <>
+    <nav className={`navbar navbar-expand-lg fixed-top bg-light　w-75 ${styles.nav}`}>
+      <div className="container">
+        <Link className="navbar-brand" href="/toppage">
           {/* 企業ロゴ   */}
           <a>
             <Image
@@ -112,7 +121,9 @@ export const Nav = (props: { name: string }) => {
         <div className="collapse navbar-collapse" id="Navber">
           <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
 
-            <li className={styles.show}>こんにちは&nbsp;&nbsp;&nbsp;{nameValue}&nbsp;さん</li>
+            <li className={styles.show}>
+              こんにちは&nbsp;&nbsp;&nbsp;{nameValue}&nbsp;さん
+              </li>
 
             {pageList.map((page, index) => {
               if (props.name !== page.name) {
@@ -136,27 +147,23 @@ export const Nav = (props: { name: string }) => {
                       </Link>
                     </li>
                   );
+                } else {
+                  // setButtonDisplay('none');
                 }
               }
             })}
             <li>
-
-              <button onClick={logoutClick} className={` nav-link btn btn-link text-decoration-none `} >
-              {/* <Link href={'/items/logout'} ><a className={`${styles.navLink}`}> */}
-
+              <button onClick={logoutClick} className={`${styles.clickbtn} `}　style={{ display: buttonDisplay }}>
                 ログアウト
-                {/* </a></Link> */}
               </button>
             </li>
           </ul>
         </div>
-      </div>
+        </div>
 
-      {/* <script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
-        crossOrigin="anonymous"
-      ></script> */}
-    </nav>
+      </nav>
+    </>
   );
 };
+
+// className={` nav-link btn btn-link text-decoration-none ${styles.clickbtn} `}

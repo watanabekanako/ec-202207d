@@ -9,6 +9,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Nav } from '../../compornents/nav_format';
 import style from '../../styles/detail.module.css';
 import styles from '../../styles/common.module.css';
+import { Breadcrumb } from 'compornents/breadcrumb';
+
+let datas = '';
 export async function getStaticProps({ params }: any) {
   const res = await fetch(
     `http://localhost:8000/items/${params.id} `
@@ -97,7 +100,7 @@ export default function ItemDetail({ items, options }: any) {
   //     optionTotalPrice += selectOptions[id];
   //   }
   // }
-
+  let datas = '';
   const onClickCreate = () => {
     // let optionTotalPrice = 0;
     // for (const id in selectOptions) {
@@ -119,6 +122,7 @@ export default function ItemDetail({ items, options }: any) {
     //         quantity: count,
     //       };
     //     });
+
     const optionsArray = Object.entries(selectOptions)
       .filter(([id, selected]) => selected)
       .map(([id, selected]) => {
@@ -147,10 +151,16 @@ export default function ItemDetail({ items, options }: any) {
       }),
     })
       .then((res) => res.json)
+      .then((data) => {
+        datas = data.name;
+        console.log(data.name);
+      })
       .catch((error) => {
         console.error(error);
       });
   };
+
+ console.log(datas);
 
   return (
     <div className={`${styles.bodyColor}`}>
@@ -160,6 +170,20 @@ export default function ItemDetail({ items, options }: any) {
           <link rel="icon" href="/3506.png" />
         </Head>
         <Nav name="" />
+        <Breadcrumb lists={[
+          {
+            name: "TOP",
+            path: "/toppage"
+          },
+          {
+            name: "商品一覧",
+            path: "/items/itemList"
+          },
+          {
+            name: items.name,
+            path: "/"
+          }
+        ]} />
         <form action="cart_list.html">
           <div className={`${style.wrapper}`}>
             <div className="row">

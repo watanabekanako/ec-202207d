@@ -8,8 +8,8 @@ import Link from 'next/link';
 import { Nav } from '../../compornents/nav_format';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import style from '../../styles/itemList.module.css';
-
 import styles from '../../styles/common.module.css';
+import { Breadcrumb } from 'compornents/breadcrumb';
 
 const fetcher = (url: any) => fetch(url).then((res) => res.json());
 function Page() {
@@ -58,7 +58,17 @@ function Page() {
       </Head>
       <div className={`${styles.bodyColor}`}>
         <div className="container">
-          <Nav name="" />
+          <Nav name="商品一覧" />
+          <Breadcrumb lists={[
+            {
+              name: "TOP",
+              path: "/toppage"
+            },
+            {
+              name: "商品一覧",
+              path: "/items/itemList"
+            }
+          ]} />
 
           <div className={`${style.row}`}>
             <div

@@ -201,7 +201,7 @@ function CartPage() {
                   router.push('/items/order_confirm');
                 } else {
                   router.push('/items/loginpage');
-                  document.cookie = 'status=shopping';
+                  document.cookie = 'status=shopping; path=/;';
                 }
               }}
             >
