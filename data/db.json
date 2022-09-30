@@ -159,46 +159,6 @@
     }
   ],
   "cartItems": [
-    {
-      "img": "/img/2.jpg",
-      "name": "とんこつラーメン",
-      "price": 800,
-      "quantity": 1,
-      "options": [],
-      "subtotal": 800,
-      "id": 2
-    },
-    {
-      "img": "/img/14.jpg",
-      "name": "まぜ麺Gorgeous4",
-      "price": 880,
-      "quantity": 1,
-      "options": [],
-      "subtotal": 880,
-      "id": 3
-    },
-    {
-      "img": "/img/10.jpg",
-      "name": "旨辛味噌麺",
-      "price": 800,
-      "quantity": 1,
-      "options": [
-        {
-          "id": 3,
-          "name": "めんま",
-          "price": 200,
-          "quantity": 1
-        },
-        {
-          "id": 4,
-          "name": "海苔",
-          "price": 200,
-          "quantity": 1
-        }
-      ],
-      "subtotal": 1200,
-      "id": 2
-    }
   ],
   "payStatus": []
 }
