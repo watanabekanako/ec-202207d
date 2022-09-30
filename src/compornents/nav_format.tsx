@@ -10,6 +10,10 @@ export const Nav = (props: { name: string }) => {
   const router = useRouter();
   const pageList = [
     {
+      name: '商品一覧',
+      url: '/items/itemList',
+    },
+    {
       name: 'ショッピングカート',
       url: '/items/cartPage',
     },
@@ -18,22 +22,26 @@ export const Nav = (props: { name: string }) => {
       url: '/items/register_user',
     },
     {
+      name: 'アカウント',
+      url: '#',
+    },
+    {
       name: 'ログイン',
       url: '/items/loginpage',
-    },
+    }
   ];
 
   const [cookie, setCookie] = useState('');
-  const [cookieuser, setCookieUser] = useState('');
   const [userID, SetUserID] = useState('');
+  const [buttonDisplay, setButtonDisplay] = useState('none');
 
   const fetcher = (url: any) => fetch(url).then((res) => res.json());
 
   useEffect(() => {
     let cookie2 = document.cookie
-    if (cookie2.includes('userId')) {
-      setCookie(document.cookie);
-      // console.log(document.cookie);
+    if(cookie2.includes('userId')){
+        setCookie(document.cookie);
+        setButtonDisplay('block');
     } else {
       // console.log('cookieがありません')
     }
@@ -70,96 +78,92 @@ export const Nav = (props: { name: string }) => {
     nameValue = 'ゲスト';
   }
 
-  const logoutClick = () => {
-    document.cookie = 'userId=; max-age=0';
-    document.cookie = 'userName=; max-age=0';
 
+  const logoutClick = () => {
+    document.cookie = 'userId=; max-age=0; path=/';
+    
     let cookie = document.cookie;
 
     if (cookie.includes('status=shopping')) {
-      document.cookie = 'status=shopping; max-age=0';
+      document.cookie = 'status=shopping; max-age=0; path=/';
     }
     router.push("/items/itemList");
-
+    
   };
 
   return (
     <>
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <nav className={`navbar navbar-expand-lg fixed-top bg-light　w-75 ${styles.nav}`}>
+      <div className="container">
+        <Link className="navbar-brand" href="/toppage">
+          {/* 企業ロゴ   */}
+          <a>
+            <Image
+              alt="main log"
+              src="/img/header_logo.png"
+              height={35}
+              width={138}
+            />
+          </a>
+        </Link>
+        <button
+          type="button"
+          className="navbar-toggler"
+          data-bs-toggle="collapse"
+          data-bs-target="#Navber"
+          aria-controls="Navber"
+          aria-expanded="false"
+          aria-label="ナビゲーションの切替"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
 
-      <nav className={`navbar navbar-expand-lg bg-light ${styles.nav}`}>
-        <div className="container-fluid">
-          <Link className="navbar-brand" href="/items/itemList">
-            {/* 企業ロゴ   */}
-            <a>
-              <Image
-                alt="main log"
-                src="/img/header_logo.png"
-                height={35}
-                width={138}
-              />
-            </a>
-          </Link>
-          <button
-            type="button"
-            className="navbar-toggler"
-            data-bs-toggle="collapse"
-            data-bs-target="#navberNav"
-            aria-controls="Navber"
-            aria-expanded="false"
-            aria-label="ナビゲーションの切替"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
+        <div className="collapse navbar-collapse" id="Navber">
+          <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
 
-          <div className="collapse navbar-collapse" id="navberNav">
-            <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-
-              <li className={`${styles.show} nav-item`}>こんにちは&nbsp;&nbsp;&nbsp;{nameValue}&nbsp;さん</li>
-
-              {pageList.map((page, index) => {
-                if (props.name !== page.name) {
-                  if (
-                    cookie.includes('userId') &&
-                    page.name !== 'ログイン'
-                  ) {
-                    return (
-                      <li className="nav-item" key={index}>
-                        <Link href={`${page.url}`}>
-                          <a className="nav-link">{page.name}</a>
-                        </Link>
-                      </li>
-                    );
-                  }
-                  if (cookie === '') {
-                    return (
-                      <li className="nav-item" key={index}>
-                        <Link href={`${page.url}`}>
-                          <a className="nav-link">{page.name}</a>
-                        </Link>
-                      </li>
-                    );
-                  }
-                }
-              })}
-              <li>
-
-                <button onClick={logoutClick} className={` nav-link btn btn-link text-decoration-none `} >
-                  {/* <Link href={'/items/logout'} ><a className={`${styles.navLink}`}> */}
-
-                  ログアウト
-                  {/* </a></Link> */}
-                </button>
+            <li className={styles.show}>
+              こんにちは&nbsp;&nbsp;&nbsp;{nameValue}&nbsp;さん
               </li>
-            </ul>
-          </div>
+
+            {pageList.map((page, index) => {
+              if (props.name !== page.name) {
+                if (
+                  cookie.includes('userId') &&
+                  page.name !== 'ログイン'
+                ) {
+                  return (
+                    <li className="nav-item" key={index}>
+                      <Link href={`${page.url}`}>
+                        <a className="nav-link">{page.name}</a>
+                      </Link>
+                    </li>
+                  );
+                }
+                if (cookie === '') {
+                  return (
+                    <li className="nav-item" key={index}>
+                      <Link href={`${page.url}`}>
+                        <a className="nav-link">{page.name}</a>
+                      </Link>
+                    </li>
+                  );
+                } else {
+                  // setButtonDisplay('none');
+                }
+              }
+            })}
+            <li>
+              <button onClick={logoutClick} className={`${styles.clickbtn} `}　style={{ display: buttonDisplay }}>
+                ログアウト
+              </button>
+            </li>
+          </ul>
+        </div>
         </div>
 
       </nav>
-      <script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
-        crossOrigin="anonymous"
-      ></script>
     </>
   );
 };
+
+// className={` nav-link btn btn-link text-decoration-none ${styles.clickbtn} `}

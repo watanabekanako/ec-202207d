@@ -14,6 +14,7 @@ import Head from "next/head";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "../../styles/register_user.module.css";
 import style from '../../styles/common.module.css';
+// import { Breadcrumb } from 'compornents/breadcrumb';
 
 const Show = () => {
   const router = useRouter();

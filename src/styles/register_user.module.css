@@ -79,6 +79,8 @@
   background-color:#F8F8F8;
   border: solid 1px #e7e7e7;
   border-radius: 5px;
+  max-width: 1300px;
+  margin: 0 auto;
 }
 
 #bs-example-navbar-collapse-1 {
@@ -166,4 +168,20 @@
   font-size: 0.8em;
   height: 35px;
   padding: 0 10px;
+}
+
+/* ログアウトボタン */
+.clickbtn{
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: #808080;
+  position: relative;
+  top: 7px;  
+  transition: 0.5s;
+}
+
+.clickbtn:hover {
+  color: #000000;
+  transition: 1s;
 }
