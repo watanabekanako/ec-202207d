@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import styles from '../styles/register_user.module.css';
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from "next/router";
 import useSWR, { useSWRConfig } from 'swr'
 
@@ -31,9 +31,9 @@ export const Nav = (props: { name: string }) => {
 
   useEffect(() => {
     let cookie2 = document.cookie
-    if(cookie2.includes('userId')){
-        setCookie(document.cookie);
-        // console.log(document.cookie);
+    if (cookie2.includes('userId')) {
+      setCookie(document.cookie);
+      // console.log(document.cookie);
     } else {
       // console.log('cookieがありません')
     }
@@ -84,79 +84,82 @@ export const Nav = (props: { name: string }) => {
   };
 
   return (
-    <nav className={`navbar navbar-expand-lg bg-light ${styles.nav}`}>
-      <div className="container-fluid">
-        <Link className="navbar-brand" href="/items/itemList">
-          {/* 企業ロゴ   */}
-          <a>
-            <Image
-              alt="main log"
-              src="/img/header_logo.png"
-              height={35}
-              width={138}
-            />
-          </a>
-        </Link>
-        <button
-          type="button"
-          className="navbar-toggler"
-          data-bs-toggle="collapse"
-          data-bs-target="#Navber"
-          aria-controls="Navber"
-          aria-expanded="false"
-          aria-label="ナビゲーションの切替"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
+    <>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" />
 
-        <div className="collapse navbar-collapse" id="Navber">
-          <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+      <nav className={`navbar navbar-expand-lg bg-light ${styles.nav}`}>
+        <div className="container-fluid">
+          <Link className="navbar-brand" href="/items/itemList">
+            {/* 企業ロゴ   */}
+            <a>
+              <Image
+                alt="main log"
+                src="/img/header_logo.png"
+                height={35}
+                width={138}
+              />
+            </a>
+          </Link>
+          <button
+            type="button"
+            className="navbar-toggler"
+            data-bs-toggle="collapse"
+            data-bs-target="#navberNav"
+            aria-controls="Navber"
+            aria-expanded="false"
+            aria-label="ナビゲーションの切替"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
 
-            <li className={styles.show}>こんにちは&nbsp;&nbsp;&nbsp;{nameValue}&nbsp;さん</li>
+          <div className="collapse navbar-collapse" id="navberNav">
+            <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
 
-            {pageList.map((page, index) => {
-              if (props.name !== page.name) {
-                if (
-                  cookie.includes('userId') &&
-                  page.name !== 'ログイン'
-                ) {
-                  return (
-                    <li className="nav-item" key={index}>
-                      <Link href={`${page.url}`}>
-                        <a className="nav-link">{page.name}</a>
-                      </Link>
-                    </li>
-                  );
+              <li className={`${styles.show} nav-item`}>こんにちは&nbsp;&nbsp;&nbsp;{nameValue}&nbsp;さん</li>
+
+              {pageList.map((page, index) => {
+                if (props.name !== page.name) {
+                  if (
+                    cookie.includes('userId') &&
+                    page.name !== 'ログイン'
+                  ) {
+                    return (
+                      <li className="nav-item" key={index}>
+                        <Link href={`${page.url}`}>
+                          <a className="nav-link">{page.name}</a>
+                        </Link>
+                      </li>
+                    );
+                  }
+                  if (cookie === '') {
+                    return (
+                      <li className="nav-item" key={index}>
+                        <Link href={`${page.url}`}>
+                          <a className="nav-link">{page.name}</a>
+                        </Link>
+                      </li>
+                    );
+                  }
                 }
-                if (cookie === '') {
-                  return (
-                    <li className="nav-item" key={index}>
-                      <Link href={`${page.url}`}>
-                        <a className="nav-link">{page.name}</a>
-                      </Link>
-                    </li>
-                  );
-                }
-              }
-            })}
-            <li>
+              })}
+              <li>
 
-              <button onClick={logoutClick} className={` nav-link btn btn-link text-decoration-none `} >
-              {/* <Link href={'/items/logout'} ><a className={`${styles.navLink}`}> */}
+                <button onClick={logoutClick} className={` nav-link btn btn-link text-decoration-none `} >
+                  {/* <Link href={'/items/logout'} ><a className={`${styles.navLink}`}> */}
 
-                ログアウト
-                {/* </a></Link> */}
-              </button>
-            </li>
-          </ul>
+                  ログアウト
+                  {/* </a></Link> */}
+                </button>
+              </li>
+            </ul>
+          </div>
         </div>
-      </div>
 
-      {/* <script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+      </nav>
+      <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
         crossOrigin="anonymous"
-      ></script> */}
-    </nav>
+      ></script>
+    </>
   );
 };
