@@ -4,7 +4,6 @@ import { Nav } from '../../compornents/nav_format';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import styles from '../../styles/common.module.css';
 
-
 export default function Page() {
   return (
     <>
@@ -16,7 +15,7 @@ export default function Page() {
         <div className="container">
           <Nav name="ショッピングカート" />
           <CartPage />
-        </div>{' '}
+        </div>
       </div>
     </>
   );

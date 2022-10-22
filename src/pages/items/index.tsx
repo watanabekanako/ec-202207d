@@ -158,7 +158,10 @@ function Page() {
                     {!search?.length &&
                       data.map((item: any) => {
                         return (
-                          <tr className="flexbox flexbox-center">
+                          <tr
+                            className="flexbox flexbox-center"
+                            key={item.id}
+                          >
                             <td className="imag">
                               <Link
                                 href={`http://localhost:3000/items/${item.id}`}
@@ -198,7 +201,10 @@ function Page() {
                       search.map((item: any) => {
                         // let number = index + 1 ;
                         return (
-                          <tr className="flexbox flexbox-center">
+                          <tr
+                            className="flexbox flexbox-center"
+                            key={item.id}
+                          >
                             <td className="imag">
                               <Link
                                 href={`http://localhost:3000/items/${item.id}`}

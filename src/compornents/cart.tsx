@@ -7,9 +7,10 @@ import { useRouter } from 'next/router';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import style from '../styles/cart.module.css';
 import styles from '..//styles/common.module.css';
+import React from 'react';
 const fetcher = (url: any) => fetch(url).then((res) => res.json());
 
-function CartPage() {
+function CartPage({ item }: any) {
   const router = useRouter();
   let total = 0;
   const { mutate } = useSWRConfig();
@@ -20,7 +21,7 @@ function CartPage() {
 
   const [moji, setMoji] = useState('none');
   const [botan, setBotan] = useState('none');
-
+  // const [count, setCount] = useState(quantity);
   useEffect(() => {
     if (data && data.length < 1) {
       console.log('文字表示');
@@ -45,6 +46,7 @@ function CartPage() {
   const Total = (props: any) => {
     let tax = props.total * 0.1;
     let totalPrice = tax + props.total;
+
     return (
       <div className={`${styles.bodyColor}`}>
         <div className={`${style.wrapper}`}>
@@ -100,77 +102,88 @@ function CartPage() {
               <tbody>
                 {data.map((cartitem: any) => {
                   return (
-                    <tr key={''}>
-                      <td className="cart-item-name">
-                        <div className="cart-item-icon">
-                          <Image
-                            src={cartitem.img}
-                            width={200}
-                            height={143}
-                          />
-                        </div>
-                        <span>{cartitem.name}</span>
-                      </td>
+                    <CartItem item={cartitem} key={cartitem.id} />
+                    //   <tr key={''}>
+                    //     <td className="cart-item-name">
+                    //       <div className="cart-item-icon">
+                    //         <Image
+                    //           src={cartitem.img}
+                    //           width={200}
+                    //           height={143}
+                    //         />
+                    //       </div>
+                    //       <span>{cartitem.name}</span>
+                    //     </td>
 
-                      <td>
-                        <span className="price">
-                          {/* &nbsp;{cartitem.size} */}
-                        </span>
-                        {cartitem.price.toLocaleString()}円{' '}
-                        {cartitem.quantity}個
-                      </td>
+                    //     <td>
+                    //       <span className="price">
+                    //         {/* &nbsp;{cartitem.size} */}
+                    //       </span>
+                    //       {cartitem.price.toLocaleString()}円{' '}
+                    //       {cartitem.quantity}個
+                    //     </td>
 
-                      <td>
-                        {cartitem.options
-                          .filter((option: any) => option)
-                          .map((option: any, index: any) => {
-                            return (
-                              // <li key={index}>{option}&nbsp;200円</li>
-                              <li key={index}>
-                                {option?.name}:{' '}
-                                {option?.price.toLocaleString()}円 ×
-                                {option?.quantity}
-                              </li>
-                            );
-                          })}
-                      </td>
-                      {/* <td>
-                    {cartitem.options.map(
-                      (option: any, index: any) => {
-                        return (
-                          <li key={index}>{option}&nbsp;200円</li>
-                        );
-                      }
-                    )}
-                  </td> */}
+                    //     <td>
+                    //       {cartitem.options
+                    //         .filter((option: any) => option)
+                    //         .map((option: any, index: any) => {
+                    //           return (
+                    //             // <li key={index}>{option}&nbsp;200円</li>
+                    //             <li key={index}>
+                    //               {option?.name}:{' '}
+                    //               {option?.price.toLocaleString()}円 ×
+                    //               {option?.quantity}
+                    //             </li>
+                    //           );
+                    //         })}
+                    //     </td>
+                    //     {/* <td>
+                    //   {cartitem.options.map(
+                    //     (option: any, index: any) => {
+                    //       return (
+                    //         <li key={index}>{option}&nbsp;200円</li>
+                    //       );
+                    //     }
+                    //   )}
+                    // </td> */}
+                    //     <td>
+                    //       <span className="text-center">
+                    //         <button onClick={() => setCount(count - 1)}>
+                    //           -
+                    //         </button>
+                    //         <input type="text" value={quantity} />
+                    //         <button onClick={() => setCount(count + 1)}>
+                    //           +
+                    //         </button>
+                    //       </span>
+                    //     </td>
+                    //     <td>
+                    //       <span className="text-center">
+                    //         {cartitem.subtotal.toLocaleString()}円
+                    //       </span>
+                    //     </td>
 
-                      <td>
-                        <span className="text-center">
-                          {cartitem.subtotal.toLocaleString()}円
-                        </span>
-                      </td>
-
-                      <td>
-                        <button
-                          className={`${style.btn}`}
-                          onClick={async () => {
-                            // let number = index + 1
-                            await fetch(
-                              `http://localhost:8000/cartItems/${cartitem.id}`,
-                              { method: 'DELETE' }
-                            ).then((res) => {
-                              if (res.status === 200) {
-                                mutate(
-                                  'http://localhost:8000/cartItems'
-                                );
-                              }
-                            });
-                          }}
-                        >
-                          削除
-                        </button>
-                      </td>
-                    </tr>
+                    //     <td>
+                    //       <button
+                    //         className={`${style.btn}`}
+                    //         onClick={async () => {
+                    //           // let number = index + 1
+                    //           await fetch(
+                    //             `http://localhost:8000/cartItems/${cartitem.id}`,
+                    //             { method: 'DELETE' }
+                    //           ).then((res) => {
+                    //             if (res.status === 200) {
+                    //               mutate(
+                    //                 'http://localhost:8000/cartItems'
+                    //               );
+                    //             }
+                    //           });
+                    //         }}
+                    //       >
+                    //         削除
+                    //       </button>
+                    //     </td>
+                    //   </tr>
                   );
                 })}
               </tbody>
@@ -188,7 +201,8 @@ function CartPage() {
             {/* <Link href={`http://localhost:3000/items/order_confirm`}> */}
             <button
               // className="btn"
-              className={`btn ${style.totalBtn}`}
+              // className={`btn ${style.totalBtn}`}
+              className={`${style.totalBtn}`}
               type="button"
               style={{ display: botan }}
               onClick={() => {
@@ -215,3 +229,78 @@ function CartPage() {
 }
 
 export default CartPage;
+
+const CartItem: React.FC<{
+  item: any;
+}> = ({ item }) => {
+  const [count, setCount] = React.useState(Number(item.quantity));
+  return (
+    <tr key={''}>
+      <td className="cart-item-name">
+        <div className="cart-item-icon">
+          <Image src={item.img} width={200} height={143} />
+        </div>
+        <span>{item.name}</span>
+      </td>
+
+      <td>
+        <span className="price">{/* &nbsp;{cartitem.size} */}</span>
+        {item.price.toLocaleString()}円 {count}個
+      </td>
+
+      <td>
+        {item.options
+          .filter((option: any) => option)
+          .map((option: any, index: any) => {
+            return (
+              // <li key={index}>{option}&nbsp;200円</li>
+              <li key={index}>
+                {option?.name}: {option?.price.toLocaleString()}円 ×
+                {option?.quantity}
+              </li>
+            );
+          })}
+      </td>
+      {/* <td>
+                    {cartitem.options.map(
+                      (option: any, index: any) => {
+                        return (
+                          <li key={index}>{option}&nbsp;200円</li>
+                        );
+                      }
+                    )}
+                  </td> */}
+      <td>
+        <span className="text-center">
+          <button onClick={() => setCount(count - 1)}>-</button>
+          <input type="text" value={count} />
+          <button onClick={() => setCount(count + 1)}>+</button>
+        </span>
+      </td>
+      <td>
+        <span className="text-center">
+          {item.subtotal.toLocaleString()}円
+        </span>
+      </td>
+
+      <td>
+        <button
+          className={`${style.btn}`}
+          onClick={async () => {
+            // let number = index + 1
+            await fetch(
+              `http://localhost:8000/cartItems/${item.id}`,
+              { method: 'DELETE' }
+            ).then((res) => {
+              // if (res.status === 200) {
+              //   mutate('http://localhost:8000/cartItems');
+              // }
+            });
+          }}
+        >
+          削除
+        </button>
+      </td>
+    </tr>
+  );
+};

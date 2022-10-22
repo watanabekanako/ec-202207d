@@ -10,7 +10,7 @@ import { Nav } from '../../compornents/nav_format';
 import style from '../../styles/detail.module.css';
 import styles from '../../styles/common.module.css';
 import { Breadcrumb } from 'compornents/breadcrumb';
-
+import style1 from '../../styles/cart.module.css';
 let datas = '';
 export async function getStaticProps({ params }: any) {
   const res = await fetch(
@@ -174,11 +174,11 @@ export default function ItemDetail({ items, options }: any) {
           lists={[
             {
               name: 'TOP',
-              path: '/toppage',
+              path: '/',
             },
             {
               name: '商品一覧',
-              path: '/items/itemList',
+              path: '/items/',
             },
             {
               name: items.name,
@@ -355,7 +355,7 @@ export default function ItemDetail({ items, options }: any) {
                     <p className={`${style.btnCenter}`}>
                       <Link href="http://localhost:3000/carts/cartPage">
                         <button
-                          className={`${style.btnDatail}`}
+                          className={`${style1.totalBtn}`}
                           onClick={() => onClickCreate()}
                         >
                           カートに入れる

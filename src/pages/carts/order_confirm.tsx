@@ -7,7 +7,7 @@ import useSWR, { useSWRConfig } from 'swr';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import style from '../../styles/register_user.module.css';
 import Head from 'next/head';
-import { UserInfo, cartLogin } from '../../compornents/register_user';
+import { UserInfo } from '../../compornents/register_user';
 import styles from '../../styles/common.module.css';
 import { Breadcrumb } from 'compornents/breadcrumb';
 
@@ -34,9 +34,9 @@ export const Show = (data: any) => {
     list.map((number) => {
       number.map((show) => {
         if (show.match(/[0-9].*/)) {
-          useEffect(() => {
-            SetUserID(show);
-          });
+          // useEffect(() => {
+          //   SetUserID(show);
+          // });
         }
       });
     });

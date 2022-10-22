@@ -160,24 +160,6 @@
   ],
   "cartItems": [
     {
-      "img": "/img/15.jpg",
-      "name": "追い鰹チャーシュー",
-      "price": 1100,
-      "quantity": 1,
-      "options": [],
-      "subtotal": 1100,
-      "id": 1
-    },
-    {
-      "img": "/img/10.jpg",
-      "name": "旨辛味噌麺",
-      "price": 800,
-      "quantity": 1,
-      "options": [],
-      "subtotal": 800,
-      "id": 2
-    },
-    {
       "img": "/img/10.jpg",
       "name": "旨辛味噌麺",
       "price": 800,
@@ -185,6 +167,40 @@
       "options": [],
       "subtotal": 800,
       "id": 3
+    },
+    {
+      "img": "/img/14.jpg",
+      "name": "まぜ麺Gorgeous4",
+      "price": 880,
+      "quantity": 1,
+      "options": [],
+      "subtotal": 880,
+      "id": 4
+    },
+    {
+      "img": "/img/10.jpg",
+      "name": "旨辛味噌麺",
+      "price": 800,
+      "quantity": 1,
+      "options": [],
+      "subtotal": 800,
+      "id": 5
+    },
+    {
+      "img": "/img/10.jpg",
+      "name": "旨辛味噌麺",
+      "price": 800,
+      "quantity": "3",
+      "options": [
+        {
+          "id": 3,
+          "name": "めんま",
+          "price": 200,
+          "quantity": "3"
+        }
+      ],
+      "subtotal": 3000,
+      "id": 6
     }
   ],
   "payStatus": [
